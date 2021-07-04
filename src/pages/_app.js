@@ -3,14 +3,18 @@ import { DefaultSeo } from "next-seo";
 import Head from "next/head";
 import { SEO } from "../components/Seo";
 import "../styles/global.css";
-export default function App({ Component, pageProps }) {
+import Layout from "../components/Layout";
+const App =  ({ Component, pageProps })=> {
   return (
     <ThemeProvider attribute="class">
       <Head>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
       </Head>
       <DefaultSeo {...SEO} />
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ThemeProvider>
   );
 }
+export default App;
