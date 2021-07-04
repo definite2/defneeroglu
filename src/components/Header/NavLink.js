@@ -19,6 +19,7 @@ const NavLink = (props) => {
     </Link>
   );
 };
+export default NavLink;
 NavLink.propTypes = {
   href: PropTypes.string.isRequired,
   exact: PropTypes.bool
