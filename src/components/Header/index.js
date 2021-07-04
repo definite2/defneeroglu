@@ -13,7 +13,7 @@ const Header = () => {
       <Link href="/">
         <a aria-label="My avatar, website logo" className="flex items-center border-white group focus-visible:outline-accent">
         <div className="flex items-center justify-between">
-          <div className="overflow-hidden transition-transform ease-in-out border-2 rounded-full w-20 h-20 group-hover:-translate-y-1">
+          <div className="mr-3 overflow-hidden transition-transform ease-in-out border-2 rounded-full w-12 h-12 group-hover:-translate-y-1">
             <Image
               src={avatar}
               alt="My avatar"
@@ -24,7 +24,7 @@ const Header = () => {
             />
           </div>
           {typeof siteMetaData.headerTitle === "string" ? (
-            <div className="hidden h-6 text-2xl font-semibold sm:block">
+            <div className="hidden h-8 text-2xl font-semibold sm:block">
               {siteMetaData.headerTitle}
             </div>
           ) : (
