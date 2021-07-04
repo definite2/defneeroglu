@@ -1,21 +1,9 @@
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import NavLink from "./NavLink";
-import siteMetaData from "../../configs/siteMetadata";
-const routes = [
-  {
-    path: "/blog",
-    label: "BLOG",
-  },
-  {
-    path: "/projects",
-    label: "PROJECTS",
-  },
-  {
-    path: "/about",
-    label: "ABOUT",
-  },
-];
+import siteMetaData from "../../constants/siteMetadata";
+import MobileNavbar from "./MobileNavbar";
+import navLinks from "../../constants/navLinks";
 const Header = () => {
   return (
     <header className="flex items-center justify-between py-10">
@@ -36,15 +24,16 @@ const Header = () => {
           </a>
         </Link>
         {/* end::website logo */}
-        <div className="lex items-center text-base leading-5">
+        <div className="flex items-center text-base leading-5">
           <div className="hidden sm:block">
-            {routes.map((route, i) => (
-              <NavLink key={i} href={route.path}>
-                {route.label}
+            {navLinks.map((route, i) => (
+              <NavLink key={i} href={route.href}>
+                {route.title}
               </NavLink>
             ))}
           </div>
           <ThemeToggle />
+          <MobileNavbar />
         </div>
       </nav>
     </header>
