@@ -1,8 +1,16 @@
-import Head from "next/head";
-import Widget from "../components/widget";
+import Link from 'next/link';
 import { PageSeo } from "../components/Seo";
-export default function Home() {
+import siteMetadata from "../constants/siteMetadata";
+
+export default function Home({ posts }) {
   return (
-   <PageSeo />
+    <>
+      <PageSeo
+        title={siteMetadata.title}
+        description={siteMetadata.description}
+        url={siteMetadata.siteUrl}
+      />
+     
+    </>
   );
 }
