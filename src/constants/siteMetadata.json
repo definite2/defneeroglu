@@ -1,4 +1,4 @@
-const siteMetaData={
+{
   "title": "My Sweet Adventures",
   "author": "Defne Eroğlu",
   "headerTitle": "defneeroglu",
@@ -13,4 +13,3 @@ const siteMetaData={
   "linkedin": "https://www.linkedin.com/in/defne-eroglu/",
   "locale": "en-US"
 }
-export default siteMetaData;
