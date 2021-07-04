@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
-import NavLink from "../NavLink";
+import NavLink from "./NavLink";
 import siteMetaData from "../../configs/siteMetadata";
 const routes = [
   {
