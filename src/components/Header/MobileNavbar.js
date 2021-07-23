@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import navLinks from "../../constants/navLinks";
-
+import NavLink from "./NavLink";
 const MobileNavbar = () => {
   const [show, setShow] = useState(false);
   const onToggleNav = () => {
@@ -56,13 +56,11 @@ const MobileNavbar = () => {
           className="fixed w-full h-full cursor-auto focus:outline-none"
         ></button>
         <nav className="fixed h-full mt-8">
-          {navLinks.map((link, i) => (
+          {navLinks.map((route, i) => (
             <div key={i} className="px-12 py-4" onClick={onToggleNav}>
-              <Link href={link.href}>
-                <a className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100">
-                  {link.title}
-                </a>
-              </Link>
+              <NavLink key={i} href={route.href}>
+                {route.title}
+              </NavLink>
             </div>
           ))}
         </nav>
