@@ -1,8 +1,8 @@
 {
   "title": "My Sweet Adventures",
   "author": "Defne Eroğlu",
-  "headerTitle": "defneeroglu",
-  "description": "Personel website build with nextjs and tailwindcss",
+  "headerTitle": "Adventure Blogs",
+  "description": "Blogs about how to adapt healthy web development skills;)",
   "language": "en-us",
   "siteUrl": "https://defneroglu.app",
   "image": "/images/avatar.jpg",

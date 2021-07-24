@@ -2,7 +2,7 @@ import CustomLink from "../components/CustomLink";
 import { PageSeo } from "../components/Seo";
 import siteMetadata from "../constants/siteMetadata";
 import { getAllFilesFrontMatter } from "../utils/mdx";
-import { formatDate } from "../utils/date";
+import Tag from "../components/Tag";
 const max_post_number = 5;
 
 export async function getStaticProps() {
@@ -19,12 +19,13 @@ export default function Home({ posts }) {
       />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="pt-6 pb-8 space-y-2 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Recents
-          </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+        <p className="text-lg  leading-7 text-gray-500 dark:text-gray-400">
             {siteMetadata.description}
           </p>
+          <h1 className="text-3xl font-medium leading-9 tracking-tight text-gray-800 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+            Recents
+          </h1>
+     
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && "No posts found."}
@@ -36,12 +37,13 @@ export default function Home({ posts }) {
                   <div className="space-y-2 xl:grid-cols-4 xl:space-y-0 xl:items-baseline">
                     <dl>
                       <dt className="sr-only"> Published on</dt>
-                      <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                      <dd className="text-base  leading-6 text-gray-400 dark:text-gray-400">
                         <time dateTime={date}>{date} </time>
                       </dd>
                     </dl>
                     <div className="space-y-5 xl:col-span-3">
                       <div className="space-y-6">
+                        <div>
                         <h2 className="text-2xl font-bold leading-8 tracking-tight">
                           <CustomLink
                             href={`/blog/${slug}`}
@@ -50,11 +52,17 @@ export default function Home({ posts }) {
                             {title}
                           </CustomLink>
                         </h2>
+                        <div className="flex flex-wrap">
+                            {tags.map((tag) => (
+                              <Tag key={tag} text={tag} />
+                            ))}
+                          </div>
+                        </div>
                         <div className="prose text-gray-500 max-w-none dark:text-gray-400">
                           {summary}
                         </div>
                       </div>
-                      <div className="text-base font-medium leading-6">
+                      {<div className="text-base font-medium leading-6">
                         <CustomLink
                           href={`/blog/${slug}`}
                           className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
@@ -63,7 +71,7 @@ export default function Home({ posts }) {
                           {" "}
                           Read more &rarr;
                         </CustomLink>
-                      </div>
+                      </div>}
                     </div>
                   </div>
                 </article>

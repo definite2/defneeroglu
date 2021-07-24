@@ -17,7 +17,7 @@ const about = () => {
         </div>
         {/* end::header */}
         {/* begin::body */}
-        <div className="pt-8 pb-8 prose dark:prose-dark max-w-none ">
+        <div className="pt-8 pb-8 prose dark:prose-dark prose text-gray-500 max-w-none dark:text-gray-400">
           <p>
             I'm a frontend development engineer working at Huawei, mostly
             working at React and Angular projects.
