@@ -1,5 +1,35 @@
+import { getAllFilesFrontMatter } from "../utils/mdx";
 import siteMetadata from "../constants/siteMetadata.json";
+import ListLayout from "../components/Layout/ListLayout";
 import { PageSeo } from "../components/Seo";
-export default function blog(params) {
-  return <div>yeee</div>;
+
+export const POSTS_PER_PAGE = 5;
+
+export async function getStaticProps() {
+  const posts = await getAllFilesFrontMatter("blog");
+  const initialDisplayPosts = posts.slice(0, POSTS_PER_PAGE);
+  const pagination = {
+    currentPage: 1,
+    totalPages: Math.ceil(posts.length / POSTS_PER_PAGE),
+  };
+
+  return { props: { initialDisplayPosts, posts, pagination } };
+}
+
+export default function Blog({ posts, initialDisplayPosts, pagination }) {
+  debugger
+  return (
+    <>
+      <PageSeo
+        title={`Blog - ${siteMetadata.author}`}
+        description={siteMetadata.description}
+      />
+      <ListLayout
+        posts={posts}
+        initialDisplayPosts={initialDisplayPosts}
+        pagination={pagination}
+        title="All Posts"
+      />
+    </>
+  );
 }
