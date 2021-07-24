@@ -19,10 +19,25 @@ const about = () => {
         {/* begin::body */}
         <div className="pt-8 pb-8 prose dark:prose-dark max-w-none ">
           <p>
-            I'm a frontend development engineer working at Huawei, mostly working at React
-            and Angular projects. 
+            I'm a frontend development engineer working at Huawei, mostly
+            working at React and Angular projects.
           </p>
-          <p>I am here to share some of my adventures </p>
+          <p>
+            My BS in physics, I still have some passion for it but I've prefered
+            to develop my career in software development.
+          </p>
+          <p>
+            I've started programming with MATLAB then worked as full stack with
+            C# and Javascript ASP .NET Web Application. I've developed some
+            mathematical models- Fuzzy based and Evolutionary strategy- and
+            integrated those models to desktop modules for my previous company.
+          </p>
+
+          <p>
+            I give importance on not the subject but people even though it is
+            not business thinker this is what I am. And I am here to share some
+            of my adventures🙂.{" "}
+          </p>
         </div>
         {/* end::body */}
       </div>
