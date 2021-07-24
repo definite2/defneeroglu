@@ -29,13 +29,22 @@ export async function getFilesBySlug(type, slug) {
     ? fs.readFileSync(mdxPath, "utf-8")
     : fs.readFileSync(mdPath, "utf-8");
 
-  process.env.ESBUILD_BINARY_PATH = path.join(
-    currentDir,
-    "node_modules",
-    "esbuild",
-    "bin",
-    "esbuild"
-  );
+  if (process.platform === "win32") {
+    process.env.ESBUILD_BINARY_PATH = path.join(
+      process.cwd(),
+      "node_modules",
+      "esbuild",
+      "esbuild.exe"
+    );
+  } else {
+    process.env.ESBUILD_BINARY_PATH = path.join(
+      process.cwd(),
+      "node_modules",
+      "esbuild",
+      "bin",
+      "esbuild"
+    );
+  }
   const { frontmatter, code } = await bundleMDX(source, {
     cwd: path.join(process.cwd(), "components"),
     xdmOptions(options) {
@@ -49,7 +58,7 @@ export async function getFilesBySlug(type, slug) {
         require("remark-gfm"),
         [require("remark-footnotes"), { inlineNotes: true }],
         require("remark-math"),
-        imgToJsx,
+        // imgToJsx,
       ];
 
       return options;
