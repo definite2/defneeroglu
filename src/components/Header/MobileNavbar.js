@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Link from "next/link";
 import navLinks from "../../constants/navLinks";
 import NavLink from "./NavLink";
 const MobileNavbar = () => {
