@@ -1,6 +1,8 @@
 import Image from "next/image";
+import { useMemo } from "react";
 import CustomLink from "./CustomLink";
-const MdxComponents = {
+import { getMDXComponent } from "mdx-bundler/client";
+export const MdxComponents = {
   Image,
   a: CustomLink,
   strong: ({ ...props }) => <strong {...props} className="font-semibold" />,
@@ -52,4 +54,7 @@ const MdxComponents = {
   li: (props) => <li className="mt-3" {...props} />,
 };
 
-export default MdxComponents;
+export const MdxLayoutRenderer = ({ layout, mdxSource, ...rest }) => {
+  const MdxLayout = useMemo(() => getMDXComponent(mdxSource), [mdxSource]);
+  return <MdxLayout layout={layout} components={MdxComponents} {...rest} />;
+};
