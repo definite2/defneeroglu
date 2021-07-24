@@ -1,7 +1,7 @@
 import SectionContainer from "../SectionContainer";
 import Header from "../Header";
 
-const Layout = ({ children }) => {
+const Wrapper = ({ children }) => {
   return (
     <SectionContainer>
       <div className="flex flex-col justify-between h-screen">
@@ -12,4 +12,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default Wrapper;
