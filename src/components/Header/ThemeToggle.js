@@ -22,7 +22,7 @@ const ThemeToggle = () => {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="currentColor"
-        className="text-gray-900 dark:text-gray-100"
+        className={`text-gray-900 dark:text-gray-100 overflow-hidden transition-transform ease-in-out ${theme==='dark'?'rotate-90':'rotate-0'}`}
       >
         {mounted && (theme === "dark" || resolvedTheme === "dark") ? (
           <path
