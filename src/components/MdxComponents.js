@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useMemo } from "react";
 import CustomLink from "./CustomLink";
 import { getMDXComponent } from "mdx-bundler/client";
+import Pre from "./Pre";
 export const MdxComponents = {
   Image,
   a: CustomLink,
@@ -27,21 +28,7 @@ export const MdxComponents = {
   p: ({ ...props }) => {
     return <p {...props} className="my-6 leading-7 lg:leading-8" />;
   },
-  code: ({ children, showLineNumbers, fileName, id }) => {
-    return (
-      <>
-        {fileName && <div className="w-full code-filename">{fileName}</div>}
-        <code
-          className={classNames("", {
-            "line-numbers": showLineNumbers !== undefined,
-          })}
-          id={id}
-        >
-          {children}
-        </code>
-      </>
-    );
-  },
+  pre: Pre,
   em: ({ ...props }) => {
     return <em {...props} className="italic" />;
   },
@@ -52,6 +39,10 @@ export const MdxComponents = {
     <ul className="mb-4 leading-relaxed list-disc list-inside" {...props} />
   ),
   li: (props) => <li className="mt-3" {...props} />,
+  wrapper: ({ components, layout, ...rest }) => {
+    const Layout = require(`../Layout/${layout}`).default
+    return <Layout {...rest} />
+  },
 };
 
 export const MdxLayoutRenderer = ({ layout, mdxSource, ...rest }) => {
