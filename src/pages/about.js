@@ -29,7 +29,7 @@ const about = () => {
           <p>
             I've started programming with MATLAB then worked as full stack with
             ASP .NET Web Application. 
-            I've developed a desktop module as developing
+            I've also developed a desktop module as developing
             four mathematical models- Fuzzy based and Evolutionary strategy- and
             integrated these models to desktop product to make spatial decision making support system.
           </p>
