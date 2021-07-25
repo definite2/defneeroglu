@@ -1,6 +1,6 @@
 import { getAllFilesFrontMatter } from "../utils/mdx";
 import siteMetadata from "../constants/siteMetadata.json";
-import ListLayout from "../components/Layout/ListLayout";
+import ListLayout from "../Layout/ListLayout";
 import { PageSeo } from "../components/Seo";
 
 export const POSTS_PER_PAGE = 5;
@@ -17,7 +17,6 @@ export async function getStaticProps() {
 }
 
 export default function Blog({ posts, initialDisplayPosts, pagination }) {
-  debugger
   return (
     <>
       <PageSeo

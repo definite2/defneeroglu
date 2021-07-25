@@ -1,4 +1,4 @@
-import ListLayout from "../../../components/Layout/ListLayout";
+import ListLayout from "../../../Layout/ListLayout";
 import { PageSeo } from "../../../components/Seo";
 import siteMetadata from "../../../constants/siteMetadata.json";
 import { getAllFilesFrontMatter } from "../../../utils/mdx";

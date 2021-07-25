@@ -6,7 +6,7 @@ import {
   getFilesBySlug,
   getFiles,
 } from "../../utils/mdx";
-import MdxLayoutRenderer from "../../components/MdxComponents";
+import {MdxLayoutRenderer} from "../../components/MdxComponents";
 import generateRss from "../../utils/generateRss";
 const DEFAULT_LAYOUT = "PostLayout";
 export const getStaticPaths = async () => {
@@ -39,8 +39,8 @@ export const getStaticProps = async ({ params }) => {
 };
 
 const Blog = ({ post, authorDetails, prev, next }) => {
+
   const { mdxSource, frontMatter } = post;
-  debugger;
   return (
     <>
       {!frontMatter.draft ? (
