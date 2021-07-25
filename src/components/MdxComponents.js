@@ -26,7 +26,7 @@ export const MdxComponents = {
     );
   },
   p: ({ ...props }) => {
-    return <p {...props} className="my-6 leading-7 lg:leading-8" />;
+    return <p {...props} className="pt-8 leading-7 lg:leading-8 prose dark:prose-dark prose text-gray-500 max-w-none dark:text-gray-400" />;
   },
   pre: Pre,
   em: ({ ...props }) => {
