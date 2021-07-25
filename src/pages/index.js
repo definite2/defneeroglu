@@ -47,7 +47,7 @@ export default function Home({ posts }) {
                         <h2 className="text-2xl font-bold leading-8 tracking-tight">
                           <CustomLink
                             href={`/blog/${slug}`}
-                            className="text-gray-900 dark:text-gray-100"
+                            className="text-gray-800 dark:text-gray-100"
                           >
                             {title}
                           </CustomLink>
@@ -65,7 +65,7 @@ export default function Home({ posts }) {
                       {<div className="text-base font-medium leading-6">
                         <CustomLink
                           href={`/blog/${slug}`}
-                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                          className="text-green-600 hover:text-green-500 dark:hover:text-green-400"
                           aria-label={`Read "${title}"`}
                         >
                           {" "}
@@ -84,7 +84,7 @@ export default function Home({ posts }) {
         <div className="flex justify-end text-base font-medium leading-6">
           <CustomLink
             href="/blog"
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+            className="text-green-500 hover:text-green-600 dark:hover:text-green-400"
             aria-label="all posts"
           >
             More Posts &rarr;
