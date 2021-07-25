@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CustomLink from "../CustomLink";
+import CustomLink from "../components/CustomLink";
 //TODO paginationa later
 const ListLayout = ({ posts, title, initialDisplayPosts = [], pagination }) => {
   const [searchValue, setSearchValue] = useState("");

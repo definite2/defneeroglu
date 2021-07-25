@@ -1,5 +1,5 @@
-import SectionContainer from "../SectionContainer";
-import Header from "../Header";
+import SectionContainer from "../components/SectionContainer";
+import Header from "../components/Header";
 
 const Wrapper = ({ children }) => {
   return (

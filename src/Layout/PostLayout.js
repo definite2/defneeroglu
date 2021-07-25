@@ -1,16 +1,24 @@
-import CustomLink from '../CustomLink'
-import PageTitle from '../PageTitle'
-import SectionContainer from '../SectionContainer'
-import { BlogSeo } from '../Seo'
-import siteMetadata from '../../constants/siteMetadata.json'
+import CustomLink from "../components/CustomLink";
+import PageTitle from "../components/PageTitle";
+import SectionContainer from "../components/SectionContainer";
+import { BlogSeo } from "../components/Seo";
+import siteMetadata from "../constants/siteMetadata.json";
 
-
-export default function PostLayout({ frontMatter, authorDetails, next, prev, children }) {
-  const { date, title } = frontMatter
+export default function PostLayout({
+  frontMatter,
+  authorDetails,
+  next,
+  prev,
+  children,
+}) {
+  const { date, title } = frontMatter;
 
   return (
     <SectionContainer>
-      <BlogSeo url={`${siteMetadata.siteUrl}/blog/${frontMatter.slug}`} {...frontMatter} />
+      <BlogSeo
+        url={`${siteMetadata.siteUrl}/blog/${frontMatter.slug}`}
+        {...frontMatter}
+      />
       <article>
         <div>
           <header>
@@ -19,7 +27,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
                 <div>
                   <dt className="sr-only">Published on</dt>
                   <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                    <time dateTime={date}>{(date)}</time>
+                    <time dateTime={date}>{date}</time>
                   </dd>
                 </div>
               </dl>
@@ -30,10 +38,12 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
           </header>
           <div
             className="pb-8 divide-y divide-gray-200 xl:divide-y-0 dark:divide-gray-700 "
-            style={{ gridTemplateRows: 'auto 1fr' }}
+            style={{ gridTemplateRows: "auto 1fr" }}
           >
             <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:pb-0 xl:col-span-3 xl:row-span-2">
-              <div className="pt-10 pb-8 prose dark:prose-dark max-w-none">{children}</div>
+              <div className="pt-10 pb-8 prose dark:prose-dark max-w-none">
+                {children}
+              </div>
             </div>
             {/* <Comments frontMatter={frontMatter} /> */}
             <footer>
@@ -64,5 +74,5 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
         </div>
       </article>
     </SectionContainer>
-  )
+  );
 }
