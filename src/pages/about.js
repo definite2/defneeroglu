@@ -28,14 +28,15 @@ const about = () => {
           </p>
           <p>
             I've started programming with MATLAB then worked as full stack with
-            C# and Javascript ASP .NET Web Application. I've developed some
-            mathematical models- Fuzzy based and Evolutionary strategy- and
-            integrated those models to desktop modules for my previous company.
+            ASP .NET Web Application. 
+            I've developed a desktop module as developing
+            four mathematical models- Fuzzy based and Evolutionary strategy- and
+            integrated these models to desktop product to make spatial decision making support system.
           </p>
 
-          <p>
+          <p>Currently I'm focusing my personal development on JavaScript and its ecosystem (frameworks, bundlers, engines, UI libraries etc.).
             And I'm here to share some
-            of my adventures 🙃.{" "}
+            of my experiences 🙃.{" "}
           </p>
         </div>
         {/* end::body */}
