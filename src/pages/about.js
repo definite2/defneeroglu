@@ -34,9 +34,8 @@ const about = () => {
           </p>
 
           <p>
-            I give importance on not the subject but people even though it is
-            not business thinker this is what I am. And I am here to share some
-            of my adventures🙂.{" "}
+            And I'm here to share some
+            of my adventures 🙃.{" "}
           </p>
         </div>
         {/* end::body */}
