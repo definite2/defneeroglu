@@ -21,7 +21,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             href={"#"}
           >
-            <span>github</span>
+            <span>I hate footers</span>
           </a>
         </div>
         <div className="flex mb-2 space-x-2 text-sm text-gray-500 dark:text-gray-400">

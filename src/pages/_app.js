@@ -3,7 +3,8 @@ import { DefaultSeo } from "next-seo";
 import Head from "next/head";
 import { SEO } from "@/components/Seo";
 import "../styles/global.scss";
-import Wrapper from "@/layouts/Wrapper";
+import Wrapper from "@/components/Wrapper";
+
 const App =  ({ Component, pageProps })=> {
   return (
     <ThemeProvider attribute="class">
