@@ -1,9 +1,9 @@
 import { ThemeProvider } from "next-themes";
 import { DefaultSeo } from "next-seo";
 import Head from "next/head";
-import { SEO } from "../components/Seo";
+import { SEO } from "@/components/Seo";
 import "../styles/global.scss";
-import Wrapper from "../Layout/Wrapper";
+import Wrapper from "@/layouts/Wrapper";
 const App =  ({ Component, pageProps })=> {
   return (
     <ThemeProvider attribute="class">
