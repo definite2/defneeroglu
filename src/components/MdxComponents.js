@@ -40,7 +40,7 @@ export const MdxComponents = {
   ),
   li: (props) => <li className="mt-3" {...props} />,
   wrapper: ({ components, layout, ...rest }) => {
-    const Layout = require(`../Layout/${layout}`).default
+    const Layout = require(`../layouts/${layout}`).default
     return <Layout {...rest} />
   },
 };

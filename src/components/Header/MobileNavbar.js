@@ -1,5 +1,5 @@
 import { useState } from "react";
-import navLinks from "../../constants/navLinks";
+import navLinks from "@/constants/navLinks";
 import NavLink from "./NavLink";
 const MobileNavbar = () => {
   const [show, setShow] = useState(false);

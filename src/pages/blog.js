@@ -1,7 +1,7 @@
-import { getAllFilesFrontMatter } from "../utils/mdx";
-import siteMetadata from "../constants/siteMetadata.json";
-import ListLayout from "../Layout/ListLayout";
-import { PageSeo } from "../components/Seo";
+import { getAllFilesFrontMatter } from "@/utils/mdx";
+import siteMetadata from "@/constants/siteMetadata.json";
+import ListLayout from "@/layouts/ListLayout";
+import { PageSeo } from "@/components/Seo";
 
 export const POSTS_PER_PAGE = 5;
 

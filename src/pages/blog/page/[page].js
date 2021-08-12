@@ -1,7 +1,7 @@
-import ListLayout from "../../../Layout/ListLayout";
-import { PageSeo } from "../../../components/Seo";
-import siteMetadata from "../../../constants/siteMetadata.json";
-import { getAllFilesFrontMatter } from "../../../utils/mdx";
+import ListLayout from "@/layouts/ListLayout";
+import { PageSeo } from "@/components/Seo";
+import siteMetadata from "@/constants/siteMetadata.json";
+import { getAllFilesFrontMatter } from "@/utils/mdx";
 export const POSTS_PER_PAGE = 5;
 export const getStaticPaths = async () => {
   const posts = await getAllFilesFrontMatter("blog");

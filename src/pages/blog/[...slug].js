@@ -1,13 +1,13 @@
 import fs from "fs";
-import PageTitle from "../../components/PageTitle";
+import PageTitle from "@/components/PageTitle";
 import {
   getAllFilesFrontMatter,
   formatSlug,
   getFilesBySlug,
   getFiles,
-} from "../../utils/mdx";
-import {MdxLayoutRenderer} from "../../components/MdxComponents";
-import generateRss from "../../utils/generateRss";
+} from "@/utils/mdx";
+import {MdxLayoutRenderer} from "@/components/MdxComponents";
+import generateRss from "@/utils/generateRss";
 const DEFAULT_LAYOUT = "PostLayout";
 export const getStaticPaths = async () => {
   const posts = getFiles("blog");
