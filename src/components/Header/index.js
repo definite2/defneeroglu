@@ -1,39 +1,38 @@
-import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import NavLink from "./NavLink";
-import siteMetaData from "../../constants/siteMetadata";
+import styled, { css } from "styled-components";
 import MobileNavbar from "./MobileNavbar";
-import navLinks from "../../constants/navLinks";
-import Image from "next/image";
-import avatar from "../../../public/images/me.jpg";
+import navLinks from "@/constants/navLinks";
+import React, { useRef } from "react";
+import Logo from "./Avatar";
+import useScrolling from "@/hooks/useScroll";
+const Wrapper = styled.header`
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border: none;
+  box-shadow: none;
+  padding: 2rem 0;
+  background-color: white;
+  transition: box-shadow 250ms ease-in-out, background 250ms ease-in-out;
+  ${(props) =>
+    props.isScrolled &&
+    css`
+    background-color: #fff;
+      box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 4px 0px;
+      z-index: 9;
+    `};
+`;
 const Header = () => {
+  const reff = useRef(null);
+  const scrolled = useScrolling(reff);
   return (
-    <header className="flex items-center justify-between py-10">
-      {/* begin::website logo */}
-      <Link href="/">
-        <a aria-label="My avatar, website logo" className="flex items-center border-white group focus-visible:outline-accent">
-        <div className="flex items-center justify-between">
-          <div className="mr-3 overflow-hidden transition-transform ease-in-out border-2 rounded-full w-12 h-12 group-hover:-translate-y-1">
-            <Image
-              src={avatar}
-              alt="My avatar"
-              width={80}
-              height={80}
-              priority={true}
-              
-            />
-          </div>
-          {typeof siteMetaData.headerTitle === "string" ? (
-            <div className="hidden h-8 text-2xl font-semibold sm:block">
-              {siteMetaData.headerTitle}
-            </div>
-          ) : (
-            siteMetaData.headerTitle
-          )}
-         </div>
-        </a>
-      </Link>
-      {/* end::website logo */}
+    <Wrapper isScrolled={scrolled}>
+      <Logo />
       <div className="flex items-center text-base leading-5">
         <div className="hidden sm:block">
           {navLinks.map((route, i) => (
@@ -45,7 +44,7 @@ const Header = () => {
         <ThemeToggle />
         <MobileNavbar />
       </div>
-    </header>
+    </Wrapper>
   );
 };
 export default Header;
