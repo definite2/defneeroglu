@@ -1,5 +1,5 @@
 import { escape } from "./htmlEscaper";
-import siteMetaData from "../constants/siteMetadata.json";
+import siteMetaData from "@/constants/siteMetadata.json";
 const generateRssItem = (post) => `
   <item>
     <guid>${siteMetaData.siteUrl}/blog/${post.slug}</guid>
