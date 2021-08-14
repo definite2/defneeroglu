@@ -1,4 +1,5 @@
 const colors = require("tailwindcss/colors");
+const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   mode: "jit",
   purge: [
@@ -12,9 +13,12 @@ module.exports = {
         "-1":"-1",
         "-10": "-10",
       },
-
+      fontFamily: {
+        sans: ['Merriweather', ...defaultTheme.fontFamily.sans],
+        mono: ['Fira Code', ...defaultTheme.fontFamily.mono],
+      },
       colors: {
-        primary: colors.sky,
+        primary: colors.indigo,
         gray: colors.trueGray,
         code: {
           green: "#b5f4a5",
@@ -23,6 +27,9 @@ module.exports = {
           red: "#ff8383",
           blue: "#93ddfd",
           white: "#fff",
+        },
+        letterSpacing: {
+          title: '0.2em',
         },
       },
       typography: (theme) => ({
