@@ -22,6 +22,7 @@ const Handle = styled.span`
     if (shouldShow(props)) {
       return css`
         opacity: 1;
+        margin-left: ${props.marginOnHide || ".5rem"};
       `;
     }
     return css`
@@ -60,7 +61,7 @@ const Logo = () => {
           ref={rref}
           className="overflow-hidden transition-transform ease-in-out border-0 group-hover:-translate-y-1"
         >
-          <Handle scrolled={isScrolled} showOnScroll className="ml-2">
+          <Handle scrolled={isScrolled} showOnScroll className="lg:-ml-1 ml-1">
             &lt;
           </Handle>
           <Handle2 scrolled={isScrolled} hideOnScroll >
@@ -69,7 +70,7 @@ const Logo = () => {
           <Handle2 scrolled={isScrolled} showOnScroll className="-ml-10">
            Home
           </Handle2>
-          <Handle scrolled={isScrolled} default={0} showOnScroll>
+          <Handle scrolled={isScrolled} default={0} showOnScroll marginOnHide="0">
             &nbsp;/&gt;
           </Handle>
         </div>
