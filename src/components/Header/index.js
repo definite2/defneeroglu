@@ -31,7 +31,7 @@ const Header = () => {
       isScrolled={scrolled}
       className="flex items-center justify-between  bg-white dark:bg-gray-900 py-5"
     >
-      <div className="w-full justify-between flex xl:max-w-5xl my-0 mx-auto py-1 lg:m ">
+      <div className="w-full justify-between flex xl:max-w-4xl my-0 mx-auto py-1 lg:m ">
         <Logo />
         <div className="flex justify-between items-center text-base leading-5">
           <div className="hidden sm:block">
