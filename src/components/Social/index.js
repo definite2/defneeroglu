@@ -1,4 +1,5 @@
-import { Mail, GitHub, Linkedin,Twitter } from "react-feather";
+import { Mail, GitHub, Linkedin, Twitter } from "react-feather";
+
 
 // Icons taken from: https://simpleicons.org/
 
@@ -6,13 +7,18 @@ const components = {
   mail: Mail,
   github: GitHub,
   linkedin: Linkedin,
-  twitter:Twitter
+  twitter: Twitter,
 };
 
-const SocialIcon = ({ kind, href, size = 8 }) => {
+const SocialIcon = ({ kind, href, size = 2 }) => {
   if (!href) return null;
 
   const SocialSvg = components[kind];
+  const hoverColor = (kind) => {
+    if (kind === "mail") return "red";
+    else if (kind === "github") return "gray";
+    else return "blue";
+  };
   return (
     <a
       className="text-sm text-gray-500 transition hover:text-gray-600"
@@ -22,7 +28,7 @@ const SocialIcon = ({ kind, href, size = 8 }) => {
     >
       <span className="sr-only">{kind}</span>
       <SocialSvg
-        className={`fill-current text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 h-${size} w-${size}`}
+        className={` text-gray-700 dark:text-gray-200 h-${size} w-${size}`}
       />
     </a>
   );

@@ -1,5 +1,6 @@
 const navLinks = [
-  { href: '/about', title: 'About' },
-]
+  { href: "/blog", title: "Blogs" },
+  { href: "/about", title: "About" },
+];
 
-export default navLinks
+export default navLinks;

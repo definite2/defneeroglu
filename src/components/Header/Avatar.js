@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import Link from "next/link";
 import siteMetaData from "@/constants/siteMetadata";
 import useScrolling from "@/hooks/useScroll";
-const shouldShow = props => {
+const shouldShow = (props) => {
   if (props.scrolled) {
     if (props.showOnScroll) return true;
     if (props.hideOnScroll) return false;
@@ -13,8 +13,12 @@ const shouldShow = props => {
 };
 
 const Handle = styled.span`
-  transition: opacity 250ms ease-out, margin 250ms ease-in-out;
-  ${props => {
+  transition: opacity 500ms ease-out, margin 500ms ease-in-out;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 2rem;
+
+  ${(props) => {
     if (shouldShow(props)) {
       return css`
         opacity: 1;
@@ -22,7 +26,7 @@ const Handle = styled.span`
     }
     return css`
       opacity: 0;
-      margin-right: ${props.marginOnHide || "-.5em"};
+      margin-right: ${props.marginOnHide || "-.5rem"};
     `;
   }};
 `;
@@ -50,20 +54,20 @@ const Logo = () => {
     <Link href="/">
       <a
         aria-label="My avatar, website logo"
-        className="flex items-center flex-col border-white group focus-visible:outline-accent h-full:hidden"
+        className="flex items-center border-white group focus-visible:outline-accent h-full:hidden"
       >
         <div
           ref={rref}
           className="overflow-hidden transition-transform ease-in-out border-0 group-hover:-translate-y-1"
         >
-          <Handle scrolled={isScrolled} showOnScroll >
+          <Handle scrolled={isScrolled} showOnScroll className="ml-2">
             &lt;
           </Handle>
           <Handle2 scrolled={isScrolled} hideOnScroll >
             {siteMetaData.headerTitle}
           </Handle2>
-          <Handle2 scrolled={isScrolled} showOnScroll >
-            {siteMetaData.headerTitle}
+          <Handle2 scrolled={isScrolled} showOnScroll className="-ml-10">
+           Home
           </Handle2>
           <Handle scrolled={isScrolled} default={0} showOnScroll>
             &nbsp;/&gt;
