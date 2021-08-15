@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import styled, { css } from "styled-components";
 import Link from "next/link";
-import siteMetaData from "@/constants/siteMetadata";
+import {siteMetadata} from "@/constants/siteMetadata";
 import useScrolling from "@/hooks/useScroll";
 const shouldShow = (props) => {
   if (props.scrolled) {
@@ -65,7 +65,7 @@ const Logo = () => {
             &lt;
           </Handle>
           <Handle2 scrolled={isScrolled} hideOnScroll >
-            {siteMetaData.headerTitle}
+            {siteMetadata.headerTitle}
           </Handle2>
           <Handle2 scrolled={isScrolled} showOnScroll className="-ml-10">
            Home

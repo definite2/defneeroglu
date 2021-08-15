@@ -1,5 +1,5 @@
 import CustomLink from "../CustomLink";
-import siteMetadata from "@/constants/siteMetadata.json";
+import {siteMetadata} from "@/constants/siteMetadata";
 import Image from "next/image";
 import flower from "../../../public/media/dede.jpg";
 export default function Footer() {

@@ -1,39 +1,39 @@
 import { NextSeo, ArticleJsonLd } from "next-seo";
-import siteMetaData from "@/constants/siteMetadata.json";
+import {siteMetadata} from "@/constants/siteMetadata";
 export const SEO = {
-  title: siteMetaData.title,
-  description: siteMetaData.description,
+  title: siteMetadata.title,
+  description: siteMetadata.description,
   openGraph: {
     type: "website",
-    locale: siteMetaData.language,
-    url: siteMetaData.siteUrl,
-    title: siteMetaData.title,
-    description: siteMetaData.description,
+    locale: siteMetadata.language,
+    url: siteMetadata.siteUrl,
+    title: siteMetadata.title,
+    description: siteMetadata.description,
     images: [
       {
-        url: `${siteMetaData.siteUrl}${siteMetaData.socialBanner}`,
-        alt: siteMetaData.title,
+        url: `${siteMetadata.siteUrl}${siteMetadata.socialBanner}`,
+        alt: siteMetadata.title,
         width: 1200,
         height: 600,
       },
     ],
   },
   twitter: {
-    handle: siteMetaData.twitter,
-    site: siteMetaData.twitter,
+    handle: siteMetadata.twitter,
+    site: siteMetadata.twitter,
     cardType: "summary_large_image",
   },
   additionalMetaTags: [
     {
       name: "author",
-      content: siteMetaData.author,
+      content: siteMetadata.author,
     },
   ],
 };
 export const PageSeo = ({ title, description, url }) => {
   return (
     <NextSeo
-      title={`${title} – ${siteMetaData.title}`}
+      title={`${title} – ${siteMetadata.title}`}
       description={description}
       canonical={url}
       openGraph={{
@@ -57,20 +57,20 @@ export const BlogSeo = ({
   const modifiedAt = new Date(lastmod || date).toISOString();
   let imagesArr =
     images.length === 0
-      ? [siteMetaData.socialBanner]
+      ? [siteMetadata.socialBanner]
       : typeof images === "string"
       ? [images]
       : images;
   const featuredImages = imagesArr.map((img) => {
     return {
-      url: `${siteMetaData.siteUrl}${img}`,
+      url: `${siteMetadata.siteUrl}${img}`,
       alt: title,
     };
   });
   return (
     <>
       <NextSeo
-        title={`${title} – ${siteMetaData.title}`}
+        title={`${title} – ${siteMetadata.title}`}
         description={summary}
         canonical={url}
         openGraph={{
@@ -78,7 +78,7 @@ export const BlogSeo = ({
           article: {
             publishedTime: publishedAt,
             modifiedTime: modifiedAt,
-            authors: [`${siteMetaData.siteUrl}/about`],
+            authors: [`${siteMetadata.siteUrl}/about`],
             tags,
           },
           url,
@@ -94,12 +94,12 @@ export const BlogSeo = ({
         ]}
       />
       <ArticleJsonLd
-        authorName={siteMetaData.author}
+        authorName={siteMetadata.author}
         dateModified={modifiedAt}
         datePublished={publishedAt}
         description={summary}
         images={featuredImages}
-        publisherName={siteMetaData.author}
+        publisherName={siteMetadata.author}
         title={title}
         url={url}
       />
