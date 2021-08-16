@@ -7,19 +7,11 @@ draft: false
 summary: 'Pretty intuitive JavaScript recipe for Leetdoce Minstack problem.'
 images: ['/media/leetcode_mintack_image.png']
 ---
-<Image
-  src={'/media/leetcode_mintack_image.png'}
-  alt="Leetcode Minstack"
-  width={438}
-  height={272}
-  quality={100}
-/>
+
 With this post, I would like to share a low level Javascript solution for one of the most popular design problems from leetcode it is called MinStack.The problem expect a stack that supports push, pop, top, and retrieving the minimum element in constant time.
 Here instead of using Javascript's `length`, `Math.min()`, `push`, `pop` etc. , the expected functions are written at the low level as possible.
 
-
-
-```js
+```javascript
 /**
  * initialize data structure
  */
@@ -83,7 +75,7 @@ Adds an element to the stack. Does not return any value.
 Here, while adding new element(x) to the stack we also check that whether new element is less than the `this.min` value. Also include the case that, if the stack is empty, means `this.count===0`, then of course the first element of `this.minVals` is also equal to the new element(x). Both length of the stacks are equal which is the value of `count`.
 Then instead of using Javascript's build in push() function, we say the last element of the stack is the new element:
 
-```js
+```javascript
 ...
 
     if (x < this.min || this.count === 0) {
@@ -100,7 +92,7 @@ Then instead of using Javascript's build in push() function, we say the last ele
 Removes the last item from the stack. We are not going to use pop() function of Javascript. We just going to delete the last item from the stack. We need to consider that, _maybe_ the value which is _going to be removed_ is the minimum value of the array. So actually thats why we've needed an extra `minVals` stack instead of only with a `this.min`. In order to catch the new state of the stack, we need to also delete the last item of the `minVals` stack. But!
 We also should remember that when we add new value to the stack with our `push(x)` function that is given above. There, we compare the _x_ value with the `this.min` value, thats why `this.min` value is no longer the last item of the `this.minVals` stack but the previous one. And lastly, since we removed the last item from stack we should decrease the count number, so that when next time we do another operation, it should follow the last index of the stack with the count value.
 
-```js
+```javascript
 ...
     delete this.stack[this.count - 1];
     this.min = this.minVals[this.count - 2];
@@ -113,7 +105,7 @@ We also should remember that when we add new value to the stack with our `push(x
 Returns the last item of the stack.
 Here the length of the stack is equal to `this.count` and the last item of the stack is at the index of `this.count-1`:
 
-```js
+```javascript
 return this.stack[this.count - 1]
 ```
 
@@ -121,7 +113,7 @@ return this.stack[this.count - 1]
 
 Returns the minium value of the stack. Here instead of scanning the whole stack, since we already set the minimum value to the `minStack` all the time. We can comfartably return the last item of minStack. Remember the last item's index is `this.count-1`; but if we are already at `count=0` then we simply should return the first value of the minStack:
 
-```js
+```javascript
 ...
 if (this.count === 0)
         return this.MinVals[0]
