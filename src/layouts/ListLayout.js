@@ -1,5 +1,8 @@
 import { useState } from "react";
 import CustomLink from "@/components/CustomLink";
+import Pagination from "@/components/Pagination";
+import { formatDate } from "@/utils/date";
+import Tag from "@/components/Tag";
 //TODO paginationa later
 const ListLayout = ({ posts, title, initialDisplayPosts = [], pagination }) => {
   const [searchValue, setSearchValue] = useState("");
@@ -12,7 +15,7 @@ const ListLayout = ({ posts, title, initialDisplayPosts = [], pagination }) => {
   return (
     <>
       <div className="divide-y">
-        <div className="pt-6 pb-8  space-y-2 md:space-y-5">
+        <div className="pt-6 pb-8 space-y-2 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             {title}
           </h1>
@@ -40,7 +43,7 @@ const ListLayout = ({ posts, title, initialDisplayPosts = [], pagination }) => {
             </svg>
           </div>
         </div>
-        <ul>
+        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {" "}
           {!filteredPosts.length && "No posts found."}
           {displayPosts.map((frontMatter, index) => {
@@ -51,18 +54,22 @@ const ListLayout = ({ posts, title, initialDisplayPosts = [], pagination }) => {
                   <dl>
                     <dt className="sr-only">Published on</dt>
                     <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                      <time dateTime={date}>{date}</time>
+                      <time dateTime={date}>{formatDate(date)}</time>
                     </dd>
                   </dl>
                   <div className="space-y-3 xl:col-span-3">
-                    <h3 className="text-2xl font-bold leading-8 tracking-tight">
-                      <CustomLink
-                        href={`/blog/${slug}`}
-                        className="text-gray-900 dark:text-gray-100"
-                      >
-                        {title}
-                      </CustomLink>
-                    </h3>
+                  <div>
+                      <h3 className="text-2xl font-bold leading-8 tracking-tight">
+                        <CustomLink href={`/blog/${slug}`} className="text-gray-900 dark:text-gray-100">
+                          {title}
+                        </CustomLink>
+                      </h3>
+                      <div className="flex flex-wrap">
+                        {tags.map((tag) => (
+                          <Tag key={tag} text={tag} />
+                        ))}
+                      </div>
+                    </div>
                     <div className="prose text-gray-500 max-w-none dark:text-gray-400">
                       {summary}
                     </div>
@@ -73,6 +80,9 @@ const ListLayout = ({ posts, title, initialDisplayPosts = [], pagination }) => {
           })}
         </ul>
       </div>
+      {pagination && pagination.totalPages > 1 && !searchValue && (
+        <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
+      )}
     </>
   );
 };
