@@ -30,7 +30,7 @@ export default function Home({ posts }) {
         <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 sm:gap-8">
           {!posts.length && 'No posts found.'}
           {posts.slice(0, max_post_number).map((frontmatter) => {
-            const { slug, date, title, summary, tags, images, alt } = frontmatter
+            const { slug, date, title, summary, tags, images } = frontmatter
             return (
               <li key={slug} className="pt-6">
                 <article>
@@ -83,7 +83,7 @@ export default function Home({ posts }) {
         </ul>
       </div>
       {posts.length > max_post_number && (
-        <div className="flex justify-end text-base font-medium leading-6">
+        <div className="flex justify-end text-base font-medium leading-6 my-5">
           <CustomLink
             href="/blog"
             className="text-green-500 hover:text-green-600 dark:hover:text-green-400"

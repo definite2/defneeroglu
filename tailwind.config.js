@@ -2,7 +2,7 @@ const colors = require('tailwindcss/colors')
 const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   mode: 'jit',
-  purge: ['./src/pages/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
+  purge: ['./src/pages/**/*.js', './src/components/**/*.js','./src/layouts/**/*.js', './src/utils/**/*.js'],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
@@ -21,20 +21,24 @@ module.exports = {
       },
       colors: {
         bglight: 'rgb(252 250 255)',
-        primary: colors.indigo,
+        primary: colors.emerald,
         gray: colors.trueGray,
+        violet:colors.violet,
+        pink:colors.pink,
+        green:colors.teal,
         code: {
           green: '#b5f4a5',
           yellow: '#ffe484',
-          purple: '#d9a9ff',
+          purple: '#569CD6',
           red: '#ff8383',
-          blue: '#93ddfd',
+          blue: '#569CD6',
           white: '#fff',
         },
       },
       letterSpacing: {
         title: '0.2em',
       },
+ 
       typography: (theme) => ({
         DEFAULT: {
           css: {

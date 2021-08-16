@@ -6,7 +6,7 @@ const Wrapper = ({ children }) => {
     <SectionContainer>
       <div className="flex flex-col justify-between h-screen">
         <Header />
-        <main className="mb-auto mt-24">{children}</main>
+        <main className="mb-auto mt-28">{children}</main>
       </div>
     </SectionContainer>
   );
