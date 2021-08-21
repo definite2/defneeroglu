@@ -30,7 +30,7 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
                 <dd>
                   <time dateTime={lastmod}>{formatDate(lastmod)}</time>
                 </dd>
-                <span class="dot"></span>
+                <span className="dot"></span>
                 <span>{frontMatter.readingTime.text}</span>
                 <span className="self-end">ALGORITMA</span>
               </dl>
