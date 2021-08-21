@@ -6,8 +6,7 @@
       "@/constants/*": ["constants/*"],
       "@/layouts/*": ["layouts/*"],
       "@/utils/*": ["utils/*"],
-      "@/hooks/*": ["hooks/*"],
-
+      "@/hooks/*": ["hooks/*"]
     }
   }
 }
