@@ -13,7 +13,6 @@ const Wrapper = styled.nav`
   width: 100%;
   border: none;
   box-shadow: none;
-  background-color: ${(props) => props.theme.background};
   transition: box-shadow 250ms ease-in-out;
   ${(props) =>
     props.isScrolled &&
@@ -29,9 +28,9 @@ const Header = () => {
   return (
     <Wrapper
       isScrolled={scrolled}
-      className="flex items-center justify-between  bg-white dark:bg-gray-900 py-5"
+      className="flex items-center justify-between bg-white dark:bg-gray-900 py-5"
     >
-      <div className="w-full  flex justify-between  max-w-3xl px-2 mx-auto sm:px-6 xl:max-w-4xl xl:px-0">
+      <div className="w-full flex justify-between max-w-3xl px-2 mx-auto sm:px-6 xl:max-w-4xl xl:px-0">
         <Logo />
         <div className="flex justify-between items-center text-base leading-5">
           <div className="hidden sm:block">
