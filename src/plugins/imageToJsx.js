@@ -1,4 +1,4 @@
-import { visit } from "unist-util-visit";
+import visit from "unist-util-visit";
 const sizeOf = require("image-size");
 const fs = require("fs");
 module.exports = (options) => (tree) => {
@@ -10,10 +10,12 @@ module.exports = (options) => (tree) => {
       node.children.some((n) => n.type === "image"),
     (node) => {
       const imageNode = node.children.find((n) => n.type === "image");
-      let localImage = `${process.cwd()}/public${imageNode.url}`;
-      if (fs.existsSync(localImage)) {
-        const dimensions = sizeOf(localImage);
-         // Convert original node to next/image
+
+      // only local files
+      if (fs.existsSync(`${process.cwd()}/public${imageNode.url}`)) {
+        const dimensions = sizeOf(`${process.cwd()}/public${imageNode.url}`);
+
+        // Convert original node to next/image
         (imageNode.type = "mdxJsxFlowElement"),
           (imageNode.name = "Image"),
           (imageNode.attributes = [
@@ -26,9 +28,10 @@ module.exports = (options) => (tree) => {
               value: dimensions.height,
             },
           ]);
-          // Change node type from p to div to avoid nesting error
-        node.type = 'div'
-        node.children = [imageNode]
+
+        // Change node type from p to div to avoid nesting error
+        node.type = "div";
+        node.children = [imageNode];
       }
     }
   );
