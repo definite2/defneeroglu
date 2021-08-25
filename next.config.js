@@ -3,7 +3,5 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 module.exports = withBundleAnalyzer({
   pageExtensions: ["js", "jsx", "md", "mdx"],
-  experimental: {
-    esmExternals: "loose",
-  },
+  experimental: { esmExternals: true },
 });
