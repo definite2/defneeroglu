@@ -1,19 +1,20 @@
-import CustomLink from '@/components/CustomLink'
-import PageTitle from '@/components/PageTitle'
-import SectionContainer from '@/components/SectionContainer'
-import { BlogSeo } from '@/components/Seo'
-import { siteMetadata } from '@/constants/siteMetadata'
-import Image from 'next/image'
-import { formatDate } from 'lib/date'
-const editUrl = (fileName) => `${siteMetadata.siteRepo}/blob/master/data/blog/${fileName}`
+import CustomLink from "@/components/CustomLink";
+import PageTitle from "@/components/PageTitle";
+import SectionContainer from "@/components/SectionContainer";
+import { BlogSeo } from "@/components/Seo";
+import { siteMetadata } from "@/constants/siteMetadata";
+import Image from "next/image";
+import { formatDate } from "lib/date";
+const editUrl = (fileName) =>
+  `${siteMetadata.siteRepo}/blob/master/data/blog/${fileName}`;
 const discussUrl = (slug) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(
     `${siteMetadata.siteUrl}/blog/${slug}`
-  )}`
+  )}`;
 
-const postDateTemplate = { year: 'numeric', month: 'long', day: 'numeric' }
+const postDateTemplate = { year: "numeric", month: "long", day: "numeric" };
 export default function PostLayout({ frontMatter, next, prev, children }) {
-  const { slug, fileName, title, tags, lastmod } = frontMatter
+  const { slug, fileName, title, tags, lastmod } = frontMatter;
 
   return (
     <SectionContainer>
@@ -32,16 +33,17 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
                 </dd>
                 <span className="dot"></span>
                 <span>{frontMatter.readingTime.text}</span>
-                <span className="self-end">ALGORITMA</span>
               </dl>
             </div>
           </header>
           <div
             className="pb-8 divide-y divide-gray-200 xl:divide-y-0 dark:divide-gray-700 "
-            style={{ gridTemplateRows: 'auto 1fr' }}
+            style={{ gridTemplateRows: "auto 1fr" }}
           >
             <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:pb-0 xl:col-span-3 xl:row-span-2">
-              <div className="pt-10 pb-8 prose dark:prose-dark max-w-none">{children}</div>
+              <div className="pt-10 pb-8 prose dark:prose-dark max-w-none">
+                {children}
+              </div>
             </div>
 
             <footer>
@@ -72,5 +74,5 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
         </div>
       </article>
     </SectionContainer>
-  )
+  );
 }
