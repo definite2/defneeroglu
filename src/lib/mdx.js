@@ -6,22 +6,10 @@ import { bundleMDX } from "mdx-bundler";
 import { getDirectories } from "./files";
 import rehypeHighlight from "rehype-highlight";
 import remarkSlug from "remark-slug";
-import imageToJsx from "../plugins/imageToJsx";
+
 
 const currentDir = process.cwd();
-const tokenClassNames = {
-  tag: "text-code-red",
-  "attr-name": "text-code-yellow",
-  "attr-value": "text-code-green",
-  deleted: "text-code-red",
-  inserted: "text-code-green",
-  punctuation: "text-code-white",
-  keyword: "text-code-purple",
-  string: "text-code-green",
-  function: "text-code-blue",
-  boolean: "text-code-red",
-  comment: "text-gray-400 italic",
-};
+
 export function getFiles(type) {
   const prefixPaths = path.join(currentDir, "_content", type);
   const files = getDirectories(prefixPaths);
@@ -67,7 +55,6 @@ export async function getFilesBySlug(type, slug) {
       options.remarkPlugins = [
         ...(options.remarkPlugins ?? []),
         remarkSlug,
-        imageToJsx,
       ];
       options.rehypePlugins = [...(options.rehypePlugins ?? []), rehypeHighlight];
       return options;
