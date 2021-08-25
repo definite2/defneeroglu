@@ -36,6 +36,7 @@
     "mdx-bundler": "^6.0.1",
     "parse-numeric-range": "^1.2.0",
     "postcss": "^8.3.5",
+    "prettier": "^2.3.2",
     "reading-time": "^1.4.0",
     "refractor": "^4.1.1",
     "rehype": "^11.0.0",
