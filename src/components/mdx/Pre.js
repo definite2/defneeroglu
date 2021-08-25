@@ -1,6 +1,9 @@
 import clsx from "clsx";
 import { useRef, useState } from "react";
-
+import styled from "styled-components";
+const StyledPre=styled.pre`
+background-color: rgba(0, 245, 196, 0.15);
+`
 const Pre = (props) => {
   const txtInput = useRef(null);
   const [hovered, setHovered] = useState(false);
@@ -68,7 +71,7 @@ const Pre = (props) => {
           </svg>
         </button>
       )}
-      <pre>{props.children}</pre>
+      <pre >{props.children}</pre>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { off, on } from "@/utils/ui";
+import { off, on } from "lib/ui";
 
 const useScrolling = (ref) => {
   const [scrolling, setScrolling] = useState(false);

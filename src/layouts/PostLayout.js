@@ -4,7 +4,7 @@ import SectionContainer from '@/components/SectionContainer'
 import { BlogSeo } from '@/components/Seo'
 import { siteMetadata } from '@/constants/siteMetadata'
 import Image from 'next/image'
-import { formatDate } from '@/utils/date'
+import { formatDate } from 'lib/date'
 const editUrl = (fileName) => `${siteMetadata.siteRepo}/blob/master/data/blog/${fileName}`
 const discussUrl = (slug) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(

@@ -5,9 +5,9 @@ import {
   formatSlug,
   getFilesBySlug,
   getFiles,
-} from "@/utils/mdx";
-import {MdxLayoutRenderer} from "@/components/MdxComponents";
-import generateRss from "@/utils/generateRss";
+} from "lib/mdx";
+import {MdxLayoutRenderer} from "@/components/mdx";
+import generateRss from "lib/generateRss";
 const DEFAULT_LAYOUT = "PostLayout";
 export const getStaticPaths = async () => {
   const posts = getFiles("blog");

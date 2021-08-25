@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CustomLink from "@/components/CustomLink";
 import Pagination from "@/components/Pagination";
-import { formatDate } from "@/utils/date";
+import { formatDate } from "lib/date";
 import Tag from "@/components/Tag";
 //TODO paginationa later
 const ListLayout = ({ posts, title, initialDisplayPosts = [], pagination }) => {

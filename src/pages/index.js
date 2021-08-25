@@ -1,7 +1,7 @@
 import CustomLink from '../components/CustomLink'
 import { PageSeo } from '../components/Seo'
 import { siteMetadata } from '../constants/siteMetadata'
-import { getAllFilesFrontMatter } from '../utils/mdx'
+import { getAllFilesFrontMatter } from '../lib/mdx'
 import Tag from '../components/Tag'
 import Image from 'next/image'
 const max_post_number = 6

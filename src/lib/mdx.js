@@ -4,9 +4,10 @@ import matter from "gray-matter";
 import readingTime from "reading-time";
 import { bundleMDX } from "mdx-bundler";
 import { getDirectories } from "./files";
-import rehypeMetaAttribute from "./rehype-meta-attribute";
+import rehypeHighlight from "rehype-highlight";
 import remarkSlug from "remark-slug";
 import imageToJsx from "../plugins/imageToJsx";
+
 const currentDir = process.cwd();
 const tokenClassNames = {
   tag: "text-code-red",
@@ -68,10 +69,7 @@ export async function getFilesBySlug(type, slug) {
         remarkSlug,
         imageToJsx,
       ];
-      options.rehypePlugins = [
-        ...(options.rehypePlugins ?? []),
-        rehypeMetaAttribute,
-      ];
+      options.rehypePlugins = [...(options.rehypePlugins ?? []), rehypeHighlight];
       return options;
     },
   });
