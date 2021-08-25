@@ -1,17 +1,14 @@
-const fs = require('fs')
-const globby = require('globby')
-const prettier = require('prettier')
-const siteMetadata = require('../src/constants/siteMetadata')
-
+import fs from "fs"
+import { globby } from "globby"
+import { siteMetadata } from "@/constants/siteMetadata"
 ;(async () => {
-  const prettierConfig = await prettier.resolveConfig('./.prettierrc.js')
   const pages = await globby([
-    'pages/*.js',
-    '_content/blog/**/*.mdx',
-    '_content/blog/**/*.md',
-    'public/tags/**/*.xml',
-    '!pages/_*.js',
-    '!pages/api',
+    "pages/*.js",
+    "_content/blog/**/*.mdx",
+    "_content/blog/**/*.md",
+    "public/tags/**/*.xml",
+    "!pages/_*.js",
+    "!pages/api",
   ])
 
   const sitemap = `
@@ -20,14 +17,14 @@ const siteMetadata = require('../src/constants/siteMetadata')
             ${pages
               .map((page) => {
                 const path = page
-                  .replace('pages/', '/')
-                  .replace('_content/blog', '/blog')
-                  .replace('public/', '/')
-                  .replace('.js', '')
-                  .replace('.mdx', '')
-                  .replace('.md', '')
-                  .replace('/feed.xml', '')
-                const route = path === '/index' ? '' : path
+                  .replace("pages/", "/")
+                  .replace("_content/blog", "/blog")
+                  .replace("public/", "/")
+                  .replace(".js", "")
+                  .replace(".mdx", "")
+                  .replace(".md", "")
+                  .replace("/feed.xml", "")
+                const route = path === "/index" ? "" : path
                 if (page === `pages/404.js` || page === `pages/blog/[...slug].js`) {
                   return
                 }
@@ -37,15 +34,10 @@ const siteMetadata = require('../src/constants/siteMetadata')
                         </url>
                     `
               })
-              .join('')}
+              .join("")}
         </urlset>
     `
 
-  const formatted = prettier.format(sitemap, {
-    ...prettierConfig,
-    parser: 'html',
-  })
-
   // eslint-disable-next-line no-sync
-  fs.writeFileSync('public/sitemap.xml', formatted)
+  fs.writeFileSync("public/sitemap.xml", sitemap)
 })()
