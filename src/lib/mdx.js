@@ -5,8 +5,8 @@ import readingTime from "reading-time";
 import { bundleMDX } from "mdx-bundler";
 import { getDirectories } from "./files";
 import rehypeHighlight from "rehype-highlight";
-import remarkSlug from "remark-slug";
-
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 const currentDir = process.cwd();
 
@@ -52,11 +52,12 @@ export async function getFilesBySlug(type, slug) {
   const { frontmatter, code } = await bundleMDX(source, {
     cwd: path.join(process.cwd(), "components"),
     xdmOptions(options) {
-      options.remarkPlugins = [
-        ...(options.remarkPlugins ?? []),
-        remarkSlug,
+      options.rehypePlugins = [
+        ...(options.rehypePlugins ?? []),
+        rehypeSlug,
+        rehypeAutolinkHeadings,
+        rehypeHighlight,
       ];
-      options.rehypePlugins = [...(options.rehypePlugins ?? []), rehypeHighlight];
       return options;
     },
   });

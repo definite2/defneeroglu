@@ -1,11 +1,12 @@
 import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
+.light{
   code {
     white-space: pre;
   }
   code[class*="language-"],
   pre[class*="language-"] {
-    color: #262626;
+    color: white;
     background: none;
     font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono",
     "Courier New", monospace;
@@ -52,7 +53,7 @@ export const GlobalStyle = createGlobalStyle`
   .hljs-prolog,
   .hljs-doctype,
   .hljs-cdata {
-    color: gray;
+    color: #6a9955;
   }
   .hljs-doctype .hljs-doctype-tag {
   color: #569cd6;
@@ -62,10 +63,7 @@ export const GlobalStyle = createGlobalStyle`
   color: #9cdcfe;
 }
 
-.hljs-comment,
-.hljs-prolog {
-  color: #6a9955;
-}
+
 
 .hljs-punctuation,
 .language-html .language-css .hljs-punctuation,
@@ -81,7 +79,7 @@ export const GlobalStyle = createGlobalStyle`
 .hljs-symbol,
 .hljs-inserted,
 .hljs-unit {
-  color: #b5cea8;
+  color: rgb(247, 140, 108);
 }
 
 .hljs-selector,
@@ -127,7 +125,7 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 .hljs-keyword {
-  color: #569cd6;
+  color: #c586c0;
 }
 
 .hljs-keyword.hljs-module,
@@ -136,7 +134,7 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 .hljs-function,
-.hljs-function .hljs-maybe-class-name {
+.hljs-function .hljs-class {
   color: #dcdcaa;
 }
 
@@ -183,11 +181,13 @@ export const GlobalStyle = createGlobalStyle`
 
 .hljs-property,
 .hljs-variable,
-.hljs-imports .hljs-maybe-class-name,
-.hljs-exports .hljs-maybe-class-name {
+.hljs-imports .hljs-class,
+.hljs-exports .hljs-class{
   color: #9cdcfe;
 }
-
+.hljs-variable.hljs-language{
+  color:#569cd6;
+}
 .hljs-selector {
   color: #d7ba7d;
 }
@@ -228,7 +228,7 @@ export const GlobalStyle = createGlobalStyle`
 .hljs-namespace {
   color: #4ec9b0;
 }
-
+}
   .mdx-marker {
     display: block;
     margin-left: -16px;
@@ -239,17 +239,19 @@ export const GlobalStyle = createGlobalStyle`
     min-width: fit-content;
   }
 
-  [data-theme="dark"] {
+ .dark {
     :not(pre) > code[class*="language-"] {
-    background: #011627;
+    background: #021c27 !important;
   }
-  
+  .hljs-namespace {
+  color: #4ec9b0;
+}
   .hljs-string,
   .hljs-url {
     color: rgb(173, 219, 103);
   }
   .hljs-variable {
-    color: rgb(214, 222, 235);
+    color:#569cd6;
   }
   .hljs-number {
     color: rgb(247, 140, 108);
@@ -263,6 +265,11 @@ export const GlobalStyle = createGlobalStyle`
   .hljs-punctuation {
     color: rgb(199, 146, 234);
   }
+  .hljs-class
+ {
+  color: #4ec9b0;
+}
+
   .hljs-selector,
   .hljs-doctype {
     color: rgb(199, 146, 234);
@@ -274,16 +281,22 @@ export const GlobalStyle = createGlobalStyle`
   .hljs-tag,
   .hljs-operator,
   .hljs-keyword {
-    color: #ffa7c4;
-  }
+    color: #c586c0;
+}
   .hljs-boolean {
     color: rgb(255, 88, 116);
   }
   .hljs-property {
-    color: rgb(128, 203, 196);
+    color: #9cdcfe;
   }
   .hljs-namespace {
     color: #4ec9b0;
+  }
+  .hljs-comment,
+  .hljs-prolog,
+  .hljs-doctype,
+  .hljs-cdata {
+    color: #6a9955;
   }
   code[class*="language-"],
   pre[class*="language-"] {
