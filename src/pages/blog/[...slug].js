@@ -6,7 +6,7 @@ import {
   getFilesBySlug,
   getFiles,
 } from "lib/mdx";
-import {MdxLayoutRenderer} from "@/components/mdx";
+import {MdxLayoutRenderer} from "@/components/Mdx";
 import generateRss from "lib/generateRss";
 const DEFAULT_LAYOUT = "PostLayout";
 export const getStaticPaths = async () => {
