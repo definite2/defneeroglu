@@ -21,12 +21,12 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
       <BlogSeo url={`${siteMetadata.siteUrl}/blog/${slug}`} {...frontMatter} />
       <article>
         <div>
-          <header className="pt-6 xl:pb-6">
+          <header className="xl:pb-6">
             <div className="pb-10 space-y-1 text-center border-b border-gray-200 dark:border-gray-700">
               <div className="mb-6">
                 <PageTitle>{title}</PageTitle>
               </div>
-              <dl className="flex text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+              <dl className="flex text-base justify-center font-medium leading-6 text-gray-500 dark:text-gray-400">
                 <dt className="sr-only">Published on</dt>
                 <dd>
                   <time dateTime={lastmod}>{formatDate(lastmod)}</time>
@@ -41,7 +41,7 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
             style={{ gridTemplateRows: "auto 1fr" }}
           >
             <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:pb-0 xl:col-span-3 xl:row-span-2">
-              <div className="pt-10 pb-8 prose dark:prose-dark max-w-none">
+              <div className="pt-8 lg:pt-6 pb-8 prose lg:prose-lg dark:prose-dark max-w-none">
                 {children}
               </div>
             </div>

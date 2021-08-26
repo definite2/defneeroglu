@@ -2,8 +2,9 @@ import { PageSeo } from "@/components/Seo";
 import {siteMetadata} from "@/constants/siteMetadata";
 import Image from "next/image";
 import SocialIcon from "@/components/Social";
+import avatar from "../../public/media/me.jpg"
 const about = () => {
-  const { author, image, occupation, email, twitter, linkedin, github } =
+  const { author, occupation, email, twitter, linkedin, github } =
     siteMetadata;
   return (
     <>
@@ -20,8 +21,8 @@ const about = () => {
         <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0 lg:pt-8 ">
           <div className="flex flex-col items-center pt-8 space-x-2 lg:-ml-16">
             <Image
-              src={image}
-              alt="avatar"
+              src={avatar}
+              alt="Defne Eroğlu"
               width="192px"
               height="192px"
               className="w-48 h-48 rounded-full"
@@ -37,7 +38,7 @@ const about = () => {
               <SocialIcon kind="twitter" href={twitter} size="4"/>
             </div>
           </div>
-          <div className="pt-8 pb-8 prose dark:prose-dark max-w-none xl:col-span-2 lg:-ml-16">
+          <div className="pt-8 pb-8 prose lg:prose-lg dark:prose-dark max-w-none xl:col-span-2 lg:-ml-16">
             {" "}
             <p>
               I'm a frontend development engineer working at Huawei, mostly
