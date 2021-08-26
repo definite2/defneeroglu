@@ -1,5 +1,5 @@
 import { NextSeo, ArticleJsonLd } from "next-seo";
-import {siteMetadata} from "@/constants/siteMetadata";
+import { siteMetadata } from "@/constants/siteMetadata";
 export const SEO = {
   title: siteMetadata.title,
   description: siteMetadata.description,
@@ -37,6 +37,7 @@ export const PageSeo = ({ title, description, url }) => {
       description={description}
       canonical={url}
       openGraph={{
+        type: "website",
         url,
         title,
         description,
@@ -44,6 +45,7 @@ export const PageSeo = ({ title, description, url }) => {
     />
   );
 };
+
 export const BlogSeo = ({
   title,
   summary,
@@ -85,11 +87,18 @@ export const BlogSeo = ({
           title,
           description: summary,
           images: featuredImages,
+          twitter:{
+
+          }
         }}
         additionalMetaTags={[
           {
             name: "twitter:image",
             content: featuredImages[0].url,
+          },
+          {
+            name: "category",
+            content: tags,
           },
         ]}
       />
