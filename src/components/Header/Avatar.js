@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import styled, { css } from "styled-components";
 import Link from "next/link";
-import {siteMetadata} from "@/constants/siteMetadata";
+import { siteMetadata } from "@/constants/siteMetadata";
 import useScrolling from "@/hooks/useScroll";
 const shouldShow = (props) => {
   if (props.scrolled) {
@@ -12,11 +12,8 @@ const shouldShow = (props) => {
   return true;
 };
 
-const Handle = styled.span`
+const Visibility = styled.span`
   transition: opacity 500ms ease-out, margin 500ms ease-in-out;
-  font-weight: 600;
-  font-size: 1.5rem;
-  line-height: 2rem;
 
   ${(props) => {
     if (shouldShow(props)) {
@@ -31,23 +28,7 @@ const Handle = styled.span`
     `;
   }};
 `;
-const Handle2 = styled.span`
-  transition: opacity 500ms ease-out, margin 500ms ease-in-out;
-  font-weight: 600;
-  font-size: 1.5rem;
-  line-height: 2rem;
-  ${(props) => {
-    if (shouldShow(props)) {
-      return css`
-        opacity: 1;
-      `;
-    }
-    return css`
-      opacity: 0;
-      margin-right: ${props.marginOnHide || "-1.5rem"};
-    `;
-  }};
-`;
+
 const Logo = () => {
   const rref = useRef(null);
   const isScrolled = useScrolling(rref);
@@ -59,20 +40,20 @@ const Logo = () => {
       >
         <div
           ref={rref}
-          className="overflow-hidden transition-transform ease-in-out border-0 group-hover:-translate-y-1"
+          className="overflow-hidden transition-transform ease-in-out border-0 group-hover:-translate-y-1 font-semibold text-xl"
         >
-          <Handle scrolled={isScrolled} showOnScroll className="lg:-ml-1 ml-1">
+          <Visibility scrolled={isScrolled} showOnScroll>
             &lt;
-          </Handle>
-          <Handle2 scrolled={isScrolled} hideOnScroll >
-            {siteMetadata.headerTitle}
-          </Handle2>
-          <Handle2 scrolled={isScrolled} showOnScroll className="-ml-10">
-           Home
-          </Handle2>
-          <Handle scrolled={isScrolled} default={0} showOnScroll marginOnHide="0">
+          </Visibility>
+          <Visibility>{siteMetadata.headerTitle}</Visibility>
+          <Visibility
+            scrolled={isScrolled}
+            default={0}
+            showOnScroll
+            marginOnHide="0"
+          >
             &nbsp;/&gt;
-          </Handle>
+          </Visibility>
         </div>
       </a>
     </Link>
