@@ -1,14 +1,13 @@
-import CustomLink from '../components/CustomLink'
-import { PageSeo } from '../components/Seo'
-import { siteMetadata } from '../constants/siteMetadata'
-import { getAllFilesFrontMatter } from '../lib/mdx'
-import Tag from '../components/Tag'
-import Image from 'next/image'
-const max_post_number = 6
-const postDateTemplate = { year: 'numeric', month: 'long', day: 'numeric' }
+import CustomLink from "../components/CustomLink";
+import { PageSeo } from "../components/Seo";
+import { siteMetadata } from "../constants/siteMetadata";
+import { getAllFilesFrontMatter } from "../lib/mdx";
+import BlogSummaryCard from "@/components/BlogSummaryCard";
+const max_post_number = 6;
+
 export async function getStaticProps() {
-  const posts = await getAllFilesFrontMatter('blog')
-  return { props: { posts } }
+  const posts = await getAllFilesFrontMatter("blog");
+  return { props: { posts } };
 }
 export default function Home({ posts }) {
   return (
@@ -28,54 +27,21 @@ export default function Home({ posts }) {
           </h1>
         </div>
         <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 sm:gap-8">
-          {!posts.length && 'No posts found.'}
+          {!posts.length && "No posts found."}
           {posts.slice(0, max_post_number).map((frontmatter) => {
-            const { slug, date, title, summary, tags, images } = frontmatter
+            const { slug, date, title, summary, tags, images } = frontmatter;
             return (
               <li key={slug} className="pt-6">
-                <article>
-                  <CustomLink href={`/blog/${slug}`} className="text-gray-800 dark:text-gray-100">
-                    <div className="flex flex-col items-center justify-between h-full overflow-hidden cursor-pointer transition-all duration-200 ease-in-out transform border-2 border-gray-100 rounded-lg hover:scale-105 hover:shadow-xl">
-                      <div className="relative w-full">
-                        <header className="relative pb-1/2">
-                          <Image
-                            layout="fill"
-                            className="absolute top-0 left-0 object-cover w-full h-full"
-                            src={images[0]}
-                            alt={title}
-                          />
-                        </header>
-                      </div>
-                      <dl>
-                        <dt className="sr-only"> Published on</dt>
-                        <dd className="text-base  leading-6 text-gray-400 dark:text-gray-400">
-                          <time dateTime={date}>
-                            {' '}
-                            {new Date(date).toLocaleDateString(
-                              siteMetadata.locale,
-                              postDateTemplate
-                            )}{' '}
-                          </time>
-                        </dd>
-                      </dl>
-                      <section className="flex flex-col h-full px-5 py-5 sm:px-8 sm:py-10">
-                        <h2 className="pb-5 text-xl font-semibold leading-tight sm:text-2xl">
-                          {title}
-                        </h2>
-                        <div className="flex flex-wrap">
-                          {tags.map((tag) => (
-                            <Tag key={tag} text={tag} />
-                          ))}
-                        </div>
-                        <div className="prose transition-opacity duration-200 ease-in-out opacity-75 hover:opacity-100 text-gray-500 max-w-none dark:text-gray-400">
-                          <p>{summary}</p>
-                        </div>
-                      </section>
-                    </div>
-                  </CustomLink>
-                </article>
+                <BlogSummaryCard
+                  slug={slug}
+                  date={date}
+                  title={title}
+                  summary={summary}
+                  tags={tags}
+                  images={images}
+                />
               </li>
-            )
+            );
           })}
         </ul>
       </div>
@@ -91,5 +57,5 @@ export default function Home({ posts }) {
         </div>
       )}
     </>
-  )
+  );
 }
