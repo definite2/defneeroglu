@@ -2,7 +2,7 @@ import { PageSeo } from "@/components/Seo";
 import {siteMetadata} from "@/constants/siteMetadata";
 import Image from "next/image";
 import SocialIcon from "@/components/Social";
-import avatar from "../../public/media/me.jpg"
+import avatar from "../../public/media/avatar1.jpg"
 const about = () => {
   const { author, occupation, email, twitter, linkedin, github } =
     siteMetadata;
@@ -24,7 +24,7 @@ const about = () => {
               src={avatar}
               alt="Defne Eroğlu"
               width="192px"
-              height="192px"
+              height="186px"
               className="w-48 h-48 rounded-full"
             />
             <h3 className="pt-4 pb-2 text-2xl font-bold leading-8 tracking-tight">
