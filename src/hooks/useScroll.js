@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { off, on } from "lib/ui";
 
-const useScrolling = (ref) => {
+const useScrolling = (offset) => {
   const [scrolling, setScrolling] = useState(false);
   const handleScroll = () => {
-    const isScrolled = window.pageYOffset > 0;
+    const isScrolled = window.pageYOffset > offset;
     setScrolling(isScrolled);
   };
   useEffect(() => {
@@ -12,7 +12,7 @@ const useScrolling = (ref) => {
     return () => {
       off(window, "scroll", handleScroll, { passive: true });
     };
-  }, [ref]);
+  }, []);
   return scrolling;
 };
 

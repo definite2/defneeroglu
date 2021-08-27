@@ -7,11 +7,6 @@ import React, { useRef } from "react";
 import Logo from "./Avatar";
 import useScrolling from "@/hooks/useScroll";
 const Wrapper = styled.nav`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  border: none;
   box-shadow: none;
   transition: box-shadow 250ms ease-in-out;
   ${(props) =>
@@ -23,12 +18,11 @@ const Wrapper = styled.nav`
 `;
 
 const Header = () => {
-  const reff = useRef(null);
-  const scrolled = useScrolling(reff);
+  const scrolled = useScrolling(0);
   return (
     <Wrapper
       isScrolled={scrolled}
-      className="flex items-center justify-between bg-white dark:bg-gray-900 py-5"
+      className="fixed top-0 left-0 w-full border-0 flex items-center justify-between bg-white dark:bg-gray-900 py-6"
     >
       <div className="w-full flex justify-between max-w-3xl px-2 mx-auto sm:px-6 xl:max-w-4xl xl:px-0">
         <Logo />

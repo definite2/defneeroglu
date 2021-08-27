@@ -30,18 +30,14 @@ const Visibility = styled.span`
 `;
 
 const Logo = () => {
-  const rref = useRef(null);
-  const isScrolled = useScrolling(rref);
+  const isScrolled = useScrolling(0);
   return (
     <Link href="/">
       <a
         aria-label="My avatar, website logo"
         className="flex items-center border-white group focus-visible:outline-accent h-full:hidden"
       >
-        <div
-          ref={rref}
-          className="overflow-hidden transition-transform ease-in-out border-0 group-hover:-translate-y-1 font-semibold text-xl"
-        >
+        <div className="overflow-hidden transition-transform ease-in-out border-0 group-hover:-translate-y-1 font-semibold text-xl">
           <Visibility scrolled={isScrolled} showOnScroll>
             &lt;
           </Visibility>
