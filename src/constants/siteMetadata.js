@@ -14,4 +14,7 @@ export const siteMetadata = {
   twitter: "https://twitter.com/defne_erogluu",
   linkedin: "https://www.linkedin.com/in/defne-eroglu/",
   locale: "en-US",
+  analytics: {
+    googleAnalyticsId: "",
+  },
 };
