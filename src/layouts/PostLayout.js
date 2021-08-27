@@ -5,6 +5,7 @@ import { BlogSeo } from "@/components/Seo";
 import { siteMetadata } from "@/constants/siteMetadata";
 import Image from "next/image";
 import { formatDate } from "lib/date";
+
 const editUrl = (fileName) =>
   `${siteMetadata.siteRepo}/blob/master/data/blog/${fileName}`;
 const discussUrl = (slug) =>
