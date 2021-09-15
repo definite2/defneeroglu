@@ -12,8 +12,8 @@ export default function ScrollToTop() {
     return true;
   };
 
-  const Scroll = styled.div`
-    transition: opacity 500ms ease-in-out,transform 1000ms ease-in-out;
+  const Scroll = styled.button`
+    transition: opacity 500ms ease-in-out,transform 700ms ease-in-out;
 
     ${(props) => {
       if (shouldShow(props)) {
@@ -24,11 +24,11 @@ export default function ScrollToTop() {
       }
       return css`
         opacity: 0;
-        transform: translateY(-16px);
+        transform: translateY(100px);
       `;
     }};
   `;
-  const isscrolled = useScrolling(800);
+  const isscrolled = useScrolling(924);
 
   const scrollToTop = () => {
     window.scrollTo({
