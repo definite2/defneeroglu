@@ -2,18 +2,20 @@ import SectionContainer from "@/components/SectionContainer";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollTop";
 import Footer from "@/components/Footer";
-import { useRouter } from "next/router";
+
+import RightSidebar from "./Sidebar/RightSidebar";
+
 const Wrapper = ({ children }) => {
-  const { pathname } = useRouter();
   return (
     <>
       <SectionContainer>
-        <div className="flex flex-col justify-between h-screen">
-          <Header />
-          <main className="pb-28 mb-auto sm:pb-40 mt-28">{children}</main>
-        </div>
+        <Header />
+        <main role="main" className="md:col-span-6 md:col-start-3 col-span-10 px-4 my-40">
+          {children}
+        </main>
+        <RightSidebar />
       </SectionContainer>
-      {!pathname.startsWith("/blog/") && <Footer />}
+      <Footer />
       <ScrollToTop />
     </>
   );
