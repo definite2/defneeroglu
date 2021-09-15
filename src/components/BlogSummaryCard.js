@@ -41,7 +41,7 @@ export default function BlogSummaryCard(props) {
             {/* TODO! fix a descendant of <a> */}
             <div className="flex flex-wrap">
               {tags.map((tag) => (
-                <object><Tag key={tag} text={tag} /></object>
+                <object key={tag}><Tag key={tag} text={tag} /></object>
               ))}
             </div>
             <div className="prose transition-opacity duration-200 ease-in-out opacity-75 hover:opacity-100 text-gray-500 max-w-none dark:text-gray-400">
