@@ -22,9 +22,9 @@ const Header = () => {
   return (
     <Wrapper
       isScrolled={scrolled}
-      className="fixed top-0 left-0 w-full border-0 flex items-center justify-between bg-white dark:bg-gray-900 py-6"
+      className="fixed top-0 left-0 w-full flex items-center justify-between border-0 md:grid md:grid-cols-10 gap-1 bg-white dark:bg-gray-900 py-6"
     >
-      <div className="w-full flex justify-between max-w-3xl px-2 mx-auto sm:px-6 xl:max-w-4xl xl:px-0">
+      <div className="w-full md:col-start-3 md:col-span-6 flex justify-between max-w-3xl px-2 mx-auto sm:px-6 xl:max-w-4xl xl:px-0">
         <Logo />
         <div className="flex justify-between items-center text-base leading-5">
           <div className="hidden sm:block">

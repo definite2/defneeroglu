@@ -10,25 +10,26 @@ const components = {
   twitter: Twitter,
 };
 
-const SocialIcon = ({ kind, href, size = 2 }) => {
+const SocialIcon = ({ kind, href, size = 2,className }) => {
   if (!href) return null;
 
   const SocialSvg = components[kind];
+  // TODO make dynamic hover color
   const hoverColor = (kind) => {
-    if (kind === "mail") return "red";
-    else if (kind === "github") return "gray";
-    else return "blue";
+    if (kind === "mail") return "text-red-400";
+    else if (kind === "github") return "text-gray-700";
+    else return "text-blue-500";
   };
   return (
     <a
-      className="text-sm text-gray-500 transition hover:text-gray-600"
+      className="text-sm text-gray-600 transition hover:text-gray-600"
       target="_blank"
       rel="noopener noreferrer"
       href={href}
     >
       <span className="sr-only">{kind}</span>
       <SocialSvg
-        className={` text-gray-700 dark:text-gray-200 h-${size} w-${size}`}
+        className={`${className} h-${size} w-${size} hover:text-orange-400`}
       />
     </a>
   );
