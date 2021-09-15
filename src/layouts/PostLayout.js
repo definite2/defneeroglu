@@ -1,24 +1,14 @@
 import CustomLink from "@/components/CustomLink";
 import PageTitle from "@/components/PageTitle";
-import SectionContainer from "@/components/SectionContainer";
 import { BlogSeo } from "@/components/Seo";
 import { siteMetadata } from "@/constants/siteMetadata";
-import Image from "next/image";
 import { formatDate } from "lib/date";
 
-const editUrl = (fileName) =>
-  `${siteMetadata.siteRepo}/blob/master/data/blog/${fileName}`;
-const discussUrl = (slug) =>
-  `https://mobile.twitter.com/search?q=${encodeURIComponent(
-    `${siteMetadata.siteUrl}/blog/${slug}`
-  )}`;
-
-const postDateTemplate = { year: "numeric", month: "long", day: "numeric" };
 export default function PostLayout({ frontMatter, next, prev, children }) {
   const { slug, fileName, title, tags, lastmod } = frontMatter;
 
   return (
-    <SectionContainer>
+    <>
       <BlogSeo url={`${siteMetadata.siteUrl}/blog/${slug}`} {...frontMatter} />
       <article>
         <div>
@@ -74,6 +64,6 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
           </div>
         </div>
       </article>
-    </SectionContainer>
+    </>
   );
 }
