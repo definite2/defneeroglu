@@ -1,11 +1,10 @@
 import { PageSeo } from "@/components/Seo";
-import {siteMetadata} from "@/constants/siteMetadata";
+import { siteMetadata } from "@/constants/siteMetadata";
 import Image from "next/image";
 import SocialIcon from "@/components/Social";
-import avatar from "../../public/media/avatar1.jpg"
+import avatar from "../../public/media/avatar1.jpg";
 const about = () => {
-  const { author, occupation, email, twitter, linkedin, github } =
-    siteMetadata;
+  const { author, occupation, email, twitter, linkedin, github } = siteMetadata;
   return (
     <>
       <PageSeo
@@ -31,12 +30,6 @@ const about = () => {
               {author}
             </h3>
             <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
-            <div className="flex pt-6 space-x-3">
-              <SocialIcon kind="mail" href={`mailto:${email}`} size="4" />
-              <SocialIcon kind="github" href={github} size="4"/>
-              <SocialIcon kind="linkedin" href={linkedin} size="4"/>
-              <SocialIcon kind="twitter" href={twitter} size="4"/>
-            </div>
           </div>
           <div className="pt-8 pb-8 prose lg:prose-lg dark:prose-dark max-w-none xl:col-span-2 lg:-ml-16">
             {" "}
@@ -45,8 +38,8 @@ const about = () => {
               working at React and Angular projects.
             </p>
             <p>
-              BS in physics, I still have some passion for it but I've
-              prefered to develop my career in software development.
+              BS in physics, I still have some passion for it but I've prefered
+              to develop my career in software development.
             </p>
             <p>
               I've started programming with MATLAB then worked as full stack
