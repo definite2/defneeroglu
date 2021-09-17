@@ -1,3 +1,4 @@
+@import './variables.scss';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -32,6 +33,28 @@
 .dot:after {
   content: "\00B7";
   @apply ml-2 mr-2;
+}
+.contact-picture {
+  transform: scale(0.9, 0.9);
+  transition: transform 0.2s ease-in;
+}
+
+.contact-picture__foreground {
+  transform-origin: 50% 50%;
+  transform: translateY(4px) scale(1, 1);
+  transition: transform 0.2s ease-in;
+}
+.contact-picture__background{
+  clip-path: url(#maskBackground);
+  transform:translate(-90 -31);
+}
+
+.contact-picture:hover {
+  transform: scale(1, 1);
+}
+
+.contact-picture:hover .contact-picture__foreground {
+  transform: translateY(-7px) scale(1.05, 1.05);
 }
 // pre[class*="language-"],
 // code[class*="language-"] {

@@ -25,6 +25,19 @@ module.exports = {
         "1/4": "25%",
         full: "100%",
       },
+      animation: {
+        "blob-spin": "blobbing 25s linear infinite",
+      },
+      keyframes: {
+        blobbing: {
+          from: {
+            transform: "rotate(0deg)",
+          },
+          to: {
+            transform: "rotate(360deg)",
+          },
+        },
+      },
       margin: {
         "1/2": "50%",
         "-1/2": "-50%",
@@ -39,6 +52,7 @@ module.exports = {
       colors: {
         primary: colors.lime,
         "primary-light": "#fefffc",
+        "primary-grayish":"#fcfcf7",
         gray: colors.trueGray,
         violet: colors.violet,
         pink: colors.pink,
@@ -56,6 +70,15 @@ module.exports = {
           red: "#ff8383",
           blue: "#569CD6",
           white: "#fff",
+        },
+        avatarback: {
+          blue: {
+            200: colors.blue[100],
+            300: colors.blue[200],
+          },
+          purple: {
+            300: colors.purple[300],
+          },
         },
       },
       letterSpacing: {
