@@ -1,10 +1,9 @@
 import { PageSeo } from "@/components/Seo";
 import { siteMetadata } from "@/constants/siteMetadata";
 import Image from "next/image";
-import SocialIcon from "@/components/Social";
-import avatar from "../../public/media/avatar1.jpg";
+import Avatar from "@/components/Avatar";
 const about = () => {
-  const { author, occupation, email, twitter, linkedin, github } = siteMetadata;
+  const { author, occupation } = siteMetadata;
   return (
     <>
       <PageSeo
@@ -17,21 +16,15 @@ const about = () => {
             Hey, I'm Defne 👋
           </h1>
         </div>
-        <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0 lg:pt-8 ">
-          <div className="flex flex-col items-center pt-8 space-x-2 lg:-ml-16">
-            <Image
-              src={avatar}
-              alt="Defne Eroğlu"
-              width="192px"
-              height="186px"
-              className="w-48 h-48 rounded-full"
-            />
+        <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-12 xl:space-y-0 lg:pt-8 ">
+          <div className="flex flex-col items-center pt-8 space-x-2 lg:-ml-16 xl:col-start-1 xl:col-span-1">
+            <Avatar />
             <h3 className="pt-4 pb-2 text-2xl font-bold leading-8 tracking-tight">
               {author}
             </h3>
             <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
           </div>
-          <div className="pt-8 pb-8 prose lg:prose-lg dark:prose-dark max-w-none xl:col-span-2 lg:-ml-16">
+          <div className="pt-8 pb-8 prose lg:prose-lg dark:prose-dark max-w-none xl:col-span-2 xl:col-start-2">
             {" "}
             <p>
               I'm a frontend development engineer working at Huawei, mostly
