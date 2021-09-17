@@ -18,7 +18,7 @@ export default function Home({ posts }) {
         url={siteMetadata.siteUrl}
       />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="py-20 space-y-2 md:space-y-5">
+        <div className="pb-10 pt-20 space-y-2 md:space-y-5">
           <p className="text-lg  leading-7 text-gray-500 dark:text-gray-400">
             {siteMetadata.description}
           </p>
