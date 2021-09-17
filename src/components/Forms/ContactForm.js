@@ -1,5 +1,6 @@
 import { useState } from "react";
 //TODO add email validation
+import Input from "./Input";
 const ContactForm = () => {
   const initialFValues = {
     name: "",
@@ -12,7 +13,7 @@ const ContactForm = () => {
     const { id, value } = e.target;
     setValues({ ...values, [id]: value });
   };
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     fetch("/api/contact", {
       method: "POST",
@@ -41,8 +42,7 @@ const ContactForm = () => {
           <label className="block tracking-wide mr-3 py-1 text-left font-medium text-xl px-2 text-transparent bg-clip-text bg-gradient-to-br from-orange-400  to-primary-400">
             Name
           </label>
-          <input
-            className="appearance-none w-full border-primary-100  text-gray-700  py-2 px-2 rounded-md leading-tight focus:outline-none focus:ring-primary-200 focus:border-primary-200 shadow-sm dark:bg-primary-100"
+          <Input
             id="name"
             type="text"
             value={values.name}
@@ -53,8 +53,7 @@ const ContactForm = () => {
           <label className="block tracking-wide mr-3 py-1 text-left font-medium text-xl px-2 text-transparent bg-clip-text bg-gradient-to-br from-orange-400  to-primary-400">
             E-mail
           </label>
-          <input
-            className="appearance-none w-full border-primary-100  text-gray-700  py-2 px-2 rounded-md leading-tight focus:outline-none focus:ring-primary-200 focus:border-primary-200 shadow-sm dark:bg-primary-100"
+          <Input
             id="email"
             type="email"
             value={values.email}
@@ -69,21 +68,21 @@ const ContactForm = () => {
           </label>
           <textarea
             id="message"
-            className="no-resize block w-full appearance-none rounded-md border-primary-100  text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none focus:ring-primary-200 focus:border-primary-200 h-36 resize-none shadow-sm dark:bg-primary-100"
+            className="no-resize block w-full appearance-none rounded-md border-primary-100  text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none focus:ring-primary-200 focus:border-primary-200 h-36 resize-none shadow-sm dark:bg-gray-800 dark:text-gray-100"
             onChange={handleChange}
             value={values.message}
           ></textarea>
         </div>
       </div>
       <div className="flex flex-wrap mb-6">
-      <button
-        className="  bg-primary-100 flex items-center justify-center font-medium  border-0 p-2 rounded-md shadow-sm hover:shadow-md"
-        onClick={handleSubmit}
-      >
-        <span className="px-1 text-transparent bg-clip-text bg-gradient-to-br from-orange-400  to-primary-400">
-          Submit
-        </span>
-      </button>
+        <button
+          className="  bg-primary-100 flex items-center justify-center font-medium  border-0 p-2 rounded-md shadow-sm hover:shadow-md"
+          onClick={handleSubmit}
+        >
+          <span className="px-1 text-transparent bg-clip-text bg-gradient-to-br from-orange-400  to-primary-400">
+            Submit
+          </span>
+        </button>
       </div>
     </form>
   );
