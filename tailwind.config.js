@@ -20,6 +20,9 @@ module.exports = {
         sans: ["Merriweather", ...defaultTheme.fontFamily.sans],
         mono: ["Fira Code", ...defaultTheme.fontFamily.mono],
       },
+      outline: {
+        primary: ['2px dotted var(--color-outline-primary)', '2px'],
+      },
       padding: {
         "1/2": "50%",
         "1/4": "25%",
