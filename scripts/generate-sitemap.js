@@ -1,6 +1,6 @@
-import { writeFileSync } from "fs";
-import { globby } from "globby";
-import { siteMetadata } from "@/constants/siteMetadata";
+const fs = require('fs')
+const globby = require('globby')
+const siteMetadata = require('../src/constants/siteMetadata')
 (async () => {
   const pages = await globby([
     "pages/*.js",
@@ -42,5 +42,5 @@ import { siteMetadata } from "@/constants/siteMetadata";
     `;
 
   // eslint-disable-next-line no-sync
-  writeFileSync("public/sitemap.xml", sitemap);
+  fs.writeFileSync("public/sitemap.xml", sitemap);
 })();
