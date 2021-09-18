@@ -1,7 +1,7 @@
-
+import { writeFileSync } from "fs";
 import { globby } from "globby";
 import { siteMetadata } from "@/constants/siteMetadata";
-async function generate() {
+const generate = async () => {
   const pages = await globby([
     "pages/*.js",
     "_content/blog/**/*.mdx",
@@ -42,6 +42,6 @@ async function generate() {
     `;
 
   // eslint-disable-next-line no-sync
-  console.log("public/sitemap.xml", sitemap);
+  writeFileSync("public/sitemap.xml", sitemap);
 };
 generate();

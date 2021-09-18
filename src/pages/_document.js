@@ -8,6 +8,7 @@ class MyDocument extends Document {
           <meta name="msapplication-TileColor" content="#000000" />
           <meta name="theme-color" content="#000000" />
           <link rel="alternate" type="application/rss+xml" href="/index.xml" />
+          <meta name="google-site-verification" content="m0h9GemPOA7FYcnZdwgREyHhB0zukt0kmI7gAJe9528" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"

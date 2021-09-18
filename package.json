@@ -6,7 +6,7 @@
     "analyze": "cross-env ANALYZE=true next build",
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
-    "postbuild":"node ./scripts/generate-sitemap",
+
     "start": "next start"
   },
   "dependencies": {
