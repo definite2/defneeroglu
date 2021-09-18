@@ -1,4 +1,4 @@
-import { writeFileSync } from "fs";
+
 import { globby } from "globby";
 import { siteMetadata } from "@/constants/siteMetadata";
 async function generate() {
@@ -42,6 +42,6 @@ async function generate() {
     `;
 
   // eslint-disable-next-line no-sync
-  writeFileSync("public/sitemap.xml", sitemap);
+  console.log("public/sitemap.xml", sitemap);
 };
 generate();
