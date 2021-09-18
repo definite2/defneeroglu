@@ -6,7 +6,7 @@ export const siteMetadata = {
   headerTitle: "Home",
   description: "Recipes for healthy web development skills🤓",
   language: "en-us",
-  siteUrl: "https://defneroglu.app",
+  siteUrl: "https://defneeroglu.vercel.app",
   siteLogo: "/media/logo.jpg",
   socialBanner: "/media/avatar.jpg",
   email: "edefne878@gmail.com",

@@ -4,13 +4,13 @@ export default async function sendEmail(req, res) {
   const { name, email, message } = req.body;
   try {
     await sendgrid.send({
-      to: process.env.CONTACT_EMAIL, 
+      to: process.env.PERSONAL_EMAIL,
       from: process.env.CONTACT_EMAIL,
       subject: `Message from ${name}`,
       html: `<div>${message}</div><p>Sent from: ${email}</p>`,
     });
   } catch (error) {
-console.log(error);
+    console.log(error);
     return res.status(error.statusCode || 500).json({ error: error.message });
   }
 
