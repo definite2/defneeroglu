@@ -8,8 +8,8 @@ const about = () => {
   return (
     <>
       <PageSeo
-        title={`About - ${author}`}
-        description={`About me - ${author}`}
+        title={`Contact - ${author}`}
+        description={`Contact me - ${author}`}
       />
       <div className="divide-y">
         <div className="pt-6 pb-8 space-y-2 md:space-y-5">
