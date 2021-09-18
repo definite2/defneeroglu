@@ -1,7 +1,7 @@
 import { writeFileSync } from "fs";
 import { globby } from "globby";
 import { siteMetadata } from "@/constants/siteMetadata";
-const generate = async () => {
+async function generate() {
   const pages = await globby([
     "pages/*.js",
     "_content/blog/**/*.mdx",
