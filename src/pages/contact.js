@@ -26,39 +26,26 @@ const about = () => {
             <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
           </div>
           <div className="pt-8 pb-8 prose lg:prose-lg dark:prose-dark max-w-none xl:col-span-2 xl:col-start-2">
-            {" "}
             <p>
-              I'm a frontend development engineer working at Huawei, mostly
-              working with React.
+              I'm a frontend development engineer. Crurently working at Huawei.
             </p>
             <p>
-              My BS in physics, I still have some passion for it, but I've
-              prefered to develop my career in software development. So I'm a
-              self taught developer.
+              I'm a self taught developer. My BS in physics, I still have some
+              passion for it, but I've prefered to develop my career in software
+              development.
             </p>
             <p>
-              I've started programming with MATLAB as trying to solve some
-              physics problem... But my professional experience in coding
-              started as full stack with ASP .NET Web Application. For work
-              purpose I've also developed a desktop four mathematical models-
-              Fuzzy based and Evolutionary strategy- and integrated these models
-              to a GIS desktop product to make spatial decision making support
-              system as module...
-            </p>
-            <p>
-              Now I'm here with React development and I love it. I want to share
-              what I've been rhrough to become a better developer as a self
-              taught. To caht about getting healthier development habits and the
-              things about web development please feel free to send me messages.
+              I'm here to share some web develompent skills I gained on my
+              journey from being a physics student to becoming a software
+              developer. The secret how I've becoming a better programmer is
+              just using my Impostor syndrome as persistently to learn new thing
+              and adapting it... Sound something to you than feel free to send
+              me message.
             </p>
           </div>
         </div>
       </div>
-
       <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0 lg:pt-8 ">
-        <div className="flex flex-col items-center pt-8 space-x-2 ">
-          <p className="mt-12">I would love to hear from you 🙂</p>
-        </div>
         <div className="pt-8 pb-8 prose lg:prose-lg dark:prose-dark max-w-none xl:col-span-2">
           <ContactForm />
         </div>
