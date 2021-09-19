@@ -4,8 +4,8 @@ export default async function sendEmail(req, res) {
   const { name, email, message } = req.body;
   try {
     await sendgrid.send({
-      to: process.env.PERSONAL_EMAIL,
-      from: process.env.CONTACT_EMAIL,
+      to: process.env.CONTACT_EMAIL,
+      from: process.env.DOMAIN_EMAIL,
       subject: `Message from ${name}`,
       html: `<div>${message}</div><p>Sent from: ${email}</p>`,
     });
