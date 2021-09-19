@@ -29,23 +29,27 @@ const about = () => {
             {" "}
             <p>
               I'm a frontend development engineer working at Huawei, mostly
-              working at React and Angular projects.
+              working with React.
             </p>
             <p>
-              BS in physics, I still have some passion for it but I've prefered
-              to develop my career in software development.
+              My BS in physics, I still have some passion for it, but I've
+              prefered to develop my career in software development. So I'm a
+              self taught developer.
             </p>
             <p>
-              I've started programming with MATLAB then worked as full stack
-              with ASP .NET Web Application. I've also developed a desktop
-              module as developing four mathematical models- Fuzzy based and
-              Evolutionary strategy- and integrated these models to desktop
-              product to make spatial decision making support system.
+              I've started programming with MATLAB as trying to solve some
+              physics problem... But my professional experience in coding
+              started as full stack with ASP .NET Web Application. For work
+              purpose I've also developed a desktop four mathematical models-
+              Fuzzy based and Evolutionary strategy- and integrated these models
+              to a GIS desktop product to make spatial decision making support
+              system as module...
             </p>
             <p>
-              Currently I'm focusing my personal development on JavaScript and
-              its ecosystem (frameworks, bundlers, engines, UI libraries etc.).
-              And I'm here to share some of my experiences 🙃.{" "}
+              Now I'm here with React development and I love it. I want to share
+              what I've been rhrough to become a better developer as a self
+              taught. To caht about getting healthier development habits and the
+              things about web development please feel free to send me messages.
             </p>
           </div>
         </div>
