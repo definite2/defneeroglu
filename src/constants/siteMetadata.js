@@ -1,10 +1,10 @@
 export const siteMetadata = {
-  title: "EasyCode Recipes",
+  title: "Coding Muscle",
   author: "Defne Eroğlu",
   avatar: "/media/avatar.jpg",
   occupation: "Software Engineer",
   headerTitle: "Home",
-  description: "Recipes for healthy web development skills🤓",
+  description: "Train regularly to build muscle and become healthier person🙃. I mean, learn best practices and fundemantals of web development reguarly and become a better developer",
   language: "en-us",
   siteUrl: "https://defneeroglu.vercel.app",
   siteLogo: "/media/logo.jpg",
