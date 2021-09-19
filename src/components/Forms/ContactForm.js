@@ -42,7 +42,15 @@ const ContactForm = () => {
   };
   return (
     <>
-      {showAlert && <Alert show={showAlert} setShow={setShowAlert} message={alertMessage} success={success} title={success?"Thank you!":"Something went wrong"}/>}
+      {showAlert && (
+        <Alert
+          show={showAlert}
+          setShow={setShowAlert}
+          message={alertMessage}
+          success={success}
+          title={success ? "Thank you!" : "Something went wrong"}
+        />
+      )}
       <form className="w-full">
         <div className="flex flex-wrap mb-6">
           <div className="w-full md:w-2/3 ">
