@@ -38,8 +38,8 @@ const about = () => {
               I'm here to share some web develompent skills I gained on my
               journey from being a physics student to becoming a software
               developer. The secret how I've becoming a better programmer is
-              just using my Impostor syndrome as persistently to learn new thing
-              and adapting it... Sound something to you than feel free to send
+              just using my Impostor syndrome as persistently to learning new
+              things and become a better version of myself... If these sounds something to you, than feel free to send
               me message.
             </p>
           </div>
