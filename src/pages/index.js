@@ -29,7 +29,7 @@ export default function Home({ posts }) {
         <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 sm:gap-8">
           {!posts.length && "No posts found."}
           {posts.slice(0, max_post_number).map((frontmatter) => {
-            const { slug, date, title, summary, tags, images } = frontmatter;
+            const { slug, date, title, summary, tags, image } = frontmatter;
             return (
               <li key={slug} className="pt-6">
                 <BlogSummaryCard
@@ -39,7 +39,7 @@ export default function Home({ posts }) {
                   title={title}
                   summary={summary}
                   tags={tags}
-                  images={images}
+                  image={image}
                 />
               </li>
             );
