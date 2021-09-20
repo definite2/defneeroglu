@@ -4,7 +4,7 @@ import Tag from "./Tag";
 import { siteMetadata } from "@/constants/siteMetadata";
 const postDateTemplate = { year: 'numeric', month: 'long', day: 'numeric' }
 export default function BlogSummaryCard(props) {
-  const { slug, date, title, summary, tags, images }=props;
+  const { slug, date, title, summary, tags, image }=props;
   return (
     <article>
       <CustomLink
@@ -17,7 +17,7 @@ export default function BlogSummaryCard(props) {
               <Image
                 layout="fill"
                 className="absolute top-0 left-0 object-cover w-full h-full"
-                src={images[0]}
+                src={image}
                 alt={title}
               />
             </header>
