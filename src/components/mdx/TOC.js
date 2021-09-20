@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import classNames from "classnames";
 import useIntersectNode from "@/hooks/useIntersection";
 import clsx from "clsx";
 import CustomLink from "../CustomLink";
@@ -8,8 +7,9 @@ export function TOC() {
   const [headings, setHeadings] = useState([]);
 
   useEffect(() => {
+    const afterElm = document.getElementById("post-body");
     const headingElements = Array.from(
-      document.querySelectorAll("h4")
+      afterElm.querySelectorAll("h1,h2,h3,h4,h5,h6")
     );
     setHeadings(headingElements);
   }, []);
