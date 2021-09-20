@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 
-function useIntersectNode(items, rootMargin, threshold) {
+function useIntersectNode(items, rootMargin="0px", threshold) {
   const [activeNode, setActiveNode] = useState(null)
 
   let observer = useRef(null)
