@@ -1,10 +1,9 @@
 import { PageSeo } from "@/components/Seo";
 import { siteMetadata } from "@/constants/siteMetadata";
 import Image from "next/image";
-import Avatar from "@/components/Avatar";
 import ContactForm from "@/components/Forms/ContactForm";
 const contact = () => {
-  const { author, occupation } = siteMetadata;
+  const { author } = siteMetadata;
   return (
     <>
       <PageSeo

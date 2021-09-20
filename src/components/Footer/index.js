@@ -3,7 +3,7 @@ import SocialIcon from "../Social";
 import Link from "next/link";
 export default function Footer() {
   return (
-    <footer className="mt-auto text-center bg-gradient-to-r from-primary-100 via-primary-grayish to-orange-200">
+    <footer className="relative clear-both h-28 -mt-28 text-center bg-gradient-to-r from-primary-100 via-primary-grayish to-orange-200">
       <div className="flex flex-col justify-center items-center py-6">
         <div className="flex-grow flex-col">
         <div className="flex text-right space-x-4">
