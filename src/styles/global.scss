@@ -1,7 +1,13 @@
-@import './variables.scss';
+@import "./variables.scss";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+#_next{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .svg-draw:hover {
   animation: wave 5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   transform: translate3d(0, 0, 0);
@@ -44,9 +50,9 @@
   transform: translateY(4px) scale(1, 1);
   transition: transform 0.2s ease-in;
 }
-.contact-picture__background{
+.contact-picture__background {
   clip-path: url(#maskBackground);
-  transform:translate(-90 -31);
+  transform: translate(-90 -31);
 }
 
 .contact-picture:hover {
