@@ -8,7 +8,9 @@
   flex-direction: column;
   min-height: 100vh;
 }
-
+#contact_form{
+  background: url("/public/media/bg-mydraw.svg");
+}
 .svg-draw:hover {
   animation: wave 5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   transform: translate3d(0, 0, 0);

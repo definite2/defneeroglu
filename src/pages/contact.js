@@ -10,7 +10,8 @@ const contact = () => {
         title={`Contact - ${author}`}
         description={`Contact me - ${author}`}
       />
-      <div className="divide-y">
+     
+      <div id="contact_form" className="divide-y">
         <div className="pt-6 pb-8 space-y-2 md:space-y-5">
           <h1 className="text-2xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl sm:leading-10 md:text-4xl md:leading-14">
             Let's Connect
@@ -20,6 +21,7 @@ const contact = () => {
           <div className="pt-8 pb-8 prose lg:prose-lg dark:prose-dark max-w-none xl:col-span-2">
             <ContactForm />
           </div>
+          <Image className="-z-10" src="/media/watermelon_me.svg" width="220px" height="196px"/>
         </div>
       </div>
 
