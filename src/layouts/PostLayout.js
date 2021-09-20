@@ -17,7 +17,7 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
         })}
       >
         {isToc && (
-          <aside className="sticky hidden h-screen  max-w-xs mt-8 top-72 xl:block">
+          <aside className="sticky hidden h-screen  max-w-xs mt-1/4 top-32 ml-12 xl:block">
             <TOC />
           </aside>
         )}
@@ -44,7 +44,7 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
               style={{ gridTemplateRows: "auto 1fr" }}
             >
               <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:pb-0 xl:col-span-3 xl:row-span-2">
-                <div className="pt-8 lg:pt-6 pb-8 prose lg:prose-lg dark:prose-dark max-w-none">
+                <div id="post-body" className="pt-8 lg:pt-6 pb-8 prose lg:prose-lg dark:prose-dark max-w-none">
                   {children}
                 </div>
               </div>
