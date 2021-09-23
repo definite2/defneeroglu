@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 const Avatar = () => {
   return (
-    <div className="relative">
+    <div className="relative -z-10">
       <div aria-hidden="true">
         <div className="relative h-48 blob md:h-56 lg:h-64">
           <svg
