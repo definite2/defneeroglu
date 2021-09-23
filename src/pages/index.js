@@ -1,15 +1,22 @@
+import { useEffect, useState } from "react";
 import CustomLink from "../components/CustomLink";
 import { PageSeo } from "../components/Seo";
 import { siteMetadata } from "../constants/siteMetadata";
 import { getAllFilesFrontMatter } from "../lib/mdx";
 import BlogSummaryCard from "@/components/BlogSummaryCard";
+import Alert from "@/components/Forms/Alert";
 const max_post_number = 6;
 
 export async function getStaticProps() {
   const posts = await getAllFilesFrontMatter("blog");
   return { props: { posts } };
 }
+
 export default function Home({ posts }) {
+  const [showUndrContruction, setShowUnderConstruction] = useState(false);
+  useEffect(() => {
+    setShowUnderConstruction(true);
+  }, []);
   return (
     <>
       <PageSeo
@@ -17,6 +24,17 @@ export default function Home({ posts }) {
         description={siteMetadata.description}
         url={siteMetadata.siteUrl}
       />
+      {showUndrContruction && (
+        <Alert
+          show={showUndrContruction}
+          setShow={setShowUnderConstruction}
+          message={
+            "Thank you for visiting my blog; it's still under construction 🚧"
+          }
+          success={false}
+          title={"Under construction!"}
+        />
+      )}
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="pb-10 pt-20 space-y-2 md:space-y-5">
           <p className="text-lg  leading-7 text-gray-500 dark:text-gray-400">
@@ -33,7 +51,6 @@ export default function Home({ posts }) {
             return (
               <li key={slug} className="pt-6">
                 <BlogSummaryCard
-                
                   slug={slug}
                   date={date}
                   title={title}

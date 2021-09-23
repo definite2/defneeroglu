@@ -17,11 +17,11 @@ const contact = () => {
             Let's Connect
           </h1>
         </div>
-        <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0 lg:pt-8 ">
+        <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-2 xl:space-y-0 lg:pt-8 ">
           <div className="pt-8 pb-8 prose lg:prose-lg dark:prose-dark max-w-none xl:col-span-2">
             <ContactForm />
           </div>
-          <Image className="-z-10" src="/media/watermelon_me.svg" width="220px" height="196px"/>
+          <Image className="-z-10 xl:col-span-1 connectme" src="/media/connectme.svg" width="300px" height="376px"/>
         </div>
       </div>
 

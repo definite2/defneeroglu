@@ -15,6 +15,7 @@ module.exports = {
       zIndex: {
         "-1": "-1",
         "-10": "-10",
+        "-50":"-50"
       },
       fontFamily: {
         sans: ["Merriweather", ...defaultTheme.fontFamily.sans],
