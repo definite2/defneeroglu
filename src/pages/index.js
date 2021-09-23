@@ -4,7 +4,8 @@ import { PageSeo } from "../components/Seo";
 import { siteMetadata } from "../constants/siteMetadata";
 import { getAllFilesFrontMatter } from "../lib/mdx";
 import BlogSummaryCard from "@/components/BlogSummaryCard";
-import Alert from "@/components/Forms/Alert";
+import Alert from "@/components/Alert";
+
 const max_post_number = 6;
 
 export async function getStaticProps() {
