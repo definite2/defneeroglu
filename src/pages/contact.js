@@ -2,6 +2,7 @@ import { PageSeo } from "@/components/Seo";
 import { siteMetadata } from "@/constants/siteMetadata";
 import Image from "next/image";
 import ContactForm from "@/components/Forms/ContactForm";
+import { motion } from "framer-motion";
 const contact = () => {
   const { author } = siteMetadata;
   return (
@@ -10,18 +11,40 @@ const contact = () => {
         title={`Contact - ${author}`}
         description={`Contact me - ${author}`}
       />
-     
+
       <div id="contact_form" className="divide-y">
         <div className="pt-6 pb-8 space-y-2 md:space-y-5">
-          <h1 className="text-2xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl sm:leading-10 md:text-4xl md:leading-14">
-            Let's Connect
-          </h1>
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {
+                scale: 0.2,
+                opacity: 0,
+              },
+              visible: {
+                scale: 1,
+                opacity: 1,
+             
+              },
+            }}
+          >
+            <h1 className="text-2xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl sm:leading-10 md:text-4xl md:leading-14">
+              Let's Connect
+            </h1>
+          </motion.div>
         </div>
         <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-2 xl:space-y-0 lg:pt-8 ">
           <div className="pt-8 pb-8 prose lg:prose-lg dark:prose-dark max-w-none xl:col-span-2">
             <ContactForm />
           </div>
-          <Image className="-z-10 xl:col-span-1 connectme" src="/media/connectme.svg" width="300px" height="376px"/>
+
+          <Image
+            className="-z-10 xl:col-span-1 connectme"
+            src="/media/connectme.svg"
+            width="300px"
+            height="376px"
+          />
         </div>
       </div>
 
