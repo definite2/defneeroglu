@@ -16,10 +16,13 @@ const ContactForm = () => {
       temp.email = /$^|.+@.+..+/.test(fieldValues.email)
         ? ""
         : "Email is not valid.";
-    if ("message" in fieldValues)
+    if ("message" in fieldValues) {
       temp.message = fieldValues.message
         ? ""
         : "Your message should not be empty";
+      temp.message =
+        fieldValues.message.length > 1001 ? "Too long message!" : "";
+    }
 
     setErrors({
       ...temp,
