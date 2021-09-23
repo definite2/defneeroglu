@@ -13,17 +13,14 @@ const ContactForm = () => {
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
     if ("email" in fieldValues)
-      temp.email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(fieldValues.email)
+      temp.email = /$^|.+@.+..+/.test(fieldValues.email)
         ? ""
-        : "To reach you back, please add your email";
-
+        : "Email is not valid.";
     if ("message" in fieldValues)
-      temp.message =
-        !fieldValues.message || fieldValues.message.length < 2 ? "It is a very short message:/" : "";
-    temp.message =
-      fieldValues.message.length > 1001 ? "Message is too long." : "";
-    if ("name" in fieldValues)
-      temp.name = fieldValues.name.length > 1 ? "" : "Your name is too short";
+      temp.message = fieldValues.message
+        ? ""
+        : "Your message should not be empty";
+
     setErrors({
       ...temp,
     });
@@ -39,7 +36,6 @@ const ContactForm = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [success, setSuccess] = useState(null);
 
- 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
@@ -54,7 +50,6 @@ const ContactForm = () => {
         .then((res) => {
           setShowAlert(true);
           if (res.status === 200) {
-            resetForm();
             setAlertMessage("Thank you for reaching me out");
             setSuccess(true);
           }
@@ -63,6 +58,7 @@ const ContactForm = () => {
           setAlertMessage(err.message);
           setSuccess(false);
         });
+      resetForm();
     }
   };
   return (
@@ -111,7 +107,9 @@ const ContactForm = () => {
               value={values.message}
               error={errors.message}
             />
-             {errors.message && <span class="text-xs text-red-700">{errors.message}</span>}
+            {errors.message && (
+              <span class="text-xs text-red-700">{errors.message}</span>
+            )}
           </div>
         </div>
         <div className="flex flex-wrap mb-6">

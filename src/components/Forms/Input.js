@@ -1,7 +1,7 @@
 import React from "react";
 
 const Input = (props) => {
-  const { label, error = null, rest } = props;
+  const { label, error = null, value, id, onChange } = props;
   return (
     <>
       {label && (
@@ -10,10 +10,12 @@ const Input = (props) => {
         </label>
       )}
       <input
+        id={id}
+        onChange={onChange}
+        value={value}
         className="appearance-none w-full border-primary-100  text-gray-700  py-2 px-2 rounded-md leading-tight focus:outline-none focus:ring-primary-200 focus:border-primary-200 shadow-sm dark:bg-gray-800 dark:text-gray-100"
-        {...rest}
       />
-      {error && <span class="text-xs text-red-700">{error}</span>}
+      {error && <span className="text-xs text-red-700">{error}</span>}
     </>
   );
 };
