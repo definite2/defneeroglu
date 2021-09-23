@@ -6,8 +6,9 @@ import "../styles/global.scss";
 import Wrapper from "@/components/Layout";
 import { GlobalStyle } from "styles/GlobalStyle";
 import Analytics from "@/components/Analytics";
-
-const App = ({ Component, pageProps }) => {
+import { motion } from "framer-motion";
+const App = ({ Component, pageProps, router }) => {
+  let easing = [0.175, 0.85, 0.12, 0.96];
   return (
     <>
       <GlobalStyle />
@@ -18,7 +19,33 @@ const App = ({ Component, pageProps }) => {
         <Analytics />
         <DefaultSeo {...SEO} />
         <Wrapper>
-          <Component {...pageProps} />
+          <motion.div
+            initial="pageInitial"
+            animate="pageAnimate"
+            key={router.route}
+            variants={{
+              pageInitial: {
+                opacity: 0,
+                x: -100,
+                y: 0,
+              },
+              pageAnimate: {
+                opacity: 1,
+                x: 0,
+                y: 0,
+                transition: {
+                  ease: easing,
+                },
+              },
+              pageExit: {
+                opacity: 0,
+                x: 0,
+                y: -100,
+              },
+            }}
+          >
+            <Component {...pageProps} />
+          </motion.div>
         </Wrapper>
       </ThemeProvider>
     </>
