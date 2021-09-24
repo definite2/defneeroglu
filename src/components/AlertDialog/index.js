@@ -29,7 +29,7 @@ const AlertDialog = ({ handleClose, message, title, success }) => {
     <Backdrop onClick={handleClose}>
       <motion.div
         onClick={(e) => e.stopPropagation()}
-        className="inline-block align-bottom bg-primary-grayish dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+        className="inline-block align-bottom bg-primary-grayish dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl sm:py-8 sm:align-middle sm:max-w-lg sm:w-full"
         variants={alertVariants}
         initial="hidden"
         animate="visible"
