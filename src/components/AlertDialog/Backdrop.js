@@ -6,7 +6,7 @@ const Backdrop = ({ children, onClick }) => {
       role="alertdialog"
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-description"
-      className="fixed z-10 top-1/4 inset-x-2 overflow-y-auto sm:inset-0"
+      className="absolute top-32 z-10 left-0 h-full w-full flex overflow-y-auto items-center justify-center"
       onClick={onClick}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
