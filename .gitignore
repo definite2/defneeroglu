@@ -15,7 +15,8 @@
 # production
 /build
 # rss feed
-/public/feed.xml 
+public/sitemap.xml
+public/feed.xml
 # misc
 .DS_Store
 *.pem
