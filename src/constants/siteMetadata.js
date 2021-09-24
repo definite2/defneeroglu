@@ -4,7 +4,7 @@ export const siteMetadata = {
   avatar: "/media/avatar.jpg",
   occupation: "Software Engineer",
   headerTitle: "Home",
-  description: "Train regularly to build muscle and become healthier person🙃... I mean, learn best practices and fundemantals of web development reguarly and become a better developer.",
+  description: "Practice regularly fundemantals of web development and become stronger 💪, I mean experienced 🤓, software engineer.",
   language: "en-us",
   siteUrl: "https://devmuscle.com",
   siteLogo: "/media/logo.jpg",
