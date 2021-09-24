@@ -58,9 +58,11 @@ module.exports = {
       },
       colors: {
         primary: colors.lime,
-        'primary-light': '#fefffc',
+        "primary-bluish":"#6DECB9",
+        pinkk: '#F21170',
+        'primary-light': '#F7F7F7',
         'primary-grayish': '#fcfcf7',
-        gray: colors.trueGray,
+        gray: colors.warmGray,
         violet: colors.violet,
         pink: colors.pink,
         green: colors.teal,

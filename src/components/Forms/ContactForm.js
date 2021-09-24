@@ -117,7 +117,7 @@ const ContactForm = () => {
             </label>
             <textarea
               id="message"
-              className="no-resize block w-full appearance-none rounded-md border-primary-300  text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none focus:ring-primary-400 focus:border-primary-400 h-36 resize-none shadow-sm dark:bg-gray-800 dark:text-gray-100"
+              className="no-resize block w-full appearance-none rounded-md border-primary-300 bg-primary-light text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none focus:ring-primary-400 focus:border-primary-400 h-36 resize-none shadow-sm dark:bg-gray-800 dark:text-gray-100"
               onChange={handleInputChange}
               value={values.message}
               error={errors.message}
