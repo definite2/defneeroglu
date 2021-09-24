@@ -14,7 +14,7 @@ class MyDocument extends Document {
           />
           <meta
             name="google-site-verification"
-            content="m0h9GemPOA7FYcnZdwgREyHhB0zukt0kmI7gAJe9528"
+            content="RY2CSkpUeAHEyh5f6rmsclP7ia1rrPWriN2gmc5U5OI"
           />
           <meta name="msapplication-TileColor" content="#ffffff" />
           <meta name="theme-color" content="#ffffff" />

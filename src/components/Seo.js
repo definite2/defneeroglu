@@ -1,12 +1,13 @@
-import { NextSeo, ArticleJsonLd } from "next-seo";
-import { siteMetadata } from "@/constants/siteMetadata";
+import { NextSeo, ArticleJsonLd } from 'next-seo'
+import { siteMetadata } from '@/constants/siteMetadata'
+import { useRouter } from 'next/router'
 export const SEO = {
   title: siteMetadata.title,
   description: siteMetadata.description,
   openGraph: {
-    type: "website",
+    type: 'website',
     locale: siteMetadata.language,
-    url: siteMetadata.siteUrl,
+    site_name: siteMetadata.siteUrl,
     title: siteMetadata.title,
     description: siteMetadata.description,
     images: [
@@ -21,54 +22,48 @@ export const SEO = {
   twitter: {
     handle: siteMetadata.twitter,
     site: siteMetadata.twitter,
-    cardType: "summary_large_image",
+    cardType: 'summary_large_image',
   },
   additionalMetaTags: [
     {
-      name: "author",
+      name: 'author',
       content: siteMetadata.author,
     },
   ],
-};
-export const PageSeo = ({ title, description, url }) => {
+}
+export const PageSeo = ({ title, description }) => {
+  const router = useRouter()
+  let url = `${siteMetadata.siteUrl}${router.asPath}`
   return (
     <NextSeo
-      title={`${title} – ${siteMetadata.title}`}
+      title={title}
       description={description}
       canonical={url}
       openGraph={{
-        type: "website",
-        url,
+        type: 'website',
+        url: url,
         title,
         description,
       }}
     />
-  );
-};
+  )
+}
 
-export const BlogSeo = ({
-  title,
-  summary,
-  date,
-  lastmod,
-  url,
-  tags,
-  images = [],
-}) => {
-  const publishedAt = new Date(date).toISOString();
-  const modifiedAt = new Date(lastmod || date).toISOString();
+export const BlogSeo = ({ title, summary, date, lastmod, url, tags, images = [] }) => {
+  const publishedAt = new Date(date).toISOString()
+  const modifiedAt = new Date(lastmod || date).toISOString()
   let imagesArr =
     images.length === 0
       ? [siteMetadata.socialBanner]
-      : typeof images === "string"
+      : typeof images === 'string'
       ? [images]
-      : images;
+      : images
   const featuredImages = imagesArr.map((img) => {
     return {
       url: `${siteMetadata.siteUrl}${img}`,
       alt: title,
-    };
-  });
+    }
+  })
   return (
     <>
       <NextSeo
@@ -76,7 +71,7 @@ export const BlogSeo = ({
         description={summary}
         canonical={url}
         openGraph={{
-          type: "article",
+          type: 'article',
           article: {
             publishedTime: publishedAt,
             modifiedTime: modifiedAt,
@@ -87,17 +82,15 @@ export const BlogSeo = ({
           title,
           description: summary,
           images: featuredImages,
-          twitter:{
-
-          }
+          twitter: {},
         }}
         additionalMetaTags={[
           {
-            name: "twitter:image",
+            name: 'twitter:image',
             content: featuredImages[0].url,
           },
           {
-            name: "category",
+            name: 'category',
             content: tags,
           },
         ]}
@@ -113,5 +106,5 @@ export const BlogSeo = ({
         url={url}
       />
     </>
-  );
-};
+  )
+}

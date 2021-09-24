@@ -23,7 +23,6 @@ export default function Home({ posts }) {
       <PageSeo
         title={siteMetadata.title}
         description={siteMetadata.description}
-        url={siteMetadata.siteUrl}
       />
       {showUndrContruction && (
         <Alert
