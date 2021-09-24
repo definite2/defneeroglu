@@ -10,7 +10,7 @@ const Wrapper = ({ children }) => {
         <Header />
         <main
           role="main"
-          className="md:col-span-7 md:col-start-4 col-span-12 px-5 my-40"
+          className="md:col-span-6 md:col-start-3 col-span-10 px-5 my-40"
         >
           {children}
         </main>

@@ -62,7 +62,7 @@ module.exports = {
         pinkk: '#F21170',
         'primary-light': '#F7F7F7',
         'primary-grayish': '#fcfcf7',
-        gray: colors.warmGray,
+        gray: colors.trueGray,
         violet: colors.violet,
         pink: colors.pink,
         green: colors.teal,
