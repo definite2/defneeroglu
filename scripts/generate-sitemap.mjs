@@ -1,6 +1,6 @@
 import { writeFileSync } from 'fs'
 import { globby } from 'globby'
-import { siteMetadata } from '@/constants/siteMetadata'
+
 import prettier from 'prettier'
 async function generate() {
   const prettierConfig = await prettier.resolveConfig('./.prettierrc.js')
@@ -31,7 +31,7 @@ async function generate() {
                 }
                 return `
                         <url>
-                            <loc>${siteMetadata.siteUrl}${route}</loc>
+                            <loc>${`https://devmuscle.com${route}`}</loc>
                         </url>
                     `
               })
