@@ -1,40 +1,40 @@
-import { useEffect, useState } from "react";
-import CustomLink from "../components/CustomLink";
-import { PageSeo } from "../components/Seo";
-import { siteMetadata } from "../constants/siteMetadata";
-import { getAllFilesFrontMatter } from "../lib/mdx";
-import BlogSummaryCard from "@/components/BlogSummaryCard";
-import Alert from "@/components/Alert";
-
-const max_post_number = 6;
+import { useEffect } from 'react'
+import CustomLink from '../components/CustomLink'
+import { PageSeo } from '../components/Seo'
+import { siteMetadata } from '../constants/siteMetadata'
+import { getAllFilesFrontMatter } from '../lib/mdx'
+import BlogSummaryCard from '@/components/BlogSummaryCard'
+import AlertDialog from '@/components/AlertDialog'
+import useAlert from '@/hooks/useAlert'
+import { AlertContainer } from '@/components/AlertDialog/AlertContainer'
+const max_post_number = 6
 
 export async function getStaticProps() {
-  const posts = await getAllFilesFrontMatter("blog");
-  return { props: { posts } };
+  const posts = await getAllFilesFrontMatter('blog')
+  return { props: { posts } }
 }
 
 export default function Home({ posts }) {
-  const [showUndrContruction, setShowUnderConstruction] = useState(false);
   useEffect(() => {
-    setShowUnderConstruction(true);
-  }, []);
+    open()
+  }, [])
+
+  const { open, close, alertDialogOpen } = useAlert()
   return (
     <>
-      <PageSeo
-        title={siteMetadata.title}
-        description={siteMetadata.description}
-      />
-      {showUndrContruction && (
-        <Alert
-          show={showUndrContruction}
-          setShow={setShowUnderConstruction}
-          message={
-            "Thank you for visiting my blog; it's still under construction 🚧"
-          }
-          success={false}
-          title={"Under construction!"}
-        />
-      )}
+      <PageSeo title={siteMetadata.title} description={siteMetadata.description} />
+      <AlertContainer>
+        {alertDialogOpen && (
+          <AlertDialog
+            alertDialogOpen={alertDialogOpen}
+            message={"Thank you for visiting my blog; it's still under construction "}
+            success={false}
+            title={'Under construction 🚧!'}
+            handleClose={close}
+          />
+        )}
+      </AlertContainer>
+
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="pb-10 pt-20 space-y-2 md:space-y-5">
           <p className="text-lg  leading-7 text-gray-500 dark:text-gray-400">
@@ -45,9 +45,9 @@ export default function Home({ posts }) {
           </h1>
         </div>
         <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 sm:gap-8">
-          {!posts.length && "No posts found."}
+          {!posts.length && 'No posts found.'}
           {posts.slice(0, max_post_number).map((frontmatter) => {
-            const { slug, date, title, summary, tags, image } = frontmatter;
+            const { slug, date, title, summary, tags, image } = frontmatter
             return (
               <li key={slug} className="pt-6">
                 <BlogSummaryCard
@@ -59,7 +59,7 @@ export default function Home({ posts }) {
                   image={image}
                 />
               </li>
-            );
+            )
           })}
         </ul>
       </div>
@@ -75,5 +75,5 @@ export default function Home({ posts }) {
         </div>
       )}
     </>
-  );
+  )
 }
