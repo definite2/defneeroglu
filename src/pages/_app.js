@@ -7,11 +7,7 @@ import Wrapper from '@/components/Layout'
 import { GlobalStyle } from 'styles/GlobalStyle'
 import Analytics from '@/components/Analytics'
 import { motion } from 'framer-motion'
-import { useEffect } from 'react'
 const App = ({ Component, pageProps, router }) => {
-  useEffect(() => {
-    window.history.scrollRestoration = 'manual'
-  }, [])
   let easing = [0.175, 0.85, 0.12, 0.96]
   return (
     <>
