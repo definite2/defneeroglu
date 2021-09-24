@@ -26,7 +26,7 @@ export default function ScrollToTop() {
       `;
     }};
   `;
-  const isscrolled = useScrolling(924);
+  const isscrolled = useScrolling(400);
 
   const scrollToTop = () => {
     window.scrollTo({
