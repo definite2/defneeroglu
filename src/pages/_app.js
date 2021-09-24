@@ -1,14 +1,18 @@
-import { ThemeProvider } from "next-themes";
-import { DefaultSeo } from "next-seo";
-import Head from "next/head";
-import { SEO } from "@/components/Seo";
-import "../styles/global.scss";
-import Wrapper from "@/components/Layout";
-import { GlobalStyle } from "styles/GlobalStyle";
-import Analytics from "@/components/Analytics";
-import { motion } from "framer-motion";
+import { ThemeProvider } from 'next-themes'
+import { DefaultSeo } from 'next-seo'
+import Head from 'next/head'
+import { SEO } from '@/components/Seo'
+import '../styles/global.scss'
+import Wrapper from '@/components/Layout'
+import { GlobalStyle } from 'styles/GlobalStyle'
+import Analytics from '@/components/Analytics'
+import { motion } from 'framer-motion'
+import { useEffect } from 'react'
 const App = ({ Component, pageProps, router }) => {
-  let easing = [0.175, 0.85, 0.12, 0.96];
+  useEffect(() => {
+    window.history.scrollRestoration = 'manual'
+  }, [])
+  let easing = [0.175, 0.85, 0.12, 0.96]
   return (
     <>
       <GlobalStyle />
@@ -49,6 +53,6 @@ const App = ({ Component, pageProps, router }) => {
         </Wrapper>
       </ThemeProvider>
     </>
-  );
-};
-export default App;
+  )
+}
+export default App
