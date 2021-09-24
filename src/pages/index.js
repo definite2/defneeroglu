@@ -17,6 +17,7 @@ export async function getStaticProps() {
 export default function Home({ posts }) {
   useEffect(() => {
     open()
+    window.history.scrollRestoration = 'manual'
   }, [])
 
   const { open, close, alertDialogOpen } = useAlert()
