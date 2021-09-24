@@ -37,7 +37,7 @@ export default function ScrollToTop() {
   return (
     <Scroll
       scrolled={isscrolled}
-      className=" overflow-hidden fixed bottom-4 cursor-pointer right-8 transform-transition hover:-translate-y-2 "
+      className=" overflow-hidden fixed bottom-6 cursor-pointer right-4 sm:righ-8 transform-transition hover:-translate-y-2 "
       onClick={scrollToTop}
       showOnScroll
     >
@@ -47,7 +47,7 @@ export default function ScrollToTop() {
         height="44"
         viewBox="0 0 24 24"
         fill="currentColor"
-        className="text-gray-900 dark:text-primary-400"
+        className="text-primary-400"
       >
         <rect
           opacity="0.5"
