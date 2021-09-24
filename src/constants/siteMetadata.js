@@ -6,7 +6,7 @@ export const siteMetadata = {
   headerTitle: "Home",
   description: "Train regularly to build muscle and become healthier person🙃... I mean, learn best practices and fundemantals of web development reguarly and become a better developer.",
   language: "en-us",
-  siteUrl: "https://defneeroglu.vercel.app",
+  siteUrl: "https://devmuscle.com",
   siteLogo: "/media/logo.jpg",
   socialBanner: "/media/avatar.jpg",
   email: "edefne878@gmail.com",
