@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import MobileNavbar from "./MobileNavbar";
 import navLinks from "@/constants/navLinks";
 import React, { useRef } from "react";
-import Logo from "./Avatar";
+import Logo from "./Logo";
 import useScrolling from "@/hooks/useScroll";
 const Wrapper = styled.nav`
   box-shadow: none;
