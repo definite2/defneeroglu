@@ -1,32 +1,46 @@
-import { useState } from "react";
-import CustomLink from "@/components/CustomLink";
-import Pagination from "@/components/Pagination";
-import { formatDate } from "lib/date";
-import Tag from "@/components/Tag";
-import Input from "@/components/Forms/Input";
+import { useState } from 'react'
+import CustomLink from '@/components/CustomLink'
+import Pagination from '@/components/Pagination'
+import { formatDate } from 'lib/date'
+import Tag from '@/components/Tag'
+import Input from '@/components/Forms/Input'
+import { motion } from 'framer-motion'
 //TODO paginationa later
 const ListLayout = ({ posts, title, initialDisplayPosts = [], pagination }) => {
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('')
   const filteredPosts = posts.filter((frontMatter) => {
-    const searchContent =
-      frontMatter.title + frontMatter.summary + frontMatter.tags.join("");
-    return searchContent.toLowerCase().includes(searchValue.toLowerCase());
-  });
-  const displayPosts = !searchValue ? initialDisplayPosts : filteredPosts;
+    const searchContent = frontMatter.title + frontMatter.summary + frontMatter.tags.join('')
+    return searchContent.toLowerCase().includes(searchValue.toLowerCase())
+  })
+  const displayPosts = !searchValue ? initialDisplayPosts : filteredPosts
   return (
     <>
       <div className="divide-y">
         <div className="pt-6 pb-8 space-y-2 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            {title}
-          </h1>
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {
+                scale: 0.2,
+                opacity: 0,
+              },
+              visible: {
+                scale: 1,
+                opacity: 1,
+              },
+            }}
+          >
+            <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+              {title}
+            </h1>
+          </motion.div>
           <div className="flex items-center max-w-lg">
             <Input
               aria-label="Search articles"
               type="text"
               onChange={(e) => setSearchValue(e.target.value)}
               placeholder="Search articles"
-             
             />
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -45,10 +59,10 @@ const ListLayout = ({ posts, title, initialDisplayPosts = [], pagination }) => {
           </div>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-          {" "}
-          {!filteredPosts.length && "No posts found."}
+          {' '}
+          {!filteredPosts.length && 'No posts found.'}
           {displayPosts.map((frontMatter, index) => {
-            const { slug, date, title, summary, tags } = frontMatter;
+            const { slug, date, title, summary, tags } = frontMatter
             return (
               <li key={index} className="py-4">
                 <article className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline">
@@ -80,18 +94,15 @@ const ListLayout = ({ posts, title, initialDisplayPosts = [], pagination }) => {
                   </div>
                 </article>
               </li>
-            );
+            )
           })}
         </ul>
       </div>
       {pagination && pagination.totalPages > 1 && !searchValue && (
-        <Pagination
-          currentPage={pagination.currentPage}
-          totalPages={pagination.totalPages}
-        />
+        <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
       )}
     </>
-  );
-};
+  )
+}
 
-export default ListLayout;
+export default ListLayout
