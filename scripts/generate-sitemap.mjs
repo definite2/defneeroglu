@@ -11,6 +11,7 @@ async function generate() {
     'public/tags/**/*.xml',
     '!src/pages/_*.js',
     '!src/pages/blog/[...slug].js',
+    '!src/pages/blog/page/[page].js',
     '!src/pages/404.js',
     '!src/pages/api',
   ])
@@ -28,9 +29,15 @@ async function generate() {
                   .replace('.mdx', '')
                   .replace('/feed.xml', '')
                 const route = path === '/index' ? '' : path
+                if (page === `src/pages/blog/[...slug].js`) {
+                  return
+                }
                 return `
                         <url>
                             <loc>${`https://devmuscle.com${route}`}</loc>
+                            <changefreq>${
+                              path.includes('/blog') ? 'weekly' : 'monthly'
+                            }</changefreq>
                         </url>
                     `
               })
