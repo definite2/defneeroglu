@@ -15,18 +15,6 @@ async function generate() {
     '!src/pages/404.js',
     '!src/pages/api',
   ])
-  const chnagefreq = (page) => {
-    switch (page) {
-      case '/blog':
-        return 'weekly'
-      case '/contact':
-        return 'yearly'
-      case '/about':
-        return 'yearly'
-      default:
-        return 'monthly'
-    }
-  }
   const sitemap = `
         <?xml version="1.0" encoding="UTF-8"?>
         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -46,7 +34,7 @@ async function generate() {
                 return `
                         <url>
                             <loc>${`https://devmuscle.com${route}`}</loc>
-                            <changefreq>${chnagefreq(route)}</changefreq>
+                            <changefreq>${path === '/blog' ? 'weekly' : 'monthly'}</changefreq>
                         </url>
                     `
               })
