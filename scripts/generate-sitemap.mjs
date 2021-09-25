@@ -10,6 +10,7 @@ async function generate() {
     '_content/blog/**/*.md',
     'public/tags/**/*.xml',
     '!src/pages/_*.js',
+    '!src/pages/blog/[...slug].js',
     '!src/pages/404.js',
     '!src/pages/api',
   ])
@@ -27,9 +28,6 @@ async function generate() {
                   .replace('.mdx', '')
                   .replace('/feed.xml', '')
                 const route = path === '/index' ? '' : path
-                if (page === `src/pages/blog/[...slug].js`) {
-                  return
-                }
                 return `
                         <url>
                             <loc>${`https://devmuscle.com${route}`}</loc>
