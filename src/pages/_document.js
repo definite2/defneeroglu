@@ -5,7 +5,13 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="icon" type="image/png" sizes="32x32" href="my-first-kaktus.ico" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicons//favicon-16x16.png" />
+          <link rel="manifest" href="/favicons/site.webmanifest" />
+          <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
+          <meta name="msapplication-TileColor" content="#A3E635" />
+          <meta name="theme-color" content="#A3E635" />
           <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
           <link
@@ -16,8 +22,6 @@ class MyDocument extends Document {
             name="google-site-verification"
             content="RY2CSkpUeAHEyh5f6rmsclP7ia1rrPWriN2gmc5U5OI"
           />
-          <meta name="msapplication-TileColor" content="#ffffff" />
-          <meta name="theme-color" content="#ffffff" />
         </Head>
         <body className="antialiased text-black bg-primary-light dark:bg-gray-900 dark:text-white">
           <Main />
