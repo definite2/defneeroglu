@@ -34,7 +34,7 @@ async function generate() {
                 return `
                         <url>
                             <loc>${`https://devmuscle.com${route}`}</loc>
-                            <changefreq>${path === '/blog' ? 'weekly' : 'monthly'}</changefreq>
+                            <changefreq>${route === '/blog' ? 'weekly' : 'monthly'}</changefreq>
                         </url>
                     `
               })
