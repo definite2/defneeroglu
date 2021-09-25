@@ -45,7 +45,7 @@ const MobileNavbar = () => {
       </button>
       {/* if not navShow then translate x 100% */}
       <div
-        className={`fixed w-full h-full top-24 right-0 bg-gray-200 dark:bg-gray-800 opacity-95 z-50 transform ease-in-out duration-300 ${
+        className={`fixed w-full h-full top-20 right-0 bg-gray-200 dark:bg-gray-800 opacity-95 z-50 transform ease-in-out duration-300 ${
           show ? "translate-x-0" : "translate-x-full"
         }`}
       >
