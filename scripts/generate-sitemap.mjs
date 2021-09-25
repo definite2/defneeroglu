@@ -27,7 +27,7 @@ async function generate() {
                   .replace('.mdx', '')
                   .replace('/feed.xml', '')
                 const route = path === '/index' ? '' : path
-                if (page === `pages/blog/[...slug].js`) {
+                if (page === `src/pages/blog/[...slug].js`) {
                   return
                 }
                 return `
