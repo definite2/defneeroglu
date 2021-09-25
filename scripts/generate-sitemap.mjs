@@ -11,7 +11,7 @@ async function generate() {
     'public/tags/**/*.xml',
     '!src/pages/_*.js',
     '!src/pages/404.js',
-    '!pages/api',
+    '!src/pages/api',
   ])
 
   const sitemap = `
