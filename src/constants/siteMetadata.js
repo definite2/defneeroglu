@@ -3,7 +3,7 @@ export const siteMetadata = {
   author: "Defne Eroğlu",
   avatar: "/media/avatar.jpg",
   occupation: "Software Engineer",
-  headerTitle: "Home",
+  headerTitle: "DevMuscle",
   description: "Practice regularly fundemantals of web development and become stronger 💪, I mean experienced 🤓, software engineer.",
   language: "en-us",
   siteUrl: "https://devmuscle.com",

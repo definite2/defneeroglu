@@ -1,0 +1,126 @@
+---
+title: 'Create Sticky Header with Custom React Hook'
+date: '2021-09-26'
+lastmod: '2021-09-26'
+tags: ['react', 'hooks', 'styled-components']
+draft: false
+summary: 'Learn how to create sticky header on scroll up with custom react hook.'
+isToc: true
+image: '/content/stickyheader_thumbnail.svg'
+alt: 'sticky header thumbnail'
+---
+
+If you want to know how to create a stciky header in your react application, this post is for you. In this post, we are going to do that in a pro way as using **[custom hook](https://reactjs.org/docs/hooks-custom.html)** and conditional classname with **[styled-components](https://styled-components.com/docs/basics#passed-props).**
+
+## Introduction
+
+On websites, users should see the full content when scrolling down, but they should see the navigation component, that is, the header, when scrolling up. It is very easy to give this experience we just need to know a boolean value about the user scroll is scrollin up or not.
+
+## Final Code
+
+Code for the custom hook and the implementation wiith holy grail layout react application can be found from hereSee an implementation of this custom hook from [here](https://github.com/definite2/sticky-header-with-hook)
+
+<WarningBodyMessage>
+  ⚠️ Even tough you may need urgently a sticky header component in your react app, but I suggest to
+  not just copy and paste the code, instead just read this blog and then write it yourself again;
+  because this post's main target is not to show how you can create a sticky header, instead it is
+  showing you to create it with custom react hook, in a nutshell the emphasis is creating custom
+  hook for your UI purposes.
+</WarningBodyMessage>
+### `useScrolllingUp()` Hook
+
+```js
+import { useEffect, useState } from 'react'
+import { off, on } from 'utils'
+/**
+ * useScrollingUp
+ * @returns {boolean}
+ */
+const useScrollingUp = () => {
+  let prevScroll
+  //if it is SSR then check you are now on the client and window object is available
+  if (process.browser) {
+    prevScroll = window.pageYOffset
+  }
+  const [scrollingUp, setScrollingUp] = useState(false)
+  const handleScroll = () => {
+    const currScroll = window.pageYOffset
+    const isScrolled = prevScroll > currScroll
+    setScrollingUp(isScrolled)
+    prevScroll = currScroll
+  }
+  useEffect(() => {
+    on(window, 'scroll', handleScroll, { passive: true })
+    return () => {
+      off(window, 'scroll', handleScroll, { passive: true })
+    }
+  }, [])
+  return scrollingUp
+}
+
+export default useScrollingUp
+```
+
+If you are going to use this hook for server side rendering, then `window` is not going to be available because our component still not mounted at the client so we can check whether the process is at the client then use `window.pageYOffset`; however if you are going to use for client side rendering with react framework then you don't have to worry about the if (process.browser) check.
+And we created a boolean state that is _scrollingUp_ with _false_ initial value.
+
+We define a variable outside of our callback function as prevScroll which holds vertical pixel value iin other words scrolled amount of pixel that is pageYOffset and it increases with the increasing amount of distance from top to down. The prevScrolls, is the value when there is no scroll event whereas currentValue inside of the callback is the value while scrolling so when user chanages direction to scrolling up then the currentValue will be less than prevScroll because we set its vaue after the comparison so it is still bigger than the currentValue.
+
+As you see there is a `useEffect` which calls a handler function handleScroll what it does, it
+
+when the component which uses this hook is initially mounted, we add scroll event listener with handleScroll callback function, with passive:true option.
+
+- We define a variable outside of our callback function as prevScroll which holds vertical pixel value iin other words scrolled amount of pixel that is pageYOffset and it increases with the increasing amount of distance from top to down.
+- The **prevScroll** is the value when there is no scroll event whereas **currentValue** inside of the callback is the value while scrolling.
+- Therefore when user changes direction to scrolling up, the currentValue will be less than prevScroll, after comparison we set prevScroll to the currentValue.
+
+### Utils
+
+```js
+//exported from src/utils/index.js
+
+export function on(obj, ...args) {
+  obj.addEventListener(...args)
+}
+
+export function off(obj, ...args) {
+  obj.removeEventListener(...args)
+}
+```
+
+### Sticky Header Component
+
+What is we are going to do is just using useScrolingUp hook we set conditional styles to make it sticky.
+
+```js
+/**
+ * Header
+ * @param {object} children is your menu link items
+ */
+import useScrollingUp from '@/hooks/useScrollingUp'
+
+const Header = ({ children }) => {
+  const scrolled = useScrollingUp()
+  return <header className={`${scrolled ? 'yourStickyClassName' : ''}`}>{children}</header>
+}
+export default Header
+```
+
+```css
+//App.css or App.scss file
+header {
+  //...the rest is at the source code
+  box-shadow: none;
+  border: none;
+  z-index: 10;
+  transition: box-shadow 250ms ease-in-out;
+  //..rest
+}
+.yourStickyClassName {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+```
