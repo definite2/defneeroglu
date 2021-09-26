@@ -4,9 +4,10 @@ import { getMDXComponent } from "mdx-bundler/client";
 import Image from "next/image";
 import CustomLink from "../CustomLink";
 import Pre from "./Pre";
-
+import { WarningBodyMessage } from "../Atoms";
 export const MdxComponents = {
   Image,
+  WarningBodyMessage,
   a: CustomLink,
   pre: Pre,
   wrapper: ({ components, layout, ...rest }) => {
