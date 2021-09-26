@@ -1,10 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
 import { siteMetadata } from '@/constants/siteMetadata'
-import useScrolling from '@/hooks/useScroll'
+import useScrollingUp from '@/hooks/useScrollingUp'
 
 const Logo = () => {
-  const isScrolled = useScrolling()
+  const isScrolled = useScrollingUp()
   return (
     <Link href="/">
       <a

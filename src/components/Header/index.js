@@ -4,10 +4,10 @@ import MobileNavbar from './MobileNavbar'
 import navLinks from '@/constants/navLinks'
 import React from 'react'
 import Logo from './Logo'
-import useScrolling from '@/hooks/useScroll'
+import useScrollingUp from '@/hooks/useScrollingUp'
 
 const Header = () => {
-  const scrolled = useScrolling()
+  const scrolled = useScrollingUp()
   return (
     <nav
       className={`${

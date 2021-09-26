@@ -1,7 +1,7 @@
-import useScrolling from '@/hooks/useScroll'
+import useScrollingUp from '@/hooks/useScrollingUp'
 
 export default function ScrollToTop() {
-  const isscrolled = useScrolling()
+  const isscrolled = useScrollingUp()
   const onScrollToTop = () => {
     window.scrollTo({
       top: 0,
