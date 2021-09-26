@@ -64,15 +64,15 @@ export default useScrollingUp
 If you are going to use this hook for server side rendering, then `window` is not going to be available because our component still not mounted at the client so we can check whether the process is at the client then use `window.pageYOffset`; however if you are going to use for client side rendering with react framework then you don't have to worry about the if (process.browser) check.
 And we created a boolean state that is _scrollingUp_ with _false_ initial value.
 
-We define a variable outside of our callback function as prevScroll which holds vertical pixel value iin other words scrolled amount of pixel that is pageYOffset and it increases with the increasing amount of distance from top to down. The prevScrolls, is the value when there is no scroll event whereas currentValue inside of the callback is the value while scrolling so when user chanages direction to scrolling up then the currentValue will be less than prevScroll because we set its vaue after the comparison so it is still bigger than the currentValue.
+We define a variable outside of our callback function as prevScroll which holds vertical pixel value iin other words scrolled amount of pixel that is pageYOffset and it increases with the increasing amount of distance from top to down. The prevScroll, is the value when there is no scroll event whereas currentScroll inside of the callback is the value while scrolling so when user changes direction to scrolling up then the currentScroll will be less than prevScroll because we set its vaue after the comparison so it is still bigger than the currentScroll.
 
 As you see there is a `useEffect` which calls a handler function handleScroll what it does, it
 
 when the component which uses this hook is initially mounted, we add scroll event listener with handleScroll callback function, with passive:true option.
 
 - We define a variable outside of our callback function as prevScroll which holds vertical pixel value iin other words scrolled amount of pixel that is pageYOffset and it increases with the increasing amount of distance from top to down.
-- The **prevScroll** is the value when there is no scroll event whereas **currentValue** inside of the callback is the value while scrolling.
-- Therefore when user changes direction to scrolling up, the currentValue will be less than prevScroll, after comparison we set prevScroll to the currentValue.
+- The **prevScroll** is the value when there is no scroll event whereas **currentScroll** inside of the callback is the value while scrolling.
+- Therefore when user changes direction to scrolling up, the currentScroll will be less than prevScroll, after comparison we set prevScroll to the currentScroll.
 
 ### Utils
 
