@@ -35,6 +35,12 @@ module.exports = {
       animation: {
         'blob-spin': 'blobbing 25s linear infinite',
       },
+      screens: {
+        '2md': '900px',
+        '1.5xl': '1340px',
+        '3xl': '1600px',
+        '4xl': '1800px',
+      },
       keyframes: {
         blobbing: {
           from: {
@@ -48,6 +54,8 @@ module.exports = {
       margin: {
         '1/2': '50%',
         '-1/2': '-50%',
+        '1/3': '33%',
+        '2/3': '66%',
         '-3/4': '-75%',
         '3/4': '75%',
         '1/4': '25%',
@@ -56,9 +64,16 @@ module.exports = {
         '-1/5': '-20%',
         full: '100%',
       },
+      maxWidth: {
+        '1/4': '25%',
+        '1/2': '50%',
+        '3/4': '75%',
+        '1.5xl': '38rem',
+        '2.5xl': '44rem',
+      },
       colors: {
         primary: colors.lime,
-        "primary-bluish":"#6DECB9",
+        'primary-bluish': '#6DECB9',
         pinkk: '#F21170',
         'primary-light': '#F7F7F7',
         'primary-grayish': '#fcfcf7',

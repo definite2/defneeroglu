@@ -1,27 +1,27 @@
-import CustomLink from "@/components/CustomLink";
-import PageTitle from "@/components/PageTitle";
-import { BlogSeo } from "@/components/Seo";
-import { siteMetadata } from "@/constants/siteMetadata";
-import { formatDate } from "lib/date";
-import { TOC } from "@/components/mdx/TOC";
-import clsx from "clsx";
+import CustomLink from '@/components/CustomLink'
+import PageTitle from '@/components/PageTitle'
+import { BlogSeo } from '@/components/Seo'
+import { siteMetadata } from '@/constants/siteMetadata'
+import { formatDate } from 'lib/date'
+import { TOC } from '@/components/mdx/TOC'
+import clsx from 'clsx'
 export default function PostLayout({ frontMatter, next, prev, children }) {
-  const { slug, fileName, title, tags, lastmod, isToc } = frontMatter;
+  const { slug, fileName, title, tags, lastmod, isToc } = frontMatter
 
   return (
     <>
       <BlogSeo url={`${siteMetadata.siteUrl}/blog/${slug}`} {...frontMatter} />
       <div
-        className={clsx("relative flex justify-between my-12", {
-          "flex-row-reverse": Boolean(isToc),
+        className={clsx('relative flex xl:justify-between justify-center my-12', {
+          'flex-row-reverse': Boolean(isToc),
         })}
       >
         {isToc && (
-          <aside className="sticky hidden h-screen  max-w-xs mt-1/4 top-32 ml-12 xl:block">
+          <aside className="sticky hidden h-screen  max-w-xs mt-1/3 xl:mt-1/4 3xl:mt-1/5 top-32 xl:block">
             <TOC />
           </aside>
         )}
-        <article className="max-w-3xl min-w-0 text-base lg:text-lg">
+        <article className="text-base max-w-prose lg:text-lg xl:max-w-xl 1.5xl:max-w-1.5xl   2xl:max-w-2xl 3xl:max-w-3xl 4xl:max-w-4xl min-w-0">
           <div>
             <header className="xl:pb-6">
               <div className="pb-10 space-y-1 text-center border-b border-gray-200 dark:border-gray-700">
@@ -41,10 +41,13 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
 
             <div
               className="pb-8 divide-y divide-gray-200 xl:divide-y-0 dark:divide-gray-700 "
-              style={{ gridTemplateRows: "auto 1fr" }}
+              style={{ gridTemplateRows: 'auto 1fr' }}
             >
               <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:pb-0 xl:col-span-3 xl:row-span-2">
-                <div id="post-body" className="pt-8 lg:pt-6 pb-8 prose lg:prose-lg dark:prose-dark max-w-none">
+                <div
+                  id="post-body"
+                  className="pt-8 lg:pt-6 pb-8 prose lg:prose-lg dark:prose-dark max-w-none"
+                >
                   {children}
                 </div>
               </div>
@@ -78,5 +81,5 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
         </article>
       </div>
     </>
-  );
+  )
 }
