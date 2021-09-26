@@ -4,9 +4,7 @@ import { PageSeo } from '../components/Seo'
 import { siteMetadata } from '../constants/siteMetadata'
 import { getAllFilesFrontMatter } from '../lib/mdx'
 import BlogSummaryCard from '@/components/BlogSummaryCard'
-import AlertDialog from '@/components/AlertDialog'
-import useAlert from '@/hooks/useAlert'
-import { AlertContainer } from '@/components/AlertDialog/AlertContainer'
+
 const max_post_number = 6
 
 export async function getStaticProps() {
@@ -16,26 +14,12 @@ export async function getStaticProps() {
 
 export default function Home({ posts }) {
   useEffect(() => {
-    open()
     window.history.scrollRestoration = 'manual'
   }, [])
 
-  const { open, close, alertDialogOpen } = useAlert()
   return (
     <>
       <PageSeo title={siteMetadata.title} description={siteMetadata.description} />
-      <AlertContainer>
-        {alertDialogOpen && (
-          <AlertDialog
-            alertDialogOpen={alertDialogOpen}
-            message={"Thank you for visiting my blog; it's still under construction "}
-            success={false}
-            title={'Under construction 🚧!'}
-            handleClose={close}
-          />
-        )}
-      </AlertContainer>
-
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="pb-10 pt-20 space-y-2 md:space-y-5">
           <p className="text-lg leading-7 prose lg:prose-lg dark:prose-dark max-w-none">
