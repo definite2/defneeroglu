@@ -5,8 +5,9 @@ import { siteMetadata } from '@/constants/siteMetadata'
 import { formatDate } from 'lib/date'
 import { TOC } from '@/components/mdx/TOC'
 import clsx from 'clsx'
+import Image from 'next/image'
 export default function PostLayout({ frontMatter, next, prev, children }) {
-  const { slug, fileName, title, tags, lastmod, isToc } = frontMatter
+  const { slug, fileName, title, tags, lastmod, isToc, image,alt } = frontMatter
 
   return (
     <>
@@ -37,6 +38,8 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
                   <span>{frontMatter.readingTime.text}</span>
                 </dl>
               </div>
+
+              <Image className="w-full" src={image} width="900px" height="600px" alt={alt} />
             </header>
 
             <div

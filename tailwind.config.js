@@ -71,6 +71,9 @@ module.exports = {
         '1.5xl': '38rem',
         '2.5xl': '44rem',
       },
+      boxShadow: {
+        nav: 'rgba(0, 0, 0, 0.15) 0px 1px 4px 0px',
+      },
       colors: {
         primary: colors.lime,
         'primary-bluish': '#6DECB9',
