@@ -1,36 +1,10 @@
-import React, { useRef } from "react";
-import styled, { css } from "styled-components";
-import Link from "next/link";
-import { siteMetadata } from "@/constants/siteMetadata";
-import useScrolling from "@/hooks/useScroll";
-const shouldShow = (props) => {
-  if (props.scrolled) {
-    if (props.showOnScroll) return true;
-    if (props.hideOnScroll) return false;
-  }
-  if (props.showOnScroll) return false;
-  return true;
-};
-
-const Visibility = styled.span`
-  transition: opacity 500ms ease-out, margin 500ms ease-in-out;
-
-  ${(props) => {
-    if (shouldShow(props)) {
-      return css`
-        opacity: 1;
-        margin-left: ${props.marginOnHide || ".5rem"};
-      `;
-    }
-    return css`
-      opacity: 0;
-      margin-right: ${props.marginOnHide || "-.5rem"};
-    `;
-  }};
-`;
+import React from 'react'
+import Link from 'next/link'
+import { siteMetadata } from '@/constants/siteMetadata'
+import useScrolling from '@/hooks/useScroll'
 
 const Logo = () => {
-  const isScrolled = useScrolling(0);
+  const isScrolled = useScrolling()
   return (
     <Link href="/">
       <a
@@ -38,22 +12,21 @@ const Logo = () => {
         className="flex items-center border-white group focus-visible:outline-accent h-full:hidden"
       >
         <div className="overflow-hidden transition-transform ease-in-out border-0 group-hover:-translate-y-1 font-semibold text-xl">
-          <Visibility scrolled={isScrolled} showOnScroll>
-            &lt;
-          </Visibility>
-          <Visibility>{siteMetadata.headerTitle}</Visibility>
-          <Visibility
-            scrolled={isScrolled}
-            default={0}
-            showOnScroll
-            marginOnHide="0"
+          <span
+            className={`${
+              isScrolled ? 'opacity-100 ml-2' : 'opacity-0 -mr-2'
+            } "transition-all duration-500 ease-in-out"`}
           >
+            &lt;
+          </span>
+          <span>{siteMetadata.headerTitle}</span>
+          <span className={`${isScrolled ? 'opacity-100 ml-2' : 'opacity-0 -mr-0'}`}>
             &nbsp;/&gt;
-          </Visibility>
+          </span>
         </div>
       </a>
     </Link>
-  );
-};
+  )
+}
 
-export default Logo;
+export default Logo
