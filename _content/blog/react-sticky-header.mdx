@@ -12,11 +12,10 @@ alt: 'sticky header thumbnail'
 
 If you want to know how to create a stciky header in your react application, this post is for you. In this post, we are going to do that in a pro way as using **[custom hook](https://reactjs.org/docs/hooks-custom.html)** and conditional classname with **[styled-components](https://styled-components.com/docs/basics#passed-props).**
 
-## Introduction
+### Introduction
 
 On websites, users should see the full content when scrolling down, but they should see the navigation component, that is, the header, when scrolling up. It is very easy to give this experience we just need to know a boolean value about the user scroll is scrollin up or not.
-
-## Final Code
+### Final Code
 
 Code for the custom hook and the implementation wiith holy grail layout react application can be found from hereSee an implementation of this custom hook from 👉 [here](https://github.com/definite2/sticky-header-with-hook)
 
@@ -27,7 +26,7 @@ Code for the custom hook and the implementation wiith holy grail layout react ap
   showing you to create it with custom react hook, in a nutshell the emphasis is creating custom
   hook for your UI purposes.
 </WarningBodyMessage>
-### `useScrolllingUp()` Hook
+#### Custom Hook
 
 ```js
 import { useEffect, useState } from 'react'
@@ -73,7 +72,7 @@ As you see there is a `useEffect` which calls a handler function handleScroll wh
 - 🔊 Attention and repeating : prevScroll is the value when there is no scroll event whereas currentScroll is the current value while scrolling event.
 - Therefore when user changes direction to scrolling up, the currentScroll will be less than prevScroll, after comparison we set prevScroll to the currentScroll.
 
-### Utils
+#### Utils
 
 ```js
 //exported from src/utils/index.js
@@ -87,7 +86,7 @@ export function off(obj, ...args) {
 }
 ```
 
-### Sticky Header Component
+#### Sticky Header
 
 What is we are going to do is just using useScrolingUp hook we set conditional styles to make it sticky.
 
@@ -123,3 +122,5 @@ header {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 ```
+### Conclusion
+With this post I want to show that you should not think that react hooks are for your shared logic, instead we can use this fact for managing UI states of our application such as showing a sticky header or showing a scroll to top icon etc. 
