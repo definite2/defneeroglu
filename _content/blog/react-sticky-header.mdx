@@ -1,8 +1,8 @@
 ---
-title: 'Create Sticky Header with Custom React Hook'
+title: 'How to Reveal Sticky Header on Scroll Up with Custom React Hook'
 date: '2021-09-26'
 lastmod: '2021-09-26'
-tags: ['react', 'hooks', 'styled-components']
+tags: ['react', 'react-hooks']
 draft: false
 summary: 'Learn how to create sticky header on scroll up with custom react hook.'
 isToc: true
@@ -10,11 +10,12 @@ image: '/content/stickyheader_thumbnail.svg'
 alt: 'sticky header thumbnail'
 ---
 
-If you want to know how to create a stciky header in your react application, this post is for you. In this post, we are going to do that in a pro way as using **[custom hook](https://reactjs.org/docs/hooks-custom.html)** and conditional classname with **[styled-components](https://styled-components.com/docs/basics#passed-props).**
+If you want to know how to create a stciky header in your react application, this post is for you. In this post, we are going to do that in a pro way as creating a **[custom hook](https://reactjs.org/docs/hooks-custom.html)** .
 
 ### Introduction
 
-On websites, users should see the full content when scrolling down, but they should see the navigation component, that is, the header, when scrolling up. It is very easy to give this experience we just need to know a boolean value about the user scroll is scrollin up or not.
+On websites, users should see the full content when scrolling down, but they should see the navigation component, that is, the header, when scrolling up. It is very easy to give this experience we just need to know a boolean value whether the user's scroll direction is up or not.
+
 ### Final Code
 
 Code for the custom hook and the implementation wiith holy grail layout react application can be found from hereSee an implementation of this custom hook from 👉 [here](https://github.com/definite2/sticky-header-with-hook)
@@ -122,5 +123,7 @@ header {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 ```
+
 ### Conclusion
-With this post I want to show that you should not think that react hooks are for your shared logic, instead we can use this fact for managing UI states of our application such as showing a sticky header or showing a scroll to top icon etc. 
+
+With this post I want to show that you should not think that react hooks are for your shared logic, instead we can use this fact for managing UI states of our application such as showing a sticky header or showing a scroll to top icon etc.

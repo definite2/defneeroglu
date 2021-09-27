@@ -22,7 +22,7 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
             <TOC />
           </aside>
         )}
-        <article className="text-base max-w-prose lg:text-lg xl:max-w-xl 1.5xl:max-w-1.5xl   2xl:max-w-2xl 3xl:max-w-3xl 4xl:max-w-4xl min-w-0">
+        <article className="text-base max-w-prose lg:text-lg xl:max-w-xl 2xl:max-w-2.5xl 3xl:max-w-3xl 4xl:max-w-4xl min-w-0">
           <div>
             <header className="xl:pb-6">
               <div className="pb-10 space-y-1 text-center border-b border-gray-200 dark:border-gray-700">
