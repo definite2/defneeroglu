@@ -34,7 +34,7 @@ const about = () => {
           <div className="flex flex-col items-center pt-8 space-x-2 lg:-ml-16 xl:col-start-1 xl:col-span-1">
             <Avatar />
 
-            <h3 className="pt-4 pb-2 text-2xl font-bold leading-8 tracking-tight">{author}</h3>
+            <h2 className="pt-4 pb-2 text-2xl font-bold leading-8 tracking-tight">{author}</h2>
             <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
           </div>
           <div className="pt-8 pb-8 prose lg:prose-lg dark:prose-dark max-w-none xl:col-span-2 xl:col-start-2">
@@ -73,6 +73,7 @@ const about = () => {
               >
                 <Image
                   className="self-start absolute -top-2 right-10 z-1"
+                  alt="triangle"
                   src="/media/triangle.svg"
                   width="40px"
                   height="40px"

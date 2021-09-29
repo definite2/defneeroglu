@@ -129,7 +129,7 @@ const ContactForm = () => {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="  bg-gradient-to-r from-orange-400 to-primary-400 flex items-center justify-center font-medium  border-0 p-2 rounded-md shadow-sm"
+            className="bg-gradient-to-r from-orange-400 to-primary-400 flex items-center justify-center font-medium  border-0 p-2 rounded-md shadow-sm"
             onClick={handleSubmit}
           >
             <span className="px-3  text-primary-light dark:text-gray-900">Send</span>

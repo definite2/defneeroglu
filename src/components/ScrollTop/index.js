@@ -11,6 +11,7 @@ export default function ScrollToTop() {
 
   return (
     <button
+      aria-label="scroll-top"
       className={`${
         !isscrolled ? 'opacity-0 translate-y-24' : 'opacity-1 translate-y-0'
       } overflow-hidden fixed bottom-6 cursor-pointer right-4 sm:righ-8 transform-transition hover:-translate-y-2`}
