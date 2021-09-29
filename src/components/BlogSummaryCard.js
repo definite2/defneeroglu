@@ -6,7 +6,7 @@ const postDateTemplate = { year: 'numeric', month: 'long', day: 'numeric' }
 export default function BlogSummaryCard(props) {
   const { slug, date, title, summary, tags, image } = props
   return (
-    <article>
+    <article className="h-full">
       <CustomLink href={`/blog/${slug}`} className="text-gray-800 dark:text-gray-100">
         <div className="flex flex-col items-center justify-between h-full overflow-hidden cursor-pointer transition-all duration-200 ease-in-out transform border-2 border-gray-100  dark:border-gray-800 rounded-lg hover:scale-105 hover:shadow-xl">
           {image && (

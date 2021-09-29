@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-
+import avatar from '../../public/media/avatar1.jpg'
 const Avatar = () => {
   return (
     <div className="relative -z-10">
@@ -26,12 +26,14 @@ const Avatar = () => {
           <div className="absolute top-0 flex items-center justify-center w-full h-full">
             <div className="w-32 h-32 overflow-hidden rounded-full md:h-40 md:w-40 lg:h-48 lg:w-48">
               <Image
-                src="/media/avatar1.jpg"
+                src={avatar}
                 alt="My avatar"
                 width={256}
                 height={256}
                 quality={100}
                 priority={true}
+                layout="intrinsic"
+                placeholder="blur"
               />
             </div>
           </div>
