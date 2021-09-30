@@ -5,7 +5,8 @@ import { formatDate } from 'lib/date'
 import Tag from '@/components/Tag'
 import Input from '@/components/Forms/Input'
 import { motion } from 'framer-motion'
-//TODO paginationa later
+import { Search } from 'react-feather'
+
 const ListLayout = ({ posts, title, initialDisplayPosts = [], pagination }) => {
   const [searchValue, setSearchValue] = useState('')
   const filteredPosts = posts.filter((frontMatter) => {
@@ -35,14 +36,15 @@ const ListLayout = ({ posts, title, initialDisplayPosts = [], pagination }) => {
               {title}
             </h1>
           </motion.div>
-          <div className="flex items-center max-w-lg">
+          <div className="relative flex items-center max-w-lg">
+          <Search className="absolute top-4 left-2 text-gray-400 " />
             <Input
               aria-label="Search articles"
               type="text"
               onChange={(e) => setSearchValue(e.target.value)}
               placeholder="Search articles"
             />
-            <object className="w-6 h-6 -ml-8 text-gray-400" data={'/media/searchIcon.svg'} />
+            
           </div>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
