@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollTop";
 import Footer from "@/components/Footer";
 const Wrapper = ({ children }) => {
-  console.log(children.layout)
   return (
     <>
       <SectionContainer>

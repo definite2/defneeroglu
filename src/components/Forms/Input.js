@@ -1,7 +1,7 @@
 import React from "react";
 
 const Input = (props) => {
-  const { label, error = null, value, id, onChange, type } = props;
+  const { label, error = null, value, id, onChange, type,className} = props;
   return (
     <>
       {label && (
@@ -14,7 +14,7 @@ const Input = (props) => {
         type={type}
         onChange={onChange}
         value={value}
-        className="appearance-none w-full border-primary-300  text-gray-700 bg-primary-light py-4 px-2 rounded-md leading-tight focus:outline-none focus:ring-primary-500 focus:border-primary-500 shadow-sm dark:bg-gray-800 dark:text-gray-100"
+        className={`appearance-none w-full border-primary-300  text-gray-700 bg-primary-light py-4 px-2 rounded-md leading-tight focus:outline-none focus:ring-primary-500 focus:border-primary-500 shadow-sm dark:bg-gray-800 dark:text-gray-100 ${className}`}
       />
       {error && <span className="text-xs text-red-600">{error}</span>}
     </>

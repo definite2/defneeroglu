@@ -1,18 +1,16 @@
-import CustomLink from "@/components/CustomLink";
-import { PageSeo } from "@/components/Seo";
-import Tag from "@/components/Tag";
-import { siteMetadata } from "@/constants/siteMetadata";
-import { getAllTags } from "@/lib/tags";
-import kebabCase from "@/lib/kebapCase";
+import CustomLink from '@/components/CustomLink'
+import { PageSeo } from '@/components/Seo'
+import Tag from '@/components/Tag'
+import { siteMetadata } from '@/constants/siteMetadata'
+import { getAllTags } from '@/lib/tags'
 
 export async function getStaticProps() {
-  const tags = await getAllTags("blog");
-
-  return { props: { tags } };
+  const tags = await getAllTags('blog')
+  return { props: { tags } }
 }
 
 export default function Tags({ tags }) {
-  const sortedTags = Object.keys(tags).sort((a, b) => tags[b] - tags[a]);
+  const sortedTags = Object.keys(tags).sort((a, b) => tags[b] - tags[a])
   return (
     <>
       <PageSeo
@@ -26,22 +24,17 @@ export default function Tags({ tags }) {
           </h1>
         </div>
         <div className="flex flex-wrap max-w-lg">
-          {Object.keys(tags).length === 0 && "No tags found."}
+          {Object.keys(tags).length === 0 && 'No tags found.'}
           {sortedTags.map((t) => {
             return (
               <div key={t} className="mt-2 mb-2 mr-5">
                 <Tag text={t} />
-                <CustomLink
-                  href={`/tags/${kebabCase(t)}`}
-                  className="-ml-2 text-sm font-semibold text-gray-600 uppercase dark:text-gray-300"
-                >
-                  {` (${tags[t]})`}
-                </CustomLink>
+                {` (${tags[t]})`}
               </div>
-            );
+            )
           })}
         </div>
       </div>
     </>
-  );
+  )
 }

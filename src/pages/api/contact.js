@@ -10,7 +10,6 @@ export default async function sendEmail(req, res) {
       html: `<div>${message}</div><p>Sent from: ${email}</p>`,
     });
   } catch (error) {
-    console.log(error);
     return res.status(error.statusCode || 500).json({ error: error.message });
   }
 
