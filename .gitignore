@@ -17,6 +17,7 @@
 # rss feed
 public/sitemap.xml
 public/feed.xml
+public/tags/**/feed.xml
 # misc
 .DS_Store
 *.pem
