@@ -18,7 +18,7 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
         })}
       >
         {isToc && (
-          <aside className="sticky hidden h-screen  max-w-xs mt-1/3 xl:mt-1/4 3xl:mt-1/5 top-32 xl:block">
+          <aside className="sticky hidden h-screen  max-w-xs mt-4/5 top-32 xl:block">
             <TOC />
           </aside>
         )}

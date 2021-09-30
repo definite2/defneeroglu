@@ -24,7 +24,7 @@ export function TOC() {
   }
 
   return (
-    <nav className="toc text-fore-subtle">
+    <nav className="text-gray-800 dark:text-gray-200">
       <h2 className="font-semibold text-gray-800 dark:text-gray-200 tracking-widestest">
         Table Of Contents
       </h2>
