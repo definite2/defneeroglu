@@ -38,7 +38,7 @@ const about = () => {
             <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
           </div>
           <div className="pt-8 pb-8 prose lg:prose-lg dark:prose-dark max-w-none xl:col-span-2 xl:col-start-2">
-            <p>I'm a frontend development engineer. Crurently working at Huawei.</p>
+            <p>I'm a frontend development engineer. Currently working at Huawei.</p>
             <p>
               I'm a self taught developer. My BS in physics, I still have some passion for it, but
               I've prefered to develop my career in software development.
