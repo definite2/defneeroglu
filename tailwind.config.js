@@ -81,6 +81,7 @@ module.exports = {
         'primary-light': '#F7F7F7',
         'primary-grayish': '#fcfcf7',
         gray: colors.trueGray,
+        'gray-150': '#ededed',
         violet: colors.violet,
         pink: colors.pink,
         green: colors.teal,

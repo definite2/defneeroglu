@@ -8,7 +8,7 @@ export default function BlogSummaryCard(props) {
   return (
     <article className="h-full">
       <CustomLink href={`/blog/${slug}`} className="text-gray-800 dark:text-gray-100">
-        <div className="flex flex-col items-center justify-between h-full overflow-hidden cursor-pointer transition-all duration-200 ease-in-out transform border-2 border-gray-100  dark:border-gray-800 rounded-lg hover:scale-105 hover:shadow-xl">
+        <div className="flex flex-col items-center justify-between h-full overflow-hidden cursor-pointer transition-all duration-200 ease-in-out transform border-2 border-gray-150  dark:border-gray-800 rounded-lg hover:scale-105 hover:shadow-xl">
           {image && (
             <div className="relative w-full">
               <header className="relative pb-1/2">
