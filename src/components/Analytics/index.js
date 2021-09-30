@@ -6,7 +6,7 @@ const GAScript = () => {
     <>
       <Script
         strategy="lazyOnload"
-        src={`https://www.googletagmanager.com/gtag/js?id=${siteMetadata.analytics.googleAnalyticsId}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${siteMetadata.analytics.measurementId}`}
       />
 
       <Script strategy="lazyOnload">
@@ -14,7 +14,7 @@ const GAScript = () => {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${siteMetadata.analytics.googleAnalyticsId}', {
+            gtag('config', '${siteMetadata.analytics.measurementId}', {
               page_path: window.location.pathname,
             });
         `}
@@ -36,7 +36,7 @@ const isProduction = process.env.NODE_ENV === "production";
 const Analytics = () => {
   return (
     <>
-      {isProduction && siteMetadata.analytics.googleAnalyticsId && <GAScript />}
+      {isProduction && siteMetadata.analytics.measurementId && <GAScript />}
     </>
   );
 };
