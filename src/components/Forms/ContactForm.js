@@ -65,13 +65,14 @@ const ContactForm = () => {
           if (res.status === 200) {
             setAlertMessage('Thank you for reaching me out')
             setSuccess(true)
+            resetForm()
           }
         })
         .catch((err) => {
           setAlertMessage(err.message)
           setSuccess(false)
         })
-      resetForm()
+    
     }
   }
   return (
