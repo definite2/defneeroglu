@@ -84,6 +84,7 @@ module.exports = {
         gray: colors.trueGray,
         'gray-150': '#ededed',
         violet: colors.violet,
+        yellow:colors.yellow,
         pink: colors.pink,
         green: colors.teal,
         orange: colors.orange,
