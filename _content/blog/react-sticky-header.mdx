@@ -18,7 +18,7 @@ On websites, users should see the full content when scrolling down, but they sho
 
 ### Final Code
 
-Code for the custom hook and the implementation wiith holy grail layout react application can be found from hereSee an implementation of this custom hook from 👉 [here](https://github.com/definite2/sticky-header-with-hook)
+Code for the custom hook and the implementation with holy grail layout react application can be found from 👉 [here](https://github.com/definite2/sticky-header-with-hook)
 
 <WarningBodyMessage>
   ⚠️ Even tough you may need urgently a sticky header component in your react app, but I suggest to
@@ -62,15 +62,13 @@ export default useScrollingUp
 ```
 
 If you are going to use this hook for server side rendering, then `window` is not going to be available because our component still not mounted at the client so we can check whether the process is at the client then use `window.pageYOffset`; however if you are going to use for client side rendering with react framework then you don't have to worry about the `if(process.browser)` check.
-And we created a boolean state that is `scrollingUp` with _false_ initial value.
 
-We define a variable outside of our callback function as prevScroll which holds vertical pixel value iin other words scrolled amount of pixel that is pageYOffset and it increases with the increasing amount of distance from top to down. The prevScroll, is the value when there is no scroll event whereas currentScroll inside of the callback is the value while scrolling so when user changes direction to scrolling up then the currentScroll will be less than prevScroll because we set its vaue after the comparison so it is still bigger than the currentScroll.
+As you see, there is a `useEffect` we add scroll event listener with a callback function named handleScroll, with some options, i.e. passive:true option. Event listener is attached when the component -which uses this hook- is initially mounted, and the event listener is removed while the component is unmounting. Below you can find a detailed explanation for the variables inside of the useEffect hook:
 
-As you see there is a `useEffect` which calls a handler function handleScroll what it does: when the component -which uses this hook- is initially mounted, we add scroll event listener a callback function named handleScroll, with some options, i.e. passive:true option. A more detailed explanation for the hook and callback function
-
-- **prevScroll**: We define a variable outside of our callback function as prevScroll which holds vertical pixel value in other words scrolled amount of pixel that is `pageYOffset` or [scrollY](https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset). It increases with the increasing amount of distance from top to down, in other words scrolled down.
-- **currentScroll**: This variable isinside of the callback that is the `pageYOffset` value while scrolling event occurs.
-- 🔊 Attention and repeating : prevScroll is the value when there is no scroll event whereas currentScroll is the current value while scrolling event.
+- **prevScroll**: We define this variable **outside of our callback function** as prevScroll which holds vertical pixel value in other words scrolled amount of pixel that is `pageYOffset` or [scrollY](https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset). It increases with the increasing amount of distance from top to down, in other words scrolled down.
+- **currentScroll**: We first define this variable **inside of the callback** that is the `pageYOffset` value while scrolling event occurs.
+- <HighlightInline>🔊 Attention and repeating :</HighlightInline> prevScroll is the value when there
+  is no scroll event whereas currentScroll is the current value while scrolling event.
 - Therefore when user changes direction to scrolling up, the currentScroll will be less than prevScroll, after comparison we set prevScroll to the currentScroll.
 
 #### Utils
@@ -89,7 +87,7 @@ export function off(obj, ...args) {
 
 #### Sticky Header
 
-What is we are going to do is just using useScrolingUp hook we set conditional styles to make it sticky.
+What is we are going to do is, just use useScrolingUp hook and set conditional styles to our header make it sticky while scrolling up.
 
 ```js
 /**
@@ -99,8 +97,8 @@ What is we are going to do is just using useScrolingUp hook we set conditional s
 import useScrollingUp from '@/hooks/useScrollingUp'
 
 const Header = ({ children }) => {
-  const scrolled = useScrollingUp()
-  return <header className={`${scrolled ? 'yourStickyClassName' : ''}`}>{children}</header>
+  const isScrollingUp = useScrollingUp()
+  return <header className={`${isScrollingUp ? 'stickyHeader' : ''}`}>{children}</header>
 }
 export default Header
 ```
@@ -115,7 +113,7 @@ header {
   transition: box-shadow 250ms ease-in-out;
   //..rest
 }
-.yourStickyClassName {
+.stickyHeader {
   position: fixed;
   top: 0;
   left: 0;
@@ -126,4 +124,4 @@ header {
 
 ### Conclusion
 
-With this post I want to show that you should not think that react hooks are not solution for only your application's shared logic or state management, but also we can use this fact for managing UI states of our application such as showing a sticky header or showing a scroll to top icon etc.
+With this post, I want to show that you should not think that react hooks are just solutions for only your application's shared logic or state management, but they also can be used to style our components, or to determine UI component states, i.e. opening a modal, showing a sticky header etc.
