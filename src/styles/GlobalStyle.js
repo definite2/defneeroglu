@@ -80,14 +80,16 @@ pre[class*="language-"] {
 .hljs-symbol,
 .hljs-inserted,
 .hljs-unit {
-  color: #7F00FF;
+  color: rgb(205 220 57);
   font-style: italic;
 
 }
 .hljs-title.hljs-function{
   color:rgb(43,193 ,227);
 }
-
+.hljs-title.hljs-class{
+    color:rgb(43,193 ,227)
+  }
 .hljs-selector,
 .hljs-attr-name,
 .hljs-string,
@@ -202,12 +204,10 @@ pre[class*="language-"] {
 }
 
 .hljs-tag {
-  color: rgb(78 201 176);
+  color: rgb(170, 71, 245);
 }
 
-.hljs-tag .hljs-punctuation {
-  color: #808080;
-}
+
 
 .hljs-cdata {
   color: #808080;
@@ -256,11 +256,11 @@ pre[class*="language-"] {
     color:rgb(255 213 0);
   }
   .hljs-variable.hljs-language{
-  color:rgb(170, 71, 245);
+  color:hljs-variable hljs-language;
 }
 
   .hljs-number {
-    color: #7F00FF;
+    color: rgb(205 220 57);
   font-style: italic;
 
   }
@@ -274,7 +274,7 @@ pre[class*="language-"] {
     color: rgb(199, 146, 234);
   }
   .hljs-title.hljs-class{
-    color:#4ec9b0
+    color:rgb(43,193 ,227)
   }
   .hljs-class
  {
@@ -287,6 +287,10 @@ pre[class*="language-"] {
   color: rgb(0 188 212);
   
 }
+.hljs-tag {
+  color: rgb(170, 71, 245);
+}
+
 
   .hljs-selector,
   .hljs-doctype {
@@ -296,7 +300,6 @@ pre[class*="language-"] {
   .hljs {
     color: rgb(255, 203, 139);
   }
-  .hljs-tag,
   .hljs-operator,
   .hljs-keyword {
     color: rgb(212 13 119);
