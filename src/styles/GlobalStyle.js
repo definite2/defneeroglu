@@ -256,7 +256,7 @@ pre[class*="language-"] {
     color:rgb(255 213 0);
   }
   .hljs-variable.hljs-language{
-  color:hljs-variable hljs-language;
+  color:rgb(170,71,245);
 }
 
   .hljs-number {
