@@ -34,8 +34,8 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
                   <dd>
                     <time dateTime={lastmod}>{formatDate(lastmod)}</time>
                   </dd>
-                  <span className="dot"></span>
-                  <span>{frontMatter.readingTime.text}</span>
+                  <div className="dot"></div>
+                  <div>{frontMatter.readingTime.text}</div>
                 </dl>
               </div>
 
