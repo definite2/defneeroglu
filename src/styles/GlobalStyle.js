@@ -195,7 +195,7 @@ pre[class*="language-"] {
   color: #d7ba7d;
 }
 .hljs-literal{
-  color: rgb(0 188 212);
+  color: rgb(244 67 54);
   
 }
 
@@ -284,7 +284,7 @@ pre[class*="language-"] {
   color: #86cf17;
 }
 .hljs-literal{
-  color: rgb(0 188 212);
+  color: rgb(244 67 54);
   
 }
 .hljs-tag {
