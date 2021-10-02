@@ -1,45 +1,46 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components'
 export const GlobalStyle = createGlobalStyle`
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+pre[class*="language-"] {
+	padding: 1em;
+	margin: 0.5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+.hljs-selector-tag, .hljs-selector-class{
+  color:orange;
+}
+.hljs-attribute{
+  color:rgb(0 188 212)
+}
+
 .light{
-  code {
-    white-space: pre;
-  }
-  code[class*="language-"],
-  pre[class*="language-"] {
-    color: white;
-    background: none;
-    font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono",
-    "Courier New", monospace;
-
-    text-align: left;
-    word-spacing: normal;
-    word-break: normal;
-    word-wrap: normal;
-
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4;
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
-    hyphens: none;
-    width: 100%;
-  }
-  /* Code blocks */
-  pre[class*="language-"] {
-    padding-top: 16px;
-    padding-bottom: 16px;
-    padding-left: 16px;
-    padding-right: 16px;
-    margin: 24px 0;
-    overflow: auto;
-    min-width: 100%;
-    font-size: 0.9rem;
-    white-space: nowrap;
+  pre{
+    background: rgb(34, 34, 34);
   }
   :not(pre) > code[class*="language-"],
   pre[class*="language-"] {
-    background: #FAFAFA;
+    
     border: 1px solid #E5E5E5;
 
   }
@@ -53,7 +54,7 @@ export const GlobalStyle = createGlobalStyle`
   .hljs-prolog,
   .hljs-doctype,
   .hljs-cdata {
-    color: #6a9955;
+    color: #888888;
   }
   .hljs-doctype .hljs-doctype-tag {
   color: #569cd6;
@@ -71,15 +72,20 @@ export const GlobalStyle = createGlobalStyle`
   color: #d4d4d4;
 }
 
-.hljs-property,
-.hljs-tag,
+
+
 .hljs-boolean,
 .hljs-number,
 .hljs-constant,
 .hljs-symbol,
 .hljs-inserted,
 .hljs-unit {
-  color: rgb(247, 140, 108);
+  color: #7F00FF;
+  font-style: italic;
+
+}
+.hljs-title.hljs-function{
+  color:rgb(43,193 ,227);
 }
 
 .hljs-selector,
@@ -88,7 +94,7 @@ export const GlobalStyle = createGlobalStyle`
 .hljs-char,
 .hljs-builtin,
 .hljs-deleted {
-  color: #ce9178;
+  color:rgb(255 213 0);
 }
 
 .language-css .hljs-string.hljs-url {
@@ -116,7 +122,7 @@ export const GlobalStyle = createGlobalStyle`
   color: #9cdcfe;
 }
 
-.hljs-atrule .hljs-url .hljs-function {
+.hljs-atrule .hljs-url  {
   color: #dcdcaa;
 }
 
@@ -125,7 +131,7 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 .hljs-keyword {
-  color: #c586c0;
+  color: rgb(212 13 119);;
 }
 
 .hljs-keyword.hljs-module,
@@ -133,10 +139,7 @@ export const GlobalStyle = createGlobalStyle`
   color: #c586c0;
 }
 
-.hljs-function,
-.hljs-function .hljs-class {
-  color: #dcdcaa;
-}
+
 
 .hljs-regex {
   color: #d16969;
@@ -179,17 +182,19 @@ export const GlobalStyle = createGlobalStyle`
   color: #569cd6;
 }
 
-.hljs-property,
-.hljs-variable,
-.hljs-imports .hljs-class,
-.hljs-exports .hljs-class{
-  color: #9cdcfe;
+.hljs-property
+{
+  color: rgb(255 152 0);
 }
 .hljs-variable.hljs-language{
-  color:#569cd6;
+  color:rgb(170, 71, 245);
 }
 .hljs-selector {
   color: #d7ba7d;
+}
+.hljs-literal{
+  color: rgb(0 188 212);
+  
 }
 
 .hljs-escape {
@@ -197,7 +202,7 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 .hljs-tag {
-  color: #569cd6;
+  color: rgb(78 201 176);
 }
 
 .hljs-tag .hljs-punctuation {
@@ -208,8 +213,8 @@ export const GlobalStyle = createGlobalStyle`
   color: #808080;
 }
 
-.hljs-attr-name {
-  color: #9cdcfe;
+.hljs-attr{
+  color: #86cf17;
 }
 
 .hljs-attr-value,
@@ -248,26 +253,39 @@ export const GlobalStyle = createGlobalStyle`
 }
   .hljs-string,
   .hljs-url {
-    color: rgb(173, 219, 103);
+    color:rgb(255 213 0);
   }
-  .hljs-variable {
-    color:#569cd6;
-  }
+  .hljs-variable.hljs-language{
+  color:rgb(170, 71, 245);
+}
+
   .hljs-number {
-    color: rgb(247, 140, 108);
+    color: #7F00FF;
+  font-style: italic;
+
   }
   .hljs-builtin,
   .hljs-char,
   .hljs-constant,
-  .hljs-function {
-    color: rgb(130, 170, 255);
+  .hljs-title.hljs-function {
+    color:rgb(43,193 ,227);
   }
   .hljs-punctuation {
     color: rgb(199, 146, 234);
   }
+  .hljs-title.hljs-class{
+    color:#4ec9b0
+  }
   .hljs-class
  {
   color: #4ec9b0;
+}
+.hljs-attr{
+  color: #86cf17;
+}
+.hljs-literal{
+  color: rgb(0 188 212);
+  
 }
 
   .hljs-selector,
@@ -281,13 +299,13 @@ export const GlobalStyle = createGlobalStyle`
   .hljs-tag,
   .hljs-operator,
   .hljs-keyword {
-    color: #c586c0;
+    color: rgb(212 13 119);
 }
   .hljs-boolean {
     color: rgb(255, 88, 116);
   }
   .hljs-property {
-    color: #9cdcfe;
+    color: rgb(255 152 0);
   }
   .hljs-namespace {
     color: #4ec9b0;
@@ -296,7 +314,7 @@ export const GlobalStyle = createGlobalStyle`
   .hljs-prolog,
   .hljs-doctype,
   .hljs-cdata {
-    color: #6a9955;
+    color: #888888;
   }
   code[class*="language-"],
   pre[class*="language-"] {
@@ -317,4 +335,4 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   }
-`;
+`
