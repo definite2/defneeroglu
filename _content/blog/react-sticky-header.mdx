@@ -12,15 +12,15 @@ alt: 'sticky header thumbnail'
 
 If you want to know how to create a stciky header in your react application, this post is for you. In this post, we are going to do that in a pro way as creating a **[custom hook](https://reactjs.org/docs/hooks-custom.html)** .
 
-### Introduction
+## Introduction
 
 On websites, users should see the full content when scrolling down, but they should see the navigation component, that is, the header, when scrolling up. It is very easy to give this experience we just need to know a boolean value whether the user's scroll direction is up or not.
 
-### Final Code
+## Final Code
 
 Code for the custom hook and the implementation with holy grail layout react application can be found from 👉 [here](https://github.com/definite2/sticky-header-with-hook)
 
-#### Custom Hook
+### Custom Hook
 
 ```js
 import { useEffect, useState } from 'react'
@@ -64,7 +64,7 @@ As you see, there is a `useEffect` we add scroll event listener with a callback 
   is no scroll event whereas currentScroll is the current value while scrolling event.
 - Therefore when user changes direction to scrolling up, the currentScroll will be less than prevScroll, after comparison we set prevScroll to the currentScroll.
 
-#### Utils
+### Utils
 
 ```js
 //exported from src/utils/index.js
@@ -78,7 +78,7 @@ export function off(obj, ...args) {
 }
 ```
 
-#### Sticky Header
+### Sticky Header
 
 What is we are going to do is, just use useScrolingUp hook and set conditional styles to our header make it sticky while scrolling up.
 
@@ -96,7 +96,7 @@ const Header = ({ children }) => {
 export default Header
 ```
 
-```css
+```scss
 //App.css or App.scss file
 header {
   //...the rest is at the source code
@@ -115,6 +115,6 @@ header {
 }
 ```
 
-### Conclusion
+## Conclusion
 
 With this post, I want to show that you should not think that react hooks are just solutions for only your application's shared logic or state management, but they also can be used to style our components, or to determine UI component states, i.e. opening a modal, showing a sticky header etc.
