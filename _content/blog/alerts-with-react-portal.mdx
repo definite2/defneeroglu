@@ -1,0 +1,378 @@
+---
+title: 'How to Create Error Dialog with React Portal and Axios Interceptor'
+date: '2021-10-03'
+lastmod: '2021-10-03'
+tags: ['react', 'axios']
+draft: false
+summary: 'Learn a global solution for error message dialogs with react portal'
+isToc: true
+image: '/content/react_portal_with_redux_and_axios.svg'
+alt: 'React Portal and Axios Interceptor thumbnail uses Rick And Morty Portal draw'
+---
+
+If you want to create a global solution to show error messages to your users in your react application, then this post is for you.
+
+## Introduction
+
+If there are elements such as form or editable form components or editable tables in your web application, users should be informed if there is an error after such editing, deleting or adding new data. For this you need to show a popup like component to inform the user about the related error.  
+In this blog, you will learn how you can handle API call errors globally using react portal.
+
+## Final Code
+
+You can find source code of the sample react application from [here](https://github.com/definite2/alert-dialog).
+
+## Project Structure
+
+The folder structure of the application is as follows
+
+```text
+-src
+ -components
+  --Alert.js
+  --Login.js
+ -mocks
+  -login
+   --index.js
+ -services
+  --authApi.js
+  --mockAxios.js
+  --setupAxios.js
+ -store
+  -error
+   --actions.js
+   --slice.js
+  --rootReducer.js
+ App.js
+ index.js
+
+```
+
+In the rest of the article, I will explain the subject through this sample application.
+
+### Create Alert Portal
+
+React portals are a fast way to render a component into DOM which doesn’t need to exist inside of a parent component.
+In general, components such as modal popup are used as portals. Here we will create an alert dialog component and embed it in the App component without the need for a parent.
+
+```js
+//src/components/ErrorPortal.js
+import React from 'react'
+import { Header, Segment, TransitionablePortal } from 'semantic-ui-react' //any UI library or you can create your own popup component
+import { useSelector, useDispatch } from 'react-redux'
+import PropTypes from 'prop-types'
+import { removeError } from '../store/error/actions'
+export const ErrorPortal = () => {
+  const dispatch = useDispatch()
+  const { openDialog, title, message } = useSelector((state) => state.error)
+  const handleClose = () => {
+    dispatch(removeError())
+  }
+
+  return (
+    <TransitionablePortal
+      open={openDialog}
+      transition={{ animation: 'browse right', duration: 900 }}
+      onClose={handleClose}
+      openOnTriggerClick
+    >
+      <Segment
+        color="red"
+        style={{
+          left: '40%',
+          position: 'fixed',
+          top: '10%',
+          zIndex: 1000,
+          width: '400px',
+          height: '120px',
+        }}
+      >
+        <Header>{title}</Header>
+        <p>{message}</p>
+      </Segment>
+    </TransitionablePortal>
+  )
+}
+ErrorPortal.propTypes = {
+  openDialog: PropTypes.bool,
+  title: PropTypes.string,
+  message: PropTypes.string,
+}
+```
+
+If there is error in redux or global context , that is, if `openDialog` is _true_, the portal component opens and displays the relevant message.
+Semantic UI has a portal element with transition property. In this example we use this 3rd party UI element but you are free to create your own portal component.
+
+### Global Error Handling
+
+To inform our portal component about error and its message we are going to use redux actually [redux toolkit](https://redux.js.org/redux-toolkit/overview) which is a redux team's official library that provides simplified utilities for redux development.
+
+```js
+//src/store/error/slice.js
+import { createSlice } from '@reduxjs/toolkit'
+const initialState = {
+  openDialog: false,
+  message: '',
+  title: '',
+}
+export const errorSlice = createSlice({
+  name: 'error',
+  initialState: initialState,
+  reducers: {
+    showError(state, action) {
+      state.openDialog = true
+      const { title, message } = action.payload
+      state.message = message
+      state.title = title
+    },
+    clearError(state) {
+      state.openDialog = false
+      state.message = ''
+      state.title = ''
+    },
+  },
+})
+```
+
+`createSlice` from Redux Toolkit makes everything easier to create Redux reducer and actions. Inside of `reducers` object every function object is reducer and each of them automatically generates related actions.
+As you see in our redux store we created error slice which holds `openDialog`, `title` and `message` in the state and update these values with reducers object/actions
+
+```js
+//src/store/error/actions.js
+import { errorSlice } from './slice'
+export const errorActions = errorSlice.actions
+export const showError = (message, title) => (dispatch) => {
+  return dispatch(errorActions.showError({ message, title }))
+}
+export const removeError = () => (dispatch) => {
+  dispatch(errorActions.clearError())
+}
+```
+
+`showError` is a redux action, if it is called then `openDialog` is set to true directly inside of our `slice.js` but its content is set with this action. We do not have to write an explicit redux action like this because Redux Toolkit provides automatically generated actions but to make things clear we write actions like this.
+`removeError` as obvious from its name, clears error and thus sets `openDialog` to _false_. Next we create our redux store with the following code:
+
+```js
+//src/store/rootReducer.js
+import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers } from 'redux'
+import { errorSlice } from './error/slice'
+
+export const rootRecucer = combineReducers({
+  error: errorSlice.reducer,
+  //other reducers here
+})
+export const store = configureStore({
+  reducer: rootRecucer,
+  devTools: process.env.NODE_ENV !== 'production',
+})
+```
+
+### Redux + Axios
+
+Now, another important aspect of the project, apart from the react portal component, is to connect axios calls with our source of truth that is redux store.
+
+```js
+//src/services/setupAxios.js
+/**
+ * @param {object} store
+ * @param {object} axios function
+ * setupAxios: connects newtwork level data with our redux store
+ */
+import { errorActions } from '../store/error/actions'
+export default function setupAxios(axios, store) {
+  axios.interceptors.response.use(
+    (response) => {
+      return response
+    },
+    (err) => {
+      // const status=err.status;
+      const message = err.response.data.message || err.statusText
+      store.dispatch(errorActions.showError({ title: 'Error', message: message }))
+      return Promise.reject(err)
+    }
+  )
+}
+```
+
+With `setupAxios`, we intercepts axios response,- we can intercept axios request as well- thus we are able to get error response data from network level and store the data to our redux store or we can do vice versa: we can use data from our redux store to add the data to our network headers such as Bearer access tokens.
+
+### Mocking Error
+
+For demo purposes we are going to use `axios-mock-adapter` to intercept to our real API calls and return error:
+
+```js
+/**
+ * intercepts real API calls and mock a error response
+ */
+import { LOGIN_URL } from '../../services/authApi'
+
+export function mockLogin(mock) {
+  mock.onPost(LOGIN_URL).reply(({ data }) => {
+    const { username } = JSON.parse(data)
+    return [403, { message: `User '${username}' not found` }]
+  })
+}
+```
+
+And suppose the following is our real API call for login:
+
+```js
+import axios from 'axios'
+
+//real API calls
+const API_URL = process.env.REACT_APP_API_URL || 'api'
+export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/auth/get-user`
+export const LOGIN_URL = `${API_URL}/auth/login`
+
+export function login(username, password) {
+  return axios.post(LOGIN_URL, { username, password })
+}
+
+export function getUserByToken() {
+  return axios.get(GET_USER_BY_ACCESSTOKEN_URL)
+}
+```
+
+To use mock axios we need to add the following function to our `ìndex.js`:
+
+```js
+//src/services/mockAxios.js
+import MockAdapter from 'axios-mock-adapter'
+import { mockLogin } from '../mocks/login'
+//mock axios setup which will returns error message for demo purposes
+export default function mockAxios(axios) {
+  const mock = new MockAdapter(axios, { delayResponse: 300 })
+  mockLogin(mock)
+  return mock
+}
+```
+
+### Login component
+
+This component can be any component which makes an API calls and result in error. For demo purposes we are going to use the following Login component and with the submit button we are going to POST login requests within our API.
+
+```js
+import React, { useState } from 'react'
+import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
+import { login } from '../services/authApi'
+
+const Login = () => {
+  const initialFValues = {
+    username: '',
+    password: '',
+  }
+  const [values, setValues] = useState(initialFValues)
+  const handleInputChange = (e) => {
+    const { id, value } = e.target
+    setValues({
+      ...values,
+      [id]: value,
+    })
+  }
+  const onSubmit = () => {
+    setTimeout(() => {
+      login(values.username, values.password)
+        .then(({ data }) => {
+          // console.log(data)
+        })
+        .catch(() => {
+          // console.log("error");
+        })
+    }, 1000)
+  }
+  return (
+    <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle">
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <Header as="h2" color="teal" textAlign="center">
+          Log-in to your account
+        </Header>
+        <Form size="large">
+          <Segment stacked>
+            <Form.Input
+              id="username"
+              fluid
+              icon="user"
+              iconPosition="left"
+              placeholder="E-mail address"
+              onChange={handleInputChange}
+            />
+            <Form.Input
+              id="password"
+              fluid
+              icon="lock"
+              iconPosition="left"
+              placeholder="Password"
+              type="password"
+              onChange={handleInputChange}
+            />
+
+            <Button color="teal" fluid size="large" onClick={onSubmit}>
+              Login
+            </Button>
+          </Segment>
+        </Form>
+      </Grid.Column>
+    </Grid>
+  )
+}
+
+export default Login
+```
+
+### `App.js` and `index.js`
+
+Our app componnet will be consist of Login component and ErrorPortal component, as mentioned before the place of ErrorPortal is not important we we would have more than one component such as routes here still we put our ErrorPortal just next to the most parent component inside of the App component.
+
+```js
+//src/App.js
+import React, { useEffect } from 'react'
+import Login from './components/Login'
+import { ErrorPortal } from './components/ErrorPortal'
+import { useDispatch } from 'react-redux'
+import { removeError } from './store/error/actions'
+function App() {
+  const dispatch = useDispatch()
+  //clear errors on page mounted
+  useEffect(() => {
+    dispatch(removeError()) //clear error at first
+  }, [dispatch])
+  return (
+    <>
+      <Login />
+      <ErrorPortal />
+    </>
+  )
+}
+
+export default App
+```
+
+We need to wrap our appication wth redux `Provider` component with our store object.
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './App'
+import { Provider } from 'react-redux'
+import 'semantic-ui-css/semantic.min.css'
+import { store } from './store/rootReducer'
+import setupAxios from './services/setupAxios'
+import mockAxios from './services/mockAxios'
+import axios from 'axios'
+mockAxios(axios)
+setupAxios(axios, store)
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)
+```
+
+Here we initialize our axios and redux connection as well as mock axios.
+
+## Conclusion
+
+In this post I tried to show how you can use axios interceptors to get network level data to write the data to your application's redux store and create react portal component.
+I could have covered these two topics under different blogs, but I wanted to cover them in a single article, since these two are combined in this way in real React projects. I hope this could help you.
