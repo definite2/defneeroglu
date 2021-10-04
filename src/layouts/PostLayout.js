@@ -13,7 +13,7 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
     <>
       <BlogSeo url={`${siteMetadata.siteUrl}/blog/${slug}`} {...frontMatter} />
       <div
-        className={clsx('relative flex xl:justify-between justify-center my-12', {
+        className={clsx('relative flex xl:justify-between justify-center', {
           'flex-row-reverse': Boolean(isToc),
         })}
       >

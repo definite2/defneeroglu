@@ -84,8 +84,11 @@ const about = () => {
               className="italic"
               href="https://dergipark.org.tr/tr/pub/ejosat/issue/53473/711076"
             >
-              Zeydan M. , Bostancı B. , Oralhan B. , Eroğlu D. , Aydıner U. Mekânsal Bulanık Karar
-              Destek Sisteminin Geliştirilmesi. EJOSAT. 2020; 418-429.
+              <span className="">
+                Development of Spatial Fuzzy Decision Support System (Mekânsal Bulanık Karar Destek
+                Sisteminin Geliştirilmesi) Zeydan, M , Bostancı, B , Oralhan, B , Eroğlu, D ,
+                Aydıner, U, (2020). EJOSAT.
+              </span>
             </CustomLink>
           </div>
         </div>
