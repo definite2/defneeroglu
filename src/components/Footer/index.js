@@ -3,8 +3,8 @@ import SocialIcon from "../Social";
 import Link from "next/link";
 export default function Footer() {
   return (
-    <footer className=" mt-auto text-center bg-gray-700">
-      <div className="flex flex-col justify-center items-center py-6">
+    <footer  className=" mt-auto text-center bg-gray-700 ">
+      <div className="flex flex-col justify-center items-center py-8">
         <div className="flex-grow flex-col">
           <div className="flex text-right space-x-4">
             <SocialIcon

@@ -1,16 +1,13 @@
-import { PageSeo } from "@/components/Seo";
-import { siteMetadata } from "@/constants/siteMetadata";
-import Image from "next/image";
-import ContactForm from "@/components/Forms/ContactForm";
-import { motion } from "framer-motion";
+import { PageSeo } from '@/components/Seo'
+import { siteMetadata } from '@/constants/siteMetadata'
+import Image from 'next/image'
+import ContactForm from '@/components/Forms/ContactForm'
+import { motion } from 'framer-motion'
 const contact = () => {
-  const { author } = siteMetadata;
+  const { author } = siteMetadata
   return (
     <>
-      <PageSeo
-        title={`Contact - ${author}`}
-        description={`Contact me - ${author}`}
-      />
+      <PageSeo title={`Contact - ${author}`} description={`Contact me - ${author}`} />
 
       <div id="contact_form" className="divide-y">
         <div className="pt-6 pb-8 space-y-2 md:space-y-5">
@@ -25,7 +22,6 @@ const contact = () => {
               visible: {
                 scale: 1,
                 opacity: 1,
-             
               },
             }}
           >
@@ -34,25 +30,20 @@ const contact = () => {
             </h1>
           </motion.div>
         </div>
-        <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-2 xl:space-y-0 lg:pt-8 ">
-          <div className="pt-8 pb-8 prose lg:prose-lg dark:prose-dark max-w-none xl:col-span-2">
+        <div className="flex flex-col-reverse items-start space-y-2 xl:grid xl:grid-cols-4 xl:gap-x-8 xl:space-y-0 sm:pt-8 sm:pb-12  ">
+          <div className="pt-8 pb-8 prose pl-4 sm:pl-0 lg:prose-lg dark:prose-dark max-w-none xl:col-span-2">
             <ContactForm />
           </div>
-
+          <div className="sm:pt-16 pt-4 pl-4 prose lg:prose-lg dark:prose-dark max-w-none xl:col-span-2">
+            <p>
+              If you have any suggestions or if you just want to chat with me please feel free to
+              drop a message.
+            </p>
+          </div>
         </div>
       </div>
-
-      <div className="flex justify-end pt-40 prose dark:prose-dark max-w-none xl:col-span-3">
-        <Image
-          className="svg-draw float-right"
-          src="/media/wiggle.svg"
-          width={172}
-          height={145}
-          alt="wiggle"
-        />
-      </div>
     </>
-  );
-};
+  )
+}
 
-export default contact;
+export default contact

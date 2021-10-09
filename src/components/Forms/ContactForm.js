@@ -90,7 +90,7 @@ const ContactForm = () => {
       </AlertContainer>
       <form className="w-full">
         <div className="flex flex-wrap mb-6">
-          <div className="w-full md:w-2/3 ">
+          <div className="w-full ">
             <Input
               id="name"
               type="text"
@@ -100,7 +100,7 @@ const ContactForm = () => {
               error={errors.name}
             />
           </div>
-          <div className="w-full md:w-2/3 ">
+          <div className="w-full  ">
             <Input
               id="email"
               type="email"
@@ -112,13 +112,13 @@ const ContactForm = () => {
           </div>
         </div>
         <div className="flex flex-wrap mb-6">
-          <div className="w-full md:w-2/3">
-            <label className="block tracking-wide mr-3 py-1 text-left font-medium text-xl px-2 text-transparent bg-clip-text bg-gradient-to-br from-orange-400  to-primary-400">
+          <div className="w-full ">
+            <label className="block tracking-wide mr-3 py-1 text-left font-medium text-xl px-2 text-gray-900 dark:text-gray-50 ">
               Message
             </label>
             <textarea
               id="message"
-              className="no-resize block w-full appearance-none rounded-md border-primary-300 bg-primary-light text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none focus:ring-primary-400 focus:border-primary-400 h-36 resize-none shadow-sm dark:bg-gray-800 dark:text-gray-100"
+              className="no-resize block w-full appearance-none rounded-md border-gray-300 dark:border-gray-500 bg-primary-light text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none focus:ring-gray-400 focus:border-gray-400 h-36 resize-none shadow-sm dark:bg-gray-800 dark:text-gray-100 dark:focus:border-gray-500 dark:focus:ring-gray-500"
               onChange={handleInputChange}
               value={values.message}
               error={errors.message}
@@ -126,15 +126,17 @@ const ContactForm = () => {
             {errors.message && <span class="text-xs text-red-600">{errors.message}</span>}
           </div>
         </div>
-        <div className="flex flex-wrap mb-6">
+        <div className="flex flex-wrap  mb-6">
+        <div className="w-full flex  justify-end">
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="bg-gradient-to-r from-orange-400 to-primary-400 flex items-center justify-center font-medium  border-0 p-2 rounded-md shadow-sm"
+            className="bg-primary-500 flex items-center justify-center font-medium  border-0 p-2 rounded-md shadow-sm"
             onClick={handleSubmit}
           >
-            <span className="px-3  text-primary-light dark:text-gray-900">Send</span>
+            <span className="px-5  text-primary-light dark:text-gray-900">Send</span>
           </motion.button>
+          </div>
         </div>
       </form>
     </>
