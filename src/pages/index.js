@@ -20,7 +20,7 @@ export default function Home({ posts }) {
   return (
     <>
       <PageSeo title={siteMetadata.title} description={siteMetadata.description} />
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
+      <div className="divide-y divide-gray-200 dark:divide-gray-700 mb-12">
         <div className="pb-1 space-y-2 md:space-y-5">
           <p className="text-lg leading-7 prose lg:prose-lg mb-8 dark:prose-dark max-w-none">
             {siteMetadata.description}

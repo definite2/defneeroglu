@@ -30,11 +30,11 @@ const contact = () => {
             </h1>
           </motion.div>
         </div>
-        <div className="flex flex-col-reverse items-start space-y-2 xl:grid xl:grid-cols-4 xl:gap-x-8 xl:space-y-0 sm:pt-8 sm:pb-12  ">
-          <div className="pt-8 pb-8 prose pl-4 sm:pl-0 lg:prose-lg dark:prose-dark max-w-none xl:col-span-2">
+        <div className="flex flex-col-reverse items-start space-y-2 xl:grid xl:grid-cols-4 xl:gap-x-8 xl:space-y-0 sm:pt-8 sm:pb-20 mb-12  ">
+          <div className="pt-8 pb-8 prose px-4 sm:pl-0 lg:prose-lg dark:prose-dark max-w-none xl:col-span-2">
             <ContactForm />
           </div>
-          <div className="sm:pt-16 pt-4 pl-4 prose lg:prose-lg dark:prose-dark max-w-none xl:col-span-2">
+          <div className="sm:pt-16 pt-4 px-4 prose lg:prose-lg dark:prose-dark max-w-none xl:col-span-2">
             <p>
               If you have any suggestions or if you just want to chat with me please feel free to
               drop a message.
