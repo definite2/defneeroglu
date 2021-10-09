@@ -12,7 +12,7 @@ const Header = () => {
     <nav
       className={`${
         scrolled ? 'fixed top-0 left-0 w-full z-10 shadow-nav dark:shadow-md' : 'col-span-10 shadow-none'
-      } transition-shadow duration-500 ease-in-out flex  items-center justify-between border-0 xl:grid xl:grid-cols-10 gap-1 bg-primary-light dark:bg-gray-900 py-6`}
+      } transition-shadow duration-200 ease-out flex  items-center justify-between border-0 xl:grid xl:grid-cols-10 gap-1 bg-primary-light dark:bg-gray-900 py-6`}
     >
       <div className="w-full xl:col-span-6 xl:col-start-3 flex justify-between px-5 ">
         <Logo />

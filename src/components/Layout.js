@@ -1,8 +1,9 @@
-import SectionContainer from "@/components/SectionContainer";
-import Header from "@/components/Header";
-import ScrollToTop from "@/components/ScrollTop";
-import Footer from "@/components/Footer";
+import SectionContainer from '@/components/SectionContainer'
+import Header from '@/components/Header'
+import ScrollToTop from '@/components/ScrollTop'
+import Footer from '@/components/Footer'
 const Wrapper = ({ children }) => {
+
   return (
     <>
       <SectionContainer>
@@ -17,7 +18,7 @@ const Wrapper = ({ children }) => {
       <Footer />
       <ScrollToTop />
     </>
-  );
-};
+  )
+}
 
-export default Wrapper;
+export default Wrapper
