@@ -59,7 +59,7 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
         </article>
   
       </div>
-      <div>
+      <div className="mb-8">
           <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
             {prev && (
               <div className="pt-4 xl:pt-8">
