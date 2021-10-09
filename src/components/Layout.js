@@ -13,7 +13,7 @@ const Wrapper = ({ children }) => {
         <Header />
         <main
           role="main"
-          className={`xl:col-span-6 xl:col-start-3 col-span-10 px-5 my-4 sm:my-12 ${
+          className={`xl:col-span-6 xl:col-start-3 col-span-10 px-5 sm:px-0 my-4 sm:my-12 ${
             scrolled ? 'pt-20' : '0'
           }`}
         >

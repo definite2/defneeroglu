@@ -16,7 +16,7 @@ const Header = () => {
           : 'col-span-10 shadow-none'
       } transition-shadow duration-300 ease-out flex  items-center justify-between border-0 xl:grid xl:grid-cols-10 gap-1 bg-primary-light dark:bg-gray-900 py-6`}
     >
-      <div className="w-full xl:col-span-6 xl:col-start-3 flex justify-between px-5 ">
+      <div className="w-full xl:col-span-6 xl:col-start-3 flex justify-between px-5 sm:px-0 ">
         <Logo />
         <div className="flex justify-between items-center text-base leading-5">
           <div className="hidden sm:block">
