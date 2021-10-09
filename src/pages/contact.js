@@ -39,12 +39,6 @@ const contact = () => {
             <ContactForm />
           </div>
 
-          <Image
-            className="-z-10 xl:col-span-1 connectme"
-            src="/media/connectme.svg"
-            width="300px"
-            height="376px"
-          />
         </div>
       </div>
 

@@ -21,6 +21,7 @@ export default function BlogSummaryCard(props) {
               </header>
             </div>
           )}
+          <div className="flex w-full justify-center mt-2">
           <dl>
             <dt className="sr-only"> Published on</dt>
             <dd className="text-base  leading-6 text-gray-400 dark:text-gray-400">
@@ -30,7 +31,8 @@ export default function BlogSummaryCard(props) {
               </time>
             </dd>
           </dl>
-          <section className="flex flex-col h-full px-5 py-5 sm:px-8 sm:py-10">
+          </div>
+          <section className="flex flex-col h-full px-5 py-5 sm:px-8 ">
             <h2 className="pb-5 text-xl font-semibold leading-tight sm:text-2xl">{title}</h2>
             {/* TODO! fix a descendant of <a> */}
             <div className="flex flex-wrap">

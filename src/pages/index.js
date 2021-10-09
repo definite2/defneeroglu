@@ -21,7 +21,7 @@ export default function Home({ posts }) {
     <>
       <PageSeo title={siteMetadata.title} description={siteMetadata.description} />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="pb-10 pt-20 space-y-2 md:space-y-5">
+        <div className="pb-10 space-y-2 md:space-y-5">
           <p className="text-lg leading-7 prose lg:prose-lg dark:prose-dark max-w-none">
             {siteMetadata.description}
           </p>
@@ -29,7 +29,7 @@ export default function Home({ posts }) {
             Recents
           </h1>
         </div>
-        <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 sm:gap-8">
+        <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 mb-4 sm:gap-8">
           {!posts.length && 'No posts found.'}
           {posts.slice(0, max_post_number).map((frontmatter) => {
             const { slug, date, title, summary, tags, image } = frontmatter
