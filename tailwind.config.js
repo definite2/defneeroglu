@@ -17,6 +17,10 @@ module.exports = {
         '-10': '-10',
         '-50': '-50',
       },
+      transitionProperty: {
+        height: 'height',
+        padding: 'padding',
+      },
       inset: {
         '1/5': '20%',
       },
@@ -84,7 +88,7 @@ module.exports = {
         gray: colors.trueGray,
         'gray-150': '#ededed',
         violet: colors.violet,
-        yellow:colors.yellow,
+        yellow: colors.yellow,
         pink: colors.pink,
         green: colors.teal,
         orange: colors.orange,
