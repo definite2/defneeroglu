@@ -3,7 +3,10 @@ import fs from 'fs'
 import path from 'path'
 
 const root = process.cwd()
-const pipe = (...fns) => (x) => fns.reduce((v, f) => f(v), x)
+const pipe =
+  (...fns) =>
+  (x) =>
+    fns.reduce((v, f) => f(v), x)
 
 const flattenArray = (input) =>
   input.reduce((acc, item) => [...acc, ...(Array.isArray(item) ? item : [item])], [])
@@ -25,7 +28,7 @@ function getFiles() {
   return files.map((file) => file.slice(prefixPaths.length + 1).replace(/\\/g, '/'))
 }
 //connect to elasticsearch
-export async function connectToElasticsearch() {
+async function connectToElasticsearch() {
   const ESS_CLOUD_ID = process.env.ESS_CLOUD_ID
   const ESS_CLOUD_USERNAME = process.env.ESS_CLOUD_USERNAME
   const ESS_CLOUD_PASSWORD = process.env.ESS_CLOUD_PASSWORD
@@ -48,27 +51,27 @@ export async function connectToElasticsearch() {
 async function indexToES() {
   const files = getFiles('blog')
   const prefixPaths = path.join(root, '_content', 'blog')
-  const client = await connectToElasticsearch()
-  for (const file of files) {
-    const source = fs.readFileSync(path.join(root, '_content', 'blog', file), 'utf8')
-    const filename = file.slice(prefixPaths.length + 1).replace(/\\/g, '/')
-    let doc = {
-      _index: 'devmuscle-blog-contents',
-      _type: 'blogpost',
-      _id: filename,
-      _source: {
+  const client = connectToElasticsearch()
+  try {
+    for (const file of files) {
+      const source = fs.readFileSync(path.join(root, '_content', 'blog', file), 'utf8')
+      const filename = file.slice(prefixPaths.length + 1).replace(/\\/g, '/')
+      let doc = {
+        _index: 'devmuscle-blog-contents',
+        _type: 'blogpost',
+        _id: filename,
         author: 'defne eroglu',
         content: source,
-      },
+      }
+      await client.index({
+        index: 'devmuscle-blog-contents',
+        // type: '_doc', // uncomment this line if you are using Elasticsearch ≤ 6
+        body: {
+          doc,
+        },
+      })
+      await client.indices.refresh({ index: 'devmuscle-blog-contents' })
     }
-    await client.index({
-      index: 'devmuscle-blog-contents',
-      // type: '_doc', // uncomment this line if you are using Elasticsearch ≤ 6
-      body: {
-        doc,
-      },
-    })
-  }
-  await client.indices.refresh({ index: 'devmuscle-blog-contents' })
+  } catch (error) {}
 }
 indexToES()
