@@ -6,11 +6,14 @@ import '../styles/global.scss'
 import Wrapper from '@/components/Layout'
 import { GlobalStyle } from 'styles/GlobalStyle'
 import Analytics from '@/components/Analytics'
-import { motion } from 'framer-motion'
+import { LazyMotion, m } from "framer-motion"
+
 const App = ({ Component, pageProps, router }) => {
   let easing = [0.175, 0.85, 0.12, 0.96]
+  const loadFeatures = () =>
+  import("../framerFeatures").then(res => res.default)
   return (
-    <>
+     <LazyMotion features={loadFeatures} strict>
       <GlobalStyle />
       <ThemeProvider attribute="class">
         <Head>
@@ -19,7 +22,7 @@ const App = ({ Component, pageProps, router }) => {
         <Analytics />
         <DefaultSeo {...SEO} />
         <Wrapper>
-          <motion.div
+          <m.div
             initial="pageInitial"
             animate="pageAnimate"
             key={router.route}
@@ -45,10 +48,10 @@ const App = ({ Component, pageProps, router }) => {
             }}
           >
             <Component {...pageProps} />
-          </motion.div>
+          </m.div>
         </Wrapper>
       </ThemeProvider>
-    </>
+    </LazyMotion>
   )
 }
 export default App

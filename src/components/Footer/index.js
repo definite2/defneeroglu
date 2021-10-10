@@ -8,20 +8,20 @@ export default function Footer() {
         <div className="flex-grow flex-col">
           <div className="flex text-right space-x-4">
             <SocialIcon
-              className="text-primary-400 "
+              className="text-primary-500 "
               kind="github"
               href={siteMetadata.github}
               size="6"
             />
 
             <SocialIcon
-              className="text-primary-400 "
+              className="text-primary-500 "
               kind="linkedin"
               href={siteMetadata.linkedin}
               size="6"
             />
             <SocialIcon
-              className="text-primary-400 "
+              className="text-primary-500 "
               kind="twitter"
               href={siteMetadata.twitter}
               size="6"

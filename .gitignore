@@ -18,6 +18,7 @@
 public/sitemap.xml
 public/feed.xml
 public/tags/**/feed.xml
+public/robots.txt
 # misc
 .DS_Store
 *.pem

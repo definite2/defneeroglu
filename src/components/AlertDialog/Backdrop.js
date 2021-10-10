@@ -1,8 +1,8 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 
 const Backdrop = ({ children, onClick }) => {
   return (
-    <motion.div
+    <m.div
       role="alertdialog"
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-description"
@@ -13,7 +13,7 @@ const Backdrop = ({ children, onClick }) => {
       exit={{ opacity: 0 }}
     >
       {children}
-    </motion.div>
+    </m.div>
   )
 }
 

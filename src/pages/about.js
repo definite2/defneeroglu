@@ -3,7 +3,7 @@ import { siteMetadata } from '@/constants/siteMetadata'
 import Avatar from '@/components/Avatar'
 import CustomLink from '@/components/CustomLink'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 const about = () => {
   const { author, occupation, title } = siteMetadata
   return (
@@ -11,7 +11,7 @@ const about = () => {
       <PageSeo title={`About ${author} of ${title}`} description={`About me - ${author}`} />
       <div className="divide-y">
         <div className="pt-6 pb-8 space-y-2 md:space-y-5">
-          <motion.div
+          <m.div
             initial="hidden"
             animate="visible"
             variants={{
@@ -28,7 +28,7 @@ const about = () => {
             <h1 className="text-2xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl sm:leading-10 md:text-4xl md:leading-14">
               Hey, I'm Defne 👋
             </h1>
-          </motion.div>
+          </m.div>
         </div>
         <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-12 xl:space-y-0 lg:pt-8 mb-12 ">
           <div className="flex flex-col items-center pt-8 space-x-2 lg:-ml-16 xl:col-start-1 xl:col-span-1">
@@ -57,7 +57,7 @@ const about = () => {
             </p>
             <h4>
               Publications{' '}
-              <motion.div
+              <m.div
                 initial={{
                   rotate: 0,
                 }}
@@ -78,9 +78,10 @@ const about = () => {
                   width="40px"
                   height="40px"
                 />
-              </motion.div>
+              </m.div>
             </h4>
             <CustomLink
+
               className="italic"
               href="https://dergipark.org.tr/tr/pub/ejosat/issue/53473/711076"
             >

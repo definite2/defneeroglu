@@ -4,7 +4,7 @@ import Pagination from '@/components/Pagination'
 import { formatDate } from 'lib/date'
 import Tag from '@/components/Tag'
 import Input from '@/components/Forms/Input'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Search } from 'react-feather'
 
 const ListLayout = ({ posts, title, initialDisplayPosts = [], pagination }) => {
@@ -18,7 +18,7 @@ const ListLayout = ({ posts, title, initialDisplayPosts = [], pagination }) => {
     <>
       <div className="divide-y">
         <div className="pt-6 pb-8 space-y-2 md:space-y-5">
-          <motion.div
+          <m.div
             initial="hidden"
             animate="visible"
             variants={{
@@ -35,7 +35,7 @@ const ListLayout = ({ posts, title, initialDisplayPosts = [], pagination }) => {
             <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
               {title}
             </h1>
-          </motion.div>
+          </m.div>
           <div className="relative flex items-center max-w-lg">
             <Search className="absolute top-4 left-2 text-gray-400 " />
             <Input

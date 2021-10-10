@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Input from './Input'
 import AlertDialog from '../AlertDialog'
 import { AlertContainer } from '../AlertDialog/AlertContainer'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { useForm } from '@/hooks/useForm'
 import useAlert from '@/hooks/useAlert'
 
@@ -128,14 +128,14 @@ const ContactForm = () => {
         </div>
         <div className="flex flex-wrap  mb-6">
         <div className="w-full flex  justify-end">
-          <motion.button
+          <m.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             className="bg-gray-700 flex items-center justify-center font-medium border-2  border-gray-500  p-2 rounded-md shadow-sm"
             onClick={handleSubmit}
           >
             <span className="px-6  text-gray-50">Send</span>
-          </motion.button>
+          </m.button>
           </div>
         </div>
       </form>

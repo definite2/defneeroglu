@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { AlertTriangle, Check } from 'react-feather'
 import Backdrop from './Backdrop'
 
@@ -27,7 +27,7 @@ const alertVariants = {
 const AlertDialog = ({ handleClose, message, title, success }) => {
   return (
     <Backdrop onClick={handleClose}>
-      <motion.div
+      <m.div
         onClick={(e) => e.stopPropagation()}
         className="inline-block align-bottom bg-primary-grayish dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl sm:py-8 sm:align-middle sm:max-w-lg sm:w-full"
         variants={alertVariants}
@@ -64,7 +64,7 @@ const AlertDialog = ({ handleClose, message, title, success }) => {
           </div>
         </div>
         </div>
-      </motion.div>
+      </m.div>
     </Backdrop>
   )
 }
