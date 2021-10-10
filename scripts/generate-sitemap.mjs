@@ -12,6 +12,7 @@ async function generate() {
     '!src/pages/_*.js',
     '!src/pages/blog/[...slug].js',
     '!src/pages/blog/page/[page].js',
+    '!src/pages/tags/[tag].js',
     '!src/pages/404.js',
     '!src/pages/api',
   ])
