@@ -57,13 +57,13 @@ async function indexToES() {
     for (const file of files) {
       const source = fs.readFileSync(path.join(root, '_content', 'blog', file), 'utf8')
       const filename = file.replace(/\.(mdx|md)/, '')
+
       await client.index({
         index: 'devmuscle-blog-contents',
+     
         // type: '_doc', // uncomment this line if you are using Elasticsearch ≤ 6
         body: {
           content: source,
-          _id: filename,
-          author: 'defne eroglu',
         },
       })
       await client.indices.refresh({ index: 'devmuscle-blog-contents' })
