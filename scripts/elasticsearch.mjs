@@ -1,10 +1,18 @@
 import { Client } from '@elastic/elasticsearch'
-import { getFiles } from '@/lib/mdx'
 import fs from 'fs'
 import path from 'path'
 
 const root = process.cwd()
 
+const getDirectories = (folder) =>
+  pipe(fs.readdirSync, map(pipe(pathJoinPrefix(folder), walkDir)), flattenArray)(folder)
+
+function getFiles() {
+  const prefixPaths = path.join(currentDir, '_content', 'blog')
+  const files = getDirectories(prefixPaths)
+  // Only want to return blog/path and ignore root, replace is needed to work on Windows
+  return files.map((file) => file.slice(prefixPaths.length + 1).replace(/\\/g, '/'))
+}
 //connect to elasticsearch
 export async function connectToElasticsearch() {
   const ESS_CLOUD_ID = process.env.ESS_CLOUD_ID
@@ -29,11 +37,10 @@ export async function connectToElasticsearch() {
 async function indexToES() {
   const files = getFiles('blog')
   const prefixPaths = path.join(root, '_content', 'blog')
-  const files = getDirectories(prefixPaths)
-  let docs = []
-  files.forEach((file) => {
+  const client = await connectToElasticsearch()
+  for (const file of files) {
     const source = fs.readFileSync(path.join(root, '_content', 'blog', file), 'utf8')
-    const filename = file.slice(prefixPaths.length + 1).replace(/\\/g, "/");
+    const filename = file.slice(prefixPaths.length + 1).replace(/\\/g, '/')
     let doc = {
       _index: 'devmuscle-blog-contents',
       _type: 'blogpost',
@@ -43,9 +50,14 @@ async function indexToES() {
         content: source,
       },
     }
-    docs.push(doc)
-  })
-  const client = connectToElasticsearch()
-  await client.bulk({ refresh: true, docs })
+    await client.index({
+      index: 'devmuscle-blog-contents',
+      // type: '_doc', // uncomment this line if you are using Elasticsearch ≤ 6
+      body: {
+        doc,
+      },
+    })
+  }
+  await client.indices.refresh({ index: 'devmuscle-blog-contents' })
 }
 indexToES()

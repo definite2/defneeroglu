@@ -1,5 +1,4 @@
 import { Client } from '@elastic/elasticsearch'
-const root = process.cwd()
 //connect to elasticsearch
 export async function connectToElasticsearch() {
   const ESS_CLOUD_ID = process.env.ESS_CLOUD_ID
@@ -23,8 +22,7 @@ export async function connectToElasticsearch() {
 
 export const searchES = async (searchTerm) => {
   const client = await connectToElasticsearch()
-
-  const { body } =await client.search({
+  const { body } = await client.search({
     index: 'devmuscle-blog-contents',
     body: {
       query: {
