@@ -11,7 +11,7 @@ const flattenArray = (input) =>
 const map = (fn) => (input) => input.map(fn)
 
 const walkDir = (fullPath) => {
-  return fs.statSync(fullPath).isFile() ? fullPath : getAllFilesRecursively(fullPath)
+  return fs.statSync(fullPath).isFile() ? fullPath : getDirectories(fullPath)
 }
 
 const pathJoinPrefix = (prefix) => (extraPath) => path.join(prefix, extraPath)
