@@ -50,28 +50,26 @@ async function connectToElasticsearch() {
 
 async function indexToES() {
   const files = getFiles('blog')
-  const prefixPaths = path.join(root, '_content', 'blog')
-  const client = connectToElasticsearch()
-  try {
-    for (const file of files) {
-      const source = fs.readFileSync(path.join(root, '_content', 'blog', file), 'utf8')
-      const filename = file.slice(prefixPaths.length + 1).replace(/\\/g, '/')
-      let doc = {
-        _index: 'devmuscle-blog-contents',
-        _type: 'blogpost',
-        _id: filename,
-        author: 'defne eroglu',
-        content: source,
-      }
-      await client.index({
-        index: 'devmuscle-blog-contents',
-        // type: '_doc', // uncomment this line if you are using Elasticsearch ≤ 6
-        body: {
-          doc,
-        },
-      })
-      await client.indices.refresh({ index: 'devmuscle-blog-contents' })
+  const client = await connectToElasticsearch()
+
+  for (const file of files) {
+    const source = fs.readFileSync(path.join(root, '_content', 'blog', file), 'utf8')
+    const filename = file.replace(/\.(mdx|md)/, "")
+    let doc = {
+      _index: 'devmuscle-blog-contents',
+      _type: 'blogpost',
+      _id: filename,
+      author: 'defne eroglu',
+      content: source,
     }
-  } catch (error) {}
+    await client.index({
+      index: 'devmuscle-blog-contents',
+      // type: '_doc', // uncomment this line if you are using Elasticsearch ≤ 6
+      body: {
+        doc,
+      },
+    })
+    await client.indices.refresh({ index: 'devmuscle-blog-contents' })
+  }
 }
 indexToES()
