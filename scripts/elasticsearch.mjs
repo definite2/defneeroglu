@@ -8,7 +8,7 @@ const getDirectories = (folder) =>
   pipe(fs.readdirSync, map(pipe(pathJoinPrefix(folder), walkDir)), flattenArray)(folder)
 
 function getFiles() {
-  const prefixPaths = path.join(currentDir, '_content', 'blog')
+  const prefixPaths = path.join(root, '_content', 'blog')
   const files = getDirectories(prefixPaths)
   // Only want to return blog/path and ignore root, replace is needed to work on Windows
   return files.map((file) => file.slice(prefixPaths.length + 1).replace(/\\/g, '/'))
