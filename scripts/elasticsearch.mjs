@@ -1,8 +1,8 @@
 import { Client } from '@elastic/elasticsearch'
 import fs from 'fs'
 import path from 'path'
-
-const root = process.cwd()
+import dotenv from 'dotenv'
+const root = process.cwd().split().pop()
 const pipe =
   (...fns) =>
   (x) =>
@@ -29,21 +29,19 @@ function getFiles() {
 }
 //connect to elasticsearch
 async function connectToElasticsearch() {
-  const ESS_CLOUD_ID = process.env.ESS_CLOUD_ID
-  const ESS_CLOUD_USERNAME = process.env.ESS_CLOUD_USERNAME
-  const ESS_CLOUD_PASSWORD = process.env.ESS_CLOUD_PASSWORD
-
-  if (!ESS_CLOUD_ID || !ESS_CLOUD_USERNAME || !ESS_CLOUD_PASSWORD) {
+  //process.env is not available from this folder, since this is outside of the project
+  //for this reason dotenv is used to resolve .env file
+const result=dotenv.config() 
+  if (!result.parsed.ESS_CLOUD_ID || !result.parsed.ESS_CLOUD_USERNAME || !result.parsed.ESS_CLOUD_PASSWORD) {
     return 'ERR_ENV_NOT_DEFINED'
   }
-
   return new Client({
     cloud: {
-      id: ESS_CLOUD_ID,
+      id: result.parsed.ESS_CLOUD_ID ,
     },
     auth: {
-      username: ESS_CLOUD_USERNAME,
-      password: ESS_CLOUD_PASSWORD,
+      username: result.parsed.ESS_CLOUD_USERNAME,
+      password: result.parsed.ESS_CLOUD_PASSWORD,
     },
   })
 }
@@ -51,25 +49,26 @@ async function connectToElasticsearch() {
 async function indexToES() {
   const files = getFiles('blog')
   const client = await connectToElasticsearch()
-
-  for (const file of files) {
-    const source = fs.readFileSync(path.join(root, '_content', 'blog', file), 'utf8')
-    const filename = file.replace(/\.(mdx|md)/, "")
-    let doc = {
-      _index: 'devmuscle-blog-contents',
-      _type: 'blogpost',
-      _id: filename,
-      author: 'defne eroglu',
-      content: source,
+  try {
+    for (const file of files) {
+      const source = fs.readFileSync(path.join(root, '_content', 'blog', file), 'utf8')
+      const filename = file.replace(/\.(mdx|md)/, '')
+      let doc = {
+        _index: 'devmuscle-blog-contents',
+        _type: 'blogpost',
+        _id: filename,
+        author: 'defne eroglu',
+        content: source,
+      }
+      await client.index({
+        index: 'devmuscle-blog-contents',
+        // type: '_doc', // uncomment this line if you are using Elasticsearch ≤ 6
+        body: {
+          doc,
+        },
+      })
+      await client.indices.refresh({ index: 'devmuscle-blog-contents' })
     }
-    await client.index({
-      index: 'devmuscle-blog-contents',
-      // type: '_doc', // uncomment this line if you are using Elasticsearch ≤ 6
-      body: {
-        doc,
-      },
-    })
-    await client.indices.refresh({ index: 'devmuscle-blog-contents' })
-  }
+  } catch (error) {}
 }
 indexToES()
