@@ -31,13 +31,17 @@ function getFiles() {
 async function connectToElasticsearch() {
   //process.env is not available from this folder, since this is outside of the project
   //for this reason dotenv is used to resolve .env file
-const result=dotenv.config() 
-  if (!result.parsed.ESS_CLOUD_ID || !result.parsed.ESS_CLOUD_USERNAME || !result.parsed.ESS_CLOUD_PASSWORD) {
+  const result = dotenv.config()
+  if (
+    !result.parsed.ESS_CLOUD_ID ||
+    !result.parsed.ESS_CLOUD_USERNAME ||
+    !result.parsed.ESS_CLOUD_PASSWORD
+  ) {
     return 'ERR_ENV_NOT_DEFINED'
   }
   return new Client({
     cloud: {
-      id: result.parsed.ESS_CLOUD_ID ,
+      id: result.parsed.ESS_CLOUD_ID,
     },
     auth: {
       username: result.parsed.ESS_CLOUD_USERNAME,
@@ -53,18 +57,13 @@ async function indexToES() {
     for (const file of files) {
       const source = fs.readFileSync(path.join(root, '_content', 'blog', file), 'utf8')
       const filename = file.replace(/\.(mdx|md)/, '')
-      let doc = {
-        _index: 'devmuscle-blog-contents',
-        _type: 'blogpost',
-        _id: filename,
-        author: 'defne eroglu',
-        content: source,
-      }
       await client.index({
         index: 'devmuscle-blog-contents',
         // type: '_doc', // uncomment this line if you are using Elasticsearch ≤ 6
         body: {
-          doc,
+          content: source,
+          _id: filename,
+          author: 'defne eroglu',
         },
       })
       await client.indices.refresh({ index: 'devmuscle-blog-contents' })
