@@ -78,12 +78,14 @@ async function indexToES() {
         index: 'devmuscle-blog-contents',
         body: {
           content: file.source,
-          title: file.title,
-          alt: file.alt,
-          date: file.date,
-          image: file.image,
-          lastmod: file.lastmod,
-          tags: file.tags.join(''),
+          meta: {
+            title: file.title,
+            alt: file.alt,
+            date: file.date,
+            image: file.image,
+            lastmod: file.lastmod,
+            tags: file.tags,
+          },
         },
       })
       await client.indices.refresh({ index: 'devmuscle-blog-contents' })
