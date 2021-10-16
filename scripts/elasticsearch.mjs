@@ -2,6 +2,8 @@ import { Client } from '@elastic/elasticsearch'
 import fs from 'fs'
 import path from 'path'
 import dotenv from 'dotenv'
+import matter from 'gray-matter'
+
 const root = process.cwd().split().pop()
 const pipe =
   (...fns) =>
@@ -21,12 +23,6 @@ const pathJoinPrefix = (prefix) => (extraPath) => path.join(prefix, extraPath)
 const getDirectories = (folder) =>
   pipe(fs.readdirSync, map(pipe(pathJoinPrefix(folder), walkDir)), flattenArray)(folder)
 
-function getFiles() {
-  const prefixPaths = path.join(root, '_content', 'blog')
-  const files = getDirectories(prefixPaths)
-  // Only want to return blog/path and ignore root, replace is needed to work on Windows
-  return files.map((file) => file.slice(prefixPaths.length + 1).replace(/\\/g, '/'))
-}
 //connect to elasticsearch
 async function connectToElasticsearch() {
   //process.env is not available from this folder, since this is outside of the project
@@ -49,21 +45,45 @@ async function connectToElasticsearch() {
     },
   })
 }
+export function formatSlug(slug) {
+  return slug.replace(/\.(mdx|md)/, '')
+}
 
+async function getAllFilesFrontMatter(folder) {
+  const prefixPaths = path.join(root, '_content', folder)
+  const files = getDirectories(prefixPaths)
+  const allFrontMatters = []
+  files.forEach((file) => {
+    const filename = file.slice(prefixPaths.length + 1).replace(/\\/g, '/')
+    if (path.extname(filename) !== '.md' && path.extname(filename) !== '.mdx') return
+    const source = fs.readFileSync(file, 'utf-8')
+    const { data: frontmatter } = matter(source)
+    if (!frontmatter.draft) {
+      allFrontMatters.push({
+        ...frontmatter,
+        source: source,
+        slug: formatSlug(filename),
+        lastmod: frontmatter.lastmod ? new Date(frontmatter.lastmod).toISOString() : null,
+      })
+    }
+  })
+  return allFrontMatters
+}
 async function indexToES() {
-  const files = getFiles('blog')
+  const allPosts = await getAllFilesFrontMatter('blog')
   const client = await connectToElasticsearch()
   try {
-    for (const file of files) {
-      const source = fs.readFileSync(path.join(root, '_content', 'blog', file), 'utf8')
-      const filename = file.replace(/\.(mdx|md)/, '')
-
+    for (const file of allPosts) {
       await client.index({
         index: 'devmuscle-blog-contents',
-     
-        // type: '_doc', // uncomment this line if you are using Elasticsearch ≤ 6
         body: {
-          content: source,
+          content: file.source,
+          title: file.title,
+          alt: file.alt,
+          date: file.date,
+          image: file.image,
+          lastmod: file.lastmod,
+          tags: file.tags.join(''),
         },
       })
       await client.indices.refresh({ index: 'devmuscle-blog-contents' })
