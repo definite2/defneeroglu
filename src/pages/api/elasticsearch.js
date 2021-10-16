@@ -20,16 +20,20 @@ export async function connectToElasticsearch() {
   })
 }
 
-export const searchES = async (searchTerm) => {
-  const client = await connectToElasticsearch()
-  const { body } = await client.search({
-    index: 'devmuscle-blog-contents',
-    body: {
-      query: {
-        match: { content: searchTerm },
+export default async function searchES(req, res) {
+  const { q } = req.query
+  try {
+    const client = await connectToElasticsearch()
+    const { body } = await client.search({
+      index: 'devmuscle-blog-contents',
+      body: {
+        query: {
+          match: { content: q },
+        },
       },
-    },
-  })
-
-  return body.hits.hits
+    })
+    return res.send(body.hits.hits)
+  } catch (error) {
+    return res.status(error.statusCode || 500).json({ error: error.message })
+  }
 }
