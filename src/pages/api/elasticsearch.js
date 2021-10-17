@@ -23,16 +23,30 @@ export async function connectToElasticsearch() {
 export default async function searchES(req, res) {
   try {
     const client = await connectToElasticsearch()
+    let results = []
     const { body } = await client.search({
       index: 'devmuscle-blog-contents',
       body: {
         query: {
-          match: { content: req.body },
+          match: {
+            content: {
+              query: req.body,
+              operator: 'and',
+              fuzziness: 'AUTO',
+              prefix_length: 0,
+              fuzzy_transpositions:false,
+              minimum_should_match: '85%',
+            },
+          },
         },
       },
       _source_excludes: 'content', //no need to return the content of the file only need to metadata
     })
-    return res.send(body.hits.hits)
+    let hits = body.hits.hits
+    hits.forEach((item) => {
+      results.push(item._source.meta)
+    })
+    return res.send(results)
   } catch (error) {
     return res.status(error.statusCode || 500).json({ error: error.message })
   }
