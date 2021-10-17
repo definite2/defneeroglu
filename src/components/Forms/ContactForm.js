@@ -69,6 +69,7 @@ const ContactForm = () => {
           }
         })
         .catch((err) => {
+          open()
           setAlertMessage(err.message)
           setSuccess(false)
         })
