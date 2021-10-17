@@ -85,6 +85,8 @@ async function indexToES() {
             image: file.image,
             lastmod: file.lastmod,
             tags: file.tags,
+            slug:file.slug,
+            summary:file.summary
           },
         },
       })
