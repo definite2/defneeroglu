@@ -37,9 +37,8 @@ export default function BlogSummaryCard(props) {
           </div>
           <section className="flex flex-col h-full px-5 py-5 sm:px-8 ">
             <h2 className="pb-5 text-xl font-semibold leading-tight sm:text-2xl">{title}</h2>
-            {/* TODO! fix a descendant of <a> */}
             <div className="flex flex-wrap">
-              {tags.map((tag) => (
+              {tags&&tags.map((tag) => (
                 <object key={tag}>
                   <Tag key={tag} text={tag} />
                 </object>

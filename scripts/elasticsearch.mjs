@@ -4,7 +4,8 @@ import path from 'path'
 import dotenv from 'dotenv'
 import matter from 'gray-matter'
 
-const root = process.cwd().split().pop()
+const root = process.cwd().split().pop() //I get always this folder /scripts; but I needed the parent folder, just a workaround solution:)
+//utils
 const pipe =
   (...fns) =>
   (x) =>
@@ -23,7 +24,7 @@ const pathJoinPrefix = (prefix) => (extraPath) => path.join(prefix, extraPath)
 const getDirectories = (folder) =>
   pipe(fs.readdirSync, map(pipe(pathJoinPrefix(folder), walkDir)), flattenArray)(folder)
 
-//connect to elasticsearch
+//connection to elasticsearch
 async function connectToElasticsearch() {
   //process.env is not available from this folder, since this is outside of the project
   //for this reason dotenv is used to resolve .env file
@@ -48,7 +49,7 @@ async function connectToElasticsearch() {
 export function formatSlug(slug) {
   return slug.replace(/\.(mdx|md)/, '')
 }
-
+//content of the blog
 async function getAllFilesFrontMatter(folder) {
   const prefixPaths = path.join(root, '_content', folder)
   const files = getDirectories(prefixPaths)
@@ -61,7 +62,7 @@ async function getAllFilesFrontMatter(folder) {
     if (!frontmatter.draft) {
       allFrontMatters.push({
         ...frontmatter,
-        source: source,
+        source: source, //includes content of the blog
         slug: formatSlug(filename),
         lastmod: frontmatter.lastmod ? new Date(frontmatter.lastmod).toISOString() : null,
       })
@@ -77,7 +78,10 @@ async function indexToES() {
       await client.index({
         index: 'devmuscle-blog-contents',
         body: {
-          content: file.source,
+          content: file.source, //elasticsearch searches in here (in everything simply)
+          //meta : ES is going to return only these fields
+          //...so we also index these metadata
+          //...to decrease reponse object size- no need the whole content as response- these are enough for UI
           meta: {
             title: file.title,
             alt: file.alt,
@@ -85,8 +89,8 @@ async function indexToES() {
             image: file.image,
             lastmod: file.lastmod,
             tags: file.tags,
-            slug:file.slug,
-            summary:file.summary
+            slug: file.slug,
+            summary: file.summary,
           },
         },
       })
