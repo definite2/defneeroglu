@@ -36,6 +36,12 @@ module.exports = {
         '1/4': '25%',
         full: '100%',
       },
+      lineHeight: {
+        11: '2.75rem',
+        12: '3rem',
+        13: '3.25rem',
+        14: '3.5rem',
+      },
       animation: {
         'blob-spin': 'blobbing 25s linear infinite',
       },
