@@ -1,0 +1,323 @@
+---
+title: 'How to Integrate Elasticsearch With Next.js'
+date: '2021-10-24'
+lastmod: '2021-10-24'
+tags: ['Elasticsearch', 'Next-js']
+draft: false
+summary: "Learn how you can use Elasticsearch to empower your Next.js application's search engine."
+isToc: true
+image: '/content/Elasticsearch.png'
+alt: 'Next.js with Elasticsearch'
+---
+
+In this article, I am going to show you how I developed the blog search feature on my Next.js blog site, which I am able to use for a short time, using the Elasticsearch 14-day trial account.
+
+## Introduction
+
+This blog site search feature just uses the `includes` function of javascript in [blogs page](https://devmuscle.com/blog), what it does: it gets search term from the searchbar and returns the relevant blog if it is in the blog's _title_, _summary_ or _tags_. But the problem isss... this is not enough,
+I think that if the search word is used anywhere in the content of an article, the related article should appear in the search results. For example this post includes `useEffect` word in the code blocks or in the paragraphs, and if I search this word in my blogs search bar, I cannot get this article as search result😑... I could use [frontmatter](https://middlemanapp.com/basics/frontmatter/) to get the content of the blog and still use `includes` function on blog content... However this would be not good for performance.
+Anyway, I'll come to the point🙃... I had comparison metrics between Elasticsearch's search performance and other very popular document oriented database at my previous company. And Elasticsearch was tremendously much faster than the other one. I recently thought of this situation and decided to experiment Elasticsearch with my Next.js blog site.
+
+Below, I attached the screen recordings while searching for the word `useSelector` which passes in the content of the blog post.
+The first one is without elasticsearch and the other one is the result of integration of Elasticsearch with Next.js
+
+<figure className="flex justify-center flex-col items-center">
+  <Image
+    alt="GIF to show poor search feature"
+    src="/content/not-found.gif"
+    width="540"
+    height="400"
+  />
+  <figcaption className="text-sm italic">
+    Before: Searching only in title, tags and summary fields{' '}
+  </figcaption>
+</figure>
+<hr />
+<figure className="flex justify-center flex-col items-center">
+  <Image
+    alt="GIF to show powerful search for blog content with elasticsearch"
+    src="/content/noo-result.gif"
+    width="540"
+    height="400"
+  />
+  <figcaption className="text-sm italic">
+    After: Searching for the word in the content of the article, with Elasticsearch{' '}
+  </figcaption>
+</figure>
+
+As can be seen from the images, thanks to Elasticsearch, I can search for words which can pass in the body of the posts and even in code blocks, and I can get the filtered articles as search results.
+<HighlightInline>🔊 Disclaimer:</HighlightInline>
+Elastic cloud service is free for [14 days](https://www.elastic.co/cloud/), but after that the trial
+period ends, you can install Elasticsearch and use it on your own machine, but ultimately you need to
+provide a physical server that can use the search api for you blog site... So without worrying that Elasticsearch
+is not free, the purpose of this article is showing to you how you can use Elasticsearch with [Next.js](https://Next.js.org/)
+## Steps
+
+- Set up Elasticsearch
+- Write **a script that indexes the blogs** in Elasticsearch at build time
+- **Writing search api** with Elasticsearch client using Next.js api pages
+- Using the search api with fetch API in a page **without!** `getServerSideProps` of Next.js
+
+### Setup Elasticsearch
+
+I use Elastic Cloud, you can create an account from [here.](https://www.elastic.co/cloud/)
+
+Create environment variables (.env) file to add following variables:
+
+- `ESS_CLOUD_ID` -  You can find this in the Elastic Cloud console.
+- `ESS_CLOUD_USERNAME` - username default is `elastic`.
+- `ESS_CLOUD_PASSWORD` - copy immedately because you may not see this again🙂
+
+Or you can use [with-Elasticsearch](https://github.com/vercel/next.js/tree/canary/examples/with-Elasticsearch) to quickly connect to easticsearch and test the connection. In this blog I am going to start with the script.
+
+### Indexing Script
+
+In our package.json file, we need to specify that the script should run at the build time or in postbuild, so that all .mdx files in our locale will be indexed to Elasticsearch at once:
+
+```json
+"scripts": {
+...
+    "build": "next build",
+    "postbuild": "node ./scripts/Elasticsearch.mjs",
+    "start": "next start"
+  },
+
+```
+
+I've gathered my Next.js project files under the src folder for convention, but I have a separate folder called scripts, it's not under src, it's an independent folder I put scripts here that run at postbuild or build time.
+
+```js
+import { Client } from '@elastic/Elasticsearch'
+import fs from 'fs'
+import path from 'path'
+import dotenv from 'dotenv'
+import matter from 'gray-matter'
+
+//I needed the parent folder
+const root = process.cwd().split().pop()
+//connection to Elasticsearch
+async function connectToElasticsearch() {
+  //process.env is not available from this folder, since this is outside of the project
+  //for this reason dotenv is used to resolve .env file
+  const result = dotenv.config()
+  if (
+    !result.parsed.ESS_CLOUD_ID ||
+    !result.parsed.ESS_CLOUD_USERNAME ||
+    !result.parsed.ESS_CLOUD_PASSWORD
+  ) {
+    return 'ERR_ENV_NOT_DEFINED'
+  }
+  return new Client({
+    cloud: {
+      id: result.parsed.ESS_CLOUD_ID,
+    },
+    auth: {
+      username: result.parsed.ESS_CLOUD_USERNAME,
+      password: result.parsed.ESS_CLOUD_PASSWORD,
+    },
+  })
+}
+export function formatSlug(slug) {
+  return slug.replace(/\.(mdx|md)/, '')
+}
+//content of the blog
+async function getAllFilesFrontMatter(folder) {
+  const prefixPaths = path.join(root, '_content', folder)
+  const files = getDirectories(prefixPaths)
+  const allFrontMatters = []
+  files.forEach((file) => {
+    const filename = file.slice(prefixPaths.length + 1).replace(/\\/g, '/')
+    if (path.extname(filename) !== '.md' && path.extname(filename) !== '.mdx') return
+    const source = fs.readFileSync(file, 'utf-8')
+    const { data: frontmatter } = matter(source)
+    if (!frontmatter.draft) {
+      allFrontMatters.push({
+        ...frontmatter,
+        source: source, //includes content of the blog
+        slug: formatSlug(filename),
+        lastmod: frontmatter.lastmod ? new Date(frontmatter.lastmod).toISOString() : null,
+      })
+    }
+  })
+  return allFrontMatters
+}
+async function indexToES() {
+  const allPosts = await getAllFilesFrontMatter('blog')
+  const client = await connectToElasticsearch()
+  try {
+    for (const file of allPosts) {
+      await client.index({
+        index: 'devmuscle-blog-contents',
+        body: {
+          content: file.source, //Elasticsearch searches in here (in everything simply)
+          //meta : ES is going to return only these fields
+          //...so we also index these metadata
+          //...to decrease reponse object size- no need the whole content as response-
+          //which are enough for UI
+          meta: {
+            title: file.title,
+            alt: file.alt,
+            date: file.date,
+            image: file.image,
+            lastmod: file.lastmod,
+            tags: file.tags,
+            slug: file.slug,
+            summary: file.summary,
+          },
+        },
+      })
+      await client.indices.refresh({ index: 'devmuscle-blog-contents' })
+    }
+  } catch (error) {}
+}
+indexToES()
+```
+
+`connectToElasticsearch`method takes the credentials we created in the Elasticsearch cloud from our .env file and creates a connection. Btw, I had a challenge here and I would like to share with you without going too deep:
+
+.env files are normally available in our application with Next.js, but because the script file is outside of our project, .env files were not available when I ran it, so I had to use [dotenv](https://www.npmjs.com/package/dotenv).
+
+`getAllFilesFrontMatter` method parses the metadata and content of our .mdx extension files and `intextToES` method indexes the sources to dev-muscle-blog-contents index to Elasticsearch.
+
+I entered it as a comment in the code block above, but let me explain here too, I'm indexing a field called `meta`, my purpose here is to perform a full text search in the `content` field of Elasticsearch, but it returns only the meta field information after search operation, so that Elasticsearch does not need to return all results's content with the response.
+
+### Next.js Elasticsearch Api Page
+
+Next.js [API Routes](Enables us to use to create our api, files under `pages/api` folder is for the client inside the same project ) In this step, we write our search api method that we can use in our own application by using Elasticsearch's search API.
+
+```js
+import { Client } from '@elastic/Elasticsearch'
+//connect to Elasticsearch
+export async function connectToElasticsearch() {
+  const ESS_CLOUD_ID = process.env.ESS_CLOUD_ID
+  const ESS_CLOUD_USERNAME = process.env.ESS_CLOUD_USERNAME
+  const ESS_CLOUD_PASSWORD = process.env.ESS_CLOUD_PASSWORD
+
+  if (!ESS_CLOUD_ID || !ESS_CLOUD_USERNAME || !ESS_CLOUD_PASSWORD) {
+    return 'ERR_ENV_NOT_DEFINED'
+  }
+
+  return new Client({
+    cloud: {
+      id: ESS_CLOUD_ID,
+    },
+    auth: {
+      username: ESS_CLOUD_USERNAME,
+      password: ESS_CLOUD_PASSWORD,
+    },
+  })
+}
+
+export default async function searchES(req, res) {
+  try {
+    const client = await connectToElasticsearch()
+    let results = []
+    const { body } = await client.search({
+      index: 'devmuscle-blog-contents',
+      body: {
+        query: {
+          match: {
+            content: {
+              query: req.body,
+              operator: 'and',
+              fuzziness: 'AUTO',
+              prefix_length: 0,
+              fuzzy_transpositions: false,
+              minimum_should_match: '85%',
+            },
+          },
+        },
+      },
+      _source_excludes: 'content', //no need to return the content of the file only need to metadata
+    })
+    let hits = body.hits.hits
+    hits.forEach((item) => {
+      results.push(item._source.meta)
+    })
+    return res.send(results)
+  } catch (error) {
+    return res.status(error.statusCode || 500).json({ error: error.message })
+  }
+}
+```
+
+Here, first we create the Elasticsearch client, we connect, then we write our own search api using the search api. Remember the conenction that we made previously was needed just for one time to index the content of the blog Elasticsearch at build time. Here this connection is continious as our user types somethings in the search bar to filter blogs within this client we request to Elasticsearch with our `searchES` method.
+For more Elasticsearch search configuration see their [documentation](https://www.elastic.co/guide/en/Elasticsearch/reference/current/query-dsl-match-query.html)
+
+### Search Component
+
+```js
+/**
+ *
+ * fetch api to our endpoint ('api/Elasticsearch' acts like an endpoint)
+ *
+ */
+const ListLayout = ({ posts, title, pagination }) => {
+const [searchValue, setSearchValue] = useState('')
+  const [filteredPosts, setFilteredPosts] = useState([])
+  const [loading, setLoading] = useState(false)//add loading indicator for fetch states(pending to success)
+  const [success, setSuccess] = useState(null)
+  const query = useDebouncedValue(searchValue, 600)//not the typed value but-
+                                                  //... the debounced value to send search term to es api
+
+useEffect(() => {
+    if (query) {
+      setLoading(true)
+      fetch('/api/Elasticsearch', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(query),
+      }).then((res) =>
+        res
+          .json()
+          .then((data) => {
+            setSuccess(true)
+            setFilteredPosts(data)
+            setLoading(false)
+          })
+          .catch((err) => {
+            open()
+            //setAlertMessage(err.message)
+            setSuccess(false)
+            setLoading(false)
+            setFilteredPosts(posts) //if there is error
+          })
+      )
+    } else {
+      setFilteredPosts(posts)//if no search string
+    }
+  }, [query])
+  const handleChange = (e) => {
+    setSearchValue(e.target.value)
+  }
+...
+...
+return(
+<>
+...
+     <div className="relative flex items-center max-w-lg">
+            <Search className="absolute top-4 left-2 text-gray-400 " />
+            <Input
+              aria-label="Search articles"
+              className="pl-12"
+              type="text"
+              onChange={handleChange}
+              placeholder="Search articles"
+            />
+          </div>
+        </div>
+</>
+)
+}
+```
+
+Above is from my `PostList` layout which is not a Next.js `page` but a component of blogs page. Why am I emphasizing this? Because in order to use my Elasticsearch api in the blog page, I would have to use `getServerSideProps` method and use `getStaticProps` on my blogs pages and since it is not convenient to use the two methods at the same time on Next.js pages, I used the api in the component to consume it with a fetch request.
+
+You could pull all the posts from Elasticsearch and use `getServerSideProps` here, but I didn't want to use because I already developed my pages with `getStaticProps`, so I did it in this way.
+
+## Conclusion
+
+With this article, I tried to show how blog contents can be searchable by integrating Elasticsearch and Next.js. Thank you for reading.
