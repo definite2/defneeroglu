@@ -46,11 +46,15 @@ The first one is without elasticsearch and the other one is the result of integr
 </figure>
 
 As can be seen from the images, thanks to Elasticsearch, I can search for words which can pass in the body of the posts and even in code blocks, and I can get the filtered articles as search results.
-<HighlightInline>🔊 Disclaimer:</HighlightInline>
-Elastic cloud service is free for [14 days](https://www.elastic.co/cloud/), but after that the trial
-period ends, you can install Elasticsearch and use it on your own machine, but ultimately you need to
-provide a physical server that can use the search api for you blog site... So without worrying that Elasticsearch
-is not free, the purpose of this article is showing to you how you can use Elasticsearch with [Next.js](https://Next.js.org/)
+
+<p>
+  <HighlightInline>🔊 Disclaimer:</HighlightInline>
+  Elastic cloud service is free for [14 days](https://www.elastic.co/cloud/), but after that the trial
+  period ends, you can install Elasticsearch and use it on your own machine, but ultimately you need
+  to provide a physical server that can use the search api for you blog site... So without worrying that
+  Elasticsearch is not free, the purpose of this article is showing to you how you can use Elasticsearch
+  with [Next.js](https://Next.js.org/)
+</p>
 ## Steps
 
 - Set up Elasticsearch
@@ -183,7 +187,7 @@ I entered it as a comment in the code block above, but let me explain here too, 
 
 ### Next.js Elasticsearch Api Page
 
-Next.js [API Routes](Enables us to use to create our api, files under `pages/api` folder is for the client inside the same project ) In this step, we write our search api method that we can use in our own application by using Elasticsearch's search API.
+Next.js API Routes enables us to use to create our api, files under `pages/api` folder can be used as an api endpoint, you can also read their [documentation](https://nextjs.org/docs/api-routes/introduction). <p>In this step, we write our search api method that we can use in our own application by using Elasticsearch's search API.</p>
 
 ```js
 import { Client } from '@elastic/Elasticsearch'
