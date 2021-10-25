@@ -320,7 +320,7 @@ return(
 
 Above is from my `PostList` layout which is not a Next.js `page` but a component of blogs page. Why am I emphasizing this? Because in order to use my Elasticsearch api in the blog page, I would have to use `getServerSideProps` method and use `getStaticProps` on my blogs pages and since it is not convenient to use the two methods at the same time on Next.js pages, I used the api in the component to consume it with a fetch request.
 
-You could pull all the posts from Elasticsearch and use `getServerSideProps` here, but I didn't want to use because I already developed my pages with `getStaticProps`, so I did it in this way.
+Here we send a request to the api we created under the `api/pages` folder using `fetch`, this way we don't have to use `getServerSideProps`.
 
 ## Conclusion
 
