@@ -41,7 +41,7 @@ export default function Home({ posts }) {
                   title={title}
                   summary={summary}
                   tags={tags}
-                  image={image}
+                  image={image[0]}
                 />
               </li>
             )

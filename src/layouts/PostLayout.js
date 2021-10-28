@@ -47,7 +47,7 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
                 </dl>
               </div>
 
-              <Image className="w-full" src={image} width="900px" height="600px" alt={alt} />
+              <Image className="w-full" src={image[0]} width="900px" height="600px" alt={alt} />
             </header>
 
             <div

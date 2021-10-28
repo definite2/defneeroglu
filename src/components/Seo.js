@@ -34,6 +34,14 @@ export const SEO = {
 export const PageSeo = ({ title, description }) => {
   const router = useRouter()
   let url = `${siteMetadata.siteUrl}${router.asPath}`
+  let imagesArr = [siteMetadata.socialBanner]
+
+  const featuredImages = imagesArr.map((img) => {
+    return {
+      url: `${siteMetadata.siteUrl}${img}`,
+      alt: title,
+    }
+  })
   return (
     <NextSeo
       title={title}
@@ -41,6 +49,7 @@ export const PageSeo = ({ title, description }) => {
       canonical={url}
       openGraph={{
         type: 'website',
+        images: featuredImages,
         url: url,
         title,
         description,
@@ -60,8 +69,8 @@ export const BlogSeo = ({ title, summary, date, lastmod, url, tags, images = [] 
       : images
   const featuredImages = imagesArr.map((img) => {
     return {
+      '@type': 'ImageObject',
       url: `${siteMetadata.siteUrl}${img}`,
-      alt: title,
     }
   })
   return (
