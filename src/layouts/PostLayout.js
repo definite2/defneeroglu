@@ -7,11 +7,19 @@ import { TOC } from '@/components/mdx/TOC'
 import clsx from 'clsx'
 import Image from 'next/image'
 export default function PostLayout({ frontMatter, next, prev, children }) {
-  const { slug, fileName, title, tags, lastmod, isToc, image, alt } = frontMatter
+  const { slug, fileName, title, tags, lastmod, isToc, image, alt, summary } = frontMatter
 
   return (
     <>
-      <BlogSeo url={`${siteMetadata.siteUrl}/blog/${slug}`} {...frontMatter} />
+      <BlogSeo
+        title={fileName}
+        tags={tags}
+        lastmod={lastmod}
+        summary={summary}
+        url={`${siteMetadata.siteUrl}/blog/${slug}`}
+        {...frontMatter}
+        images={image}
+      />
       <div
         className={clsx('relative flex xl:justify-between justify-center', {
           'flex-row-reverse': Boolean(isToc),
@@ -57,32 +65,31 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
             </div>
           </div>
         </article>
-  
       </div>
       <div className="mb-8">
-          <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
-            {prev && (
-              <div className="pt-4 xl:pt-8">
-                <CustomLink
-                  href={`/blog/${prev.slug}`}
-                  className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                >
-                  &larr; {prev.title}
-                </CustomLink>
-              </div>
-            )}
-            {next && (
-              <div className="pt-4 xl:pt-8">
-                <CustomLink
-                  href={`/blog/${next.slug}`}
-                  className="text-primary-500 hover:primary-600 dark:hover:text-primary-400"
-                >
-                  {next.title} &rarr;
-                </CustomLink>
-              </div>
-            )}
-          </div>
+        <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
+          {prev && (
+            <div className="pt-4 xl:pt-8">
+              <CustomLink
+                href={`/blog/${prev.slug}`}
+                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              >
+                &larr; {prev.title}
+              </CustomLink>
+            </div>
+          )}
+          {next && (
+            <div className="pt-4 xl:pt-8">
+              <CustomLink
+                href={`/blog/${next.slug}`}
+                className="text-primary-500 hover:primary-600 dark:hover:text-primary-400"
+              >
+                {next.title} &rarr;
+              </CustomLink>
+            </div>
+          )}
         </div>
+      </div>
     </>
   )
 }
