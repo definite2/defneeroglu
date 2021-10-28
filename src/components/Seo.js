@@ -109,7 +109,7 @@ export const BlogSeo = ({ title, summary, date, lastmod, url, tags, images = [] 
         dateModified={modifiedAt}
         datePublished={publishedAt}
         description={summary}
-        images={featuredImages}
+        images={imagesArr}
         publisherName={siteMetadata.author}
         title={title}
         url={url}
