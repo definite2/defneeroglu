@@ -1,5 +1,4 @@
 import { useState } from 'react'
-//TODO add email validation
 import Input from './Input'
 import AlertDialog from '../AlertDialog'
 import { AlertContainer } from '../AlertDialog/AlertContainer'
