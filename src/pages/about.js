@@ -38,22 +38,22 @@ const about = () => {
             <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
           </div>
           <div className="pt-8 pb-8 prose lg:prose-lg dark:prose-dark max-w-none xl:col-span-2 xl:col-start-2">
-            <p>I'm a frontend development engineer. Currently working at Huawei.</p>
+            <p>Currently working at Huawei as frontend engineer.</p>
             <p>
               I'm a self taught developer. My BS in physics, I still have some passion for it, but
               I've prefered to develop my career in software development.
             </p>
             <p>
-              I've started as full stack development with ASP .NET Web Application. I've worked with
-              Elastic Stack. Also I worked with academicians to implement four mathematical models
-              (Fuzzy-CMAES, Fuzzy-AHP, Fuzzy-DEMATEL, Fuzzy-TOPSIS) in C# programming language and
-              than integrated these models to a GIS desktop product for my former company.
+              Between 2018-2019, I implemented four mathematical models (Fuzzy-CMAES, Fuzzy-AHP,
+              Fuzzy-DEMATEL, Fuzzy-TOPSIS) in C# programming language and than integrated these
+              models to a GIS desktop product for my former company. Then I've continued to work as
+              full stack developer with ASP .NET Web Application at the same company for a low code
+              platform product.
             </p>
             <p>
-              After 1 year of C# development, I've been doing frontend development since 2019. I am
-              pretty passionate to learn how Javascript works from its history to browser engines...
-              I decided to make this blog site both to reinforce what I know and to be instructive
-              for other beginners.
+              I've been doing frontend development since 2019. I am pretty passionate to learn how
+              Javascript works from its history to browser engines... I decided to make this blog
+              site both to reinforce what I know and to be instructive for other beginners.
             </p>
             <h4>
               Publications{' '}
@@ -81,7 +81,6 @@ const about = () => {
               </m.div>
             </h4>
             <CustomLink
-
               className="italic"
               href="https://dergipark.org.tr/tr/pub/ejosat/issue/53473/711076"
             >
