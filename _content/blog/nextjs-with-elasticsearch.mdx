@@ -74,9 +74,9 @@ Create environment variables (.env) file to add following variables:
 
 Or you can use [with-elasticsearch](https://github.com/vercel/next.js/tree/canary/examples/with-elasticsearch/) to quickly connect to easticsearch and test the connection. In this blog I am going to start with the script.
 
-### Indexing Script
+### The Indexing Script
 
-In our package.json file, we need to specify that the script should run at the build time or in postbuild, so that all .mdx files in our locale will be indexed to Elasticsearch at once:
+In our `package.json` file, we need to specify that the script should run at the build time or in postbuild, so that all `.mdx` files in our locale will be indexed to Elasticsearch at once:
 
 ```json
 "scripts": {
@@ -88,7 +88,7 @@ In our package.json file, we need to specify that the script should run at the b
 
 ```
 
-I've gathered my Next.js project files under the src folder for convention, but I have a separate folder called scripts, it's not under src, it's an independent folder I put scripts here that run at postbuild or build time.
+I've gathered my Next.js project files under the `src` folder for convention, but I have a separate folder called `scripts`, it's not under src, it's an independent folder I put **scripts here that run at postbuild or build time.**
 
 ```js
 import { Client } from '@elastic/Elasticsearch'
@@ -177,11 +177,11 @@ async function indexToES() {
 indexToES()
 ```
 
-`connectToElasticsearch`method takes the credentials we created in the Elasticsearch cloud from our .env file and creates a connection. Btw, I had a challenge here and I would like to share with you without going too deep:
+`connectToElasticsearch`method takes the credentials we created in the Elasticsearch cloud from our `.env` file and creates a connection. Btw, I had a challenge here and I would like to share with you without going too deep:
 
 .env files are normally available in our application with Next.js, but because the script file is outside of our project, .env files were not available when I ran it, so I had to use [dotenv](https://www.npmjs.com/package/dotenv).
 
-`getAllFilesFrontMatter` method parses the metadata and content of our .mdx extension files and `intextToES` method indexes the sources to dev-muscle-blog-contents index to Elasticsearch.
+`getAllFilesFrontMatter` method parses the metadata and content of our .mdx extension files and `intextToES` method indexes the sources to _dev-muscle-blog-contents_ index to Elasticsearch.
 
 I entered it as a comment in the code block above, but let me explain here too, I'm indexing a field called `meta`, my purpose here is to perform a full text search in the `content` field of Elasticsearch, but it returns only the meta field information after search operation, so that Elasticsearch does not need to return all results's content with the response.
 
@@ -318,7 +318,7 @@ return(
 }
 ```
 
-Above is from my `PostList` layout which is not a Next.js `page` but a component of blogs page. Why am I emphasizing this? Because in order to use my Elasticsearch api in the blog page, I would have to use `getServerSideProps` method and use `getStaticProps` on my blogs pages and since it is not convenient to use the two methods at the same time on Next.js pages, I used the api in the component to consume it with a fetch request.
+Above is from my `PostList` layout which is not a Next.js [page](https://nextjs.org/docs/basic-features/pages) but a component. Why am I emphasizing this? Because in order to use my Elasticsearch Api in the blog page, I would have to use `getServerSideProps` method and use `getStaticProps` on my blogs pages and since it is not convenient to use the two methods at the same time on Next.js pages, I used the api in the component to consume it with a fetch request.
 
 Here we send a request to the api we created under the `api/pages` folder using `fetch`, this way we don't have to use `getServerSideProps`.
 
