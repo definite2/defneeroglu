@@ -14,10 +14,27 @@ If you need to create client side configuration to determine the coordinates of 
 
 ## Introduction
 
-The idea is, in many computer vision projects we need to have information about the coordinates of the object.
-There are lots of labelling tools.One of the most popular open source one is [LabelMe](http://labelme.csail.mit.edu/guidelines.html). However, LabelMe is written in python. In this blog I am going to use a minimal react app to draw polygon shapes to configure the coordinates of the object or the area. To perform drawing on images we need canvas objects for this I used Konva.js. It is an open source library for HTML5 Canvas 2d context. If you don't know what canvas is... it is an HTML5 element and it is a place to draw graphics, animation, photo manipulation, video processing etc. Doing complex tasks on canvas requires lots of consideration, but thanks to Konva.js it is more easy.
-`Konva.Stage` is the container for the layers. `Konva.Layer` is the canvas element. Layers can contain [shapes](https://konvajs.org/docs/shapes/Rect.html), groups of shapes, or groups of other groups. The stage, layers, groups, and shapes are all virtual nodes, similar to DOM nodes in an HTML page.
-Konva gives `draggable` properties to shapes and groups. It also gives the ability to resize and rotate functionality to nodes with `Transformer`. In this project we are not going to use a transformer. There is a good example project with Transformer, rectangle shaped image annotation [here](https://github.com/lavaldi/react-konva-image-with-annotations)
+<p>
+  The idea is, in many computer vision projects we need to have information about the coordinates of
+  the object. There are lots of labelling tools. One of the most popular open source one is
+  [LabelMe](http://labelme.csail.mit.edu/guidelines.html). However, LabelMe is written in python.
+</p>
+
+<p>
+  In this blog I am going to use a minimal react app to draw polygon shapes to configure the
+  coordinates of the object or the area. To perform drawing on images we need canvas objects for
+  this I used Konva.js. It is an open source library for HTML5 Canvas 2d context. If you don't know
+  what canvas is... it is an HTML5 element and it is a place to draw graphics, animation, photo
+  manipulation, video processing etc. Doing complex tasks on canvas requires lots of consideration,
+  but thanks to Konva.js it is more easy. `Konva.Stage` is the container for the layers.
+  `Konva.Layer` is the canvas element. Layers can contain
+  [shapes](https://konvajs.org/docs/shapes/Rect.html), groups of shapes, or groups of other groups.
+  The stage, layers, groups, and shapes are all virtual nodes, similar to DOM nodes in an HTML page.
+  Konva gives `draggable` properties to shapes and groups. It also gives the ability to resize and
+  rotate functionality to nodes with `Transformer`. In this project we are not going to use a
+  transformer. There is a good example project with Transformer, rectangle shaped image annotation
+  [here](https://github.com/lavaldi/react-konva-image-with-annotations)
+</p>
 
 ## Final Code
 
@@ -30,7 +47,7 @@ Konva gives `draggable` properties to shapes and groups. It also gives the abili
     priority
   />
   <figcaption className="text-sm italic">
-    Canvas Polygon Shape Landscape Annotation With It's Coordinates
+    Canvas Polygon Shape Landscape Annotation With Its Coordinates
   </figcaption>
 </figure>
 You can find source code of the sample react application from [here](https://github.com/definite2/kanva-draggable-polygon).
@@ -151,7 +168,7 @@ export default PolygonAnnotation
 
 I will explain by destructing the above code block as elements and events.
 
-### Group: The Group od Shapes
+### Group: The Group of Shapes
 
 There are events for drag drop operations in Konva, we wrote callbacks for these events in the `Group` element. The callback we wrote for `onDragStart`, actually sets the values required for the `dragBoundFunc` property, which is required to prevent the `Group` from leaving the canvas.
 Here's how: we save the minimum and maximum x and y coordinate values with `setMinMaxX` and `setMinMaxY` helper functions respectively. When drag starts these values are setted in the locale state with react `useState`.
