@@ -14,28 +14,23 @@ If you need to create client side configuration to determine the coordinates of 
 
 ## Introduction
 
-<p>
-  The idea is, in many computer vision projects we need to have information about the coordinates of
-  the object. There are lots of labelling tools. One of the most popular open source one is
-  [LabelMe](http://labelme.csail.mit.edu/guidelines.html). LabelMe is written in python and it is
-  more like a desktop application.
-</p>
+The idea is, in many computer vision projects we need to have information about the coordinates of
+the object. There are lots of labelling tools. One of the most popular open source one is
+[LabelMe](http://labelme.csail.mit.edu/guidelines.html). LabelMe is written in python and it is
+more like a desktop application.
 
-<p>
-  In this blog I am going to use a minimal react app to draw polygon shapes to configure the
-  coordinates of the object or the area.
-</p>
-<p>
-  To perform drawing on images we need canvas object, for this I used Konva.js. It is an open source
-  library for HTML5 Canvas 2d context. If you don't know what canvas is... it is an HTML5 element
-  and it is a place to draw graphics, animation, photo manipulation, video processing etc. Doing
-  complex tasks on canvas requires lots of consideration, but thanks to Konva.js it is more easy.
-  `Konva.Stage` is the container for the layers. `Konva.Layer` is the canvas element. Layers can
-  contain [shapes](https://konvajs.org/docs/shapes/Rect.html), groups of shapes, or groups of other
-  groups. The stage, layers, groups, and shapes are all virtual nodes, similar to DOM nodes in an
-  HTML page. Konva gives `draggable` properties to shapes and groups. It also gives the ability to
-  resize and rotate functionality to nodes with `Transformer`.
-</p>
+In this blog I am going to use a minimal react app to draw polygon shapes to configure the
+coordinates of the object or the area.
+
+To perform drawing on images we need canvas object, for this I used Konva.js. It is an open source
+library for HTML5 Canvas 2d context. If you don't know what canvas is... it is an HTML5 element
+and it is a place to draw graphics, animation, photo manipulation, video processing etc. Doing
+complex tasks on canvas requires lots of consideration, but thanks to Konva.js it is more easy.
+`Konva.Stage` is the container for the layers. `Konva.Layer` is the canvas element. Layers can
+contain [shapes](https://konvajs.org/docs/shapes/Rect.html), groups of shapes, or groups of other
+groups. The stage, layers, groups, and shapes are all virtual nodes, similar to DOM nodes in an
+HTML page. Konva gives `draggable` properties to shapes and groups. It also gives the ability to
+resize and rotate functionality to nodes with `Transformer`.
 
 ## Final Code
 
@@ -66,7 +61,7 @@ We will write a polygon component consisting of `Circle` and `Line`. While circl
 
 We will collect this shape in the `Group` element. The reason we use the group is necessary to be able to handle the draggable functions of the closed shape consisting of circle and line. When I first tried with line and circle, I encountered problems such as distortions in mouse position after drag and drop operations or mixing of drag drop events, so I used group.
 
-```js
+```js {34-49,89} showLineNumbers
 import React, { useState } from 'react'
 import { Line, Circle, Group } from 'react-konva'
 import { minMax, dragBoundFunc } from 'utils'
@@ -167,42 +162,18 @@ const PolygonAnnotation = (props) => {
 export default PolygonAnnotation
 ```
 
-I will explain by destructing the above code block as elements and events.
+The highlighted code lines are responsible to prevent the `Group` from leaving the canvas.
+I will explain in more detaiş by destructing the above code block as elements and events in the following section.
 
 ### Group: The Group of Shapes
 
-There are events for drag drop operations in Konva, we wrote callbacks for these events in the `Group` element. The callback we wrote for `onDragStart`, actually sets the values required for the `dragBoundFunc` property, which is required to prevent the `Group` from leaving the canvas.
-Here's how: we save the minimum and maximum x and y coordinate values with `setMinMaxX` and `setMinMaxY` helper functions respectively. When drag starts these values are setted in the locale state with react `useState`.
-`dragBoundFunc` is a property used to override drag drop positions. In `groupDragBound` function, if the minimum of the drag starting point and the sum of the positions formed by drag is less than 0, we set it back to 0, in the same way, if the sum of the drag and max position is greater than the width of the stage, we set it to the width of the stage. Thus, we ensure that the dragged group remains on the canvas.
-
-```js
-//src/components/PolygonAnnotation.js
-...
-
-const [minMaxX, setMinMaxX] = useState([0, 0]) //min and max in x axis
-const [minMaxY, setMinMaxY] = useState([0, 0]) //min and max in y axis
-const handleGroupDragStart = (e) => {
-  let arrX = points.map((p) => p[0])
-  let arrY = points.map((p) => p[1])
-  setMinMaxX(minMax(arrX))
-  setMinMaxY(minMax(arrY))
-}
-const groupDragBound = (pos) => {
-  let { x, y } = pos
-  const sw = stage.width()
-  const sh = stage.height()
-  if (minMaxY[0] + y < 0) y = -1 * minMaxY[0]
-  if (minMaxX[0] + x < 0) x = -1 * minMaxX[0]
-  if (minMaxY[1] + y > sh) y = sh - minMaxY[1]
-  if (minMaxX[1] + x > sw) x = sw - minMaxX[1]
-  return { x, y }
-}
-
-```
+There are events for drag drop operations in Konva, we wrote callbacks for these events in the `Group` element. 
+In `handleGroupDragStart` we save the minimum and maximum x and y coordinate values with `setMinMaxX` and `setMinMaxY` helper functions respectively. When drag starts these values are setted in the locale state with react `useState`.
+Whereas `dragBoundFunc` is a property used to override drag drop positions while dragging event. In `groupDragBound` function, if the minimum of the drag starting point and the sum of the positions formed by drag is less than 0, we set it back to 0, in the same way, if the sum of the drag and max position is greater than the width of the stage, we set it to the width of the stage. Thus, we ensure that the dragged group remains on the canvas.
 
 ### Circles: Draggable Vertices
 
-```js
+```js 
 //src/components/PolygonAnnotation.js
 ...
 {
@@ -258,7 +229,7 @@ The line element creates a closed shape with the `isFinished` property with the 
 
 In this part we are going to use the above component which is reusable.
 
-```js
+```js {15-35,41} showLineNumbers
 import React, { useMemo, useRef, useState, useEffect } from 'react'
 import PolygonAnnotation from 'components/PolygonAnnotation'
 import { Stage, Layer, Image } from 'react-konva'
@@ -406,12 +377,13 @@ export default Canvas
 
 ### Setting Image In Canvas
 
-Here, we placed our image inside the canvas using the Konva Image element. By using `useMemo` we prevented the image element from being created repeatedly in each render. Whatever Image's size is, we set it to Stge's width and height. We did this in the image onload event listener. We removed the event listener here with `useEffect` return.
+In the highlighted code above, we set an image inside the canvas. To this we used the Konva Image element. 
+In line 15, by using `useMemo` we prevented the image element from being created repeatedly in each render. Whatever Image's size is, we set it to Satge's width and height. We did this in the image onload event listener. We removed the event listener here with `useEffect` return.
 
 ### Events on Stage
 
-We added our `onMouseDown` event callback, which provides the drawing on every mouse down (say when user presses the mouse or even you may say mouse click🙂) , and the `onMouseMove` event that sets the mouse's position to the state that everyone can access locally.
-In our onMouseDown event, we set the clicked coordinates (points) when the mouse is pressed, that is, when the mouse is clicked, and we pass it as a prop to our `PolygonAnnotation` component. The Component creates circles for the coordinates, and lines between circles. And if the first circle and the last circle are in the same position, it creates a closed shape and we can't perform draw action anymore -because we allow only one annotation shape-, and we do this with the `if isFinished return` statement in the mousedown callback; however we can drag and drop the shape to change the coordinates of the annotated the region.
+We added our `onMouseDown` event callback in line 40, which provides the drawing on every mouse down (say when user presses the mouse or even you may say mouse click🙂) , and the `onMouseMove` event callback in line 50, that sets the mouse's position to the state that everyone can access locally.
+In our onMouseDown event, we set the clicked coordinates (points) when the mouse is pressed, that is, when the mouse is clicked, and we pass it as a prop to our `PolygonAnnotation` component. The Component creates circles for the coordinates, and lines between circles. And if the first circle and the last circle are in the same position, it creates a closed shape and we can't perform draw action anymore -because we allow only one annotation shape-, and we do this with the statement in line 41; however we can drag and drop the shape to change the coordinates of the annotated the region.
 
 ## Conclusion
 

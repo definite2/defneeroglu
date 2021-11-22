@@ -7,7 +7,7 @@ import { getDirectories } from './files'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-
+import rehypePrism from 'rehype-prism-plus'
 const currentDir = process.cwd()
 
 export function getFiles(type) {
@@ -33,14 +33,14 @@ export async function getFilesBySlug(type, slug) {
 
   if (process.platform === 'win32') {
     process.env.ESBUILD_BINARY_PATH = path.join(
-      process.cwd(),
+      currentDir,
       'node_modules',
       'esbuild',
       'esbuild.exe'
     )
   } else {
     process.env.ESBUILD_BINARY_PATH = path.join(
-      process.cwd(),
+      currentDir,
       'node_modules',
       'esbuild',
       'bin',
@@ -48,13 +48,14 @@ export async function getFilesBySlug(type, slug) {
     )
   }
   const { frontmatter, code } = await bundleMDX(source, {
-    cwd: path.join(process.cwd(), 'components'),
+    cwd: path.join(currentDir, 'components'),
     xdmOptions(options) {
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []),
         rehypeSlug,
         rehypeAutolinkHeadings,
         rehypeHighlight,
+        rehypePrism,
       ]
       return options
     },
