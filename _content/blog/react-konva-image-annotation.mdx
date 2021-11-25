@@ -1,28 +1,26 @@
 ---
-title: 'How to Create Image Annotation Tool With React-Konva'
+title: 'How to Create Bounding Polygon Annotation Tool With React-Konva'
 date: '2021-11-21'
 lastmod: '2021-11-21'
-tags: ['react', 'canvas-api', 'konva-js']
+tags: ['react', 'canvas-api', 'konva-js', 'labelling-tool']
 draft: false
-summary: 'Learn how to create polygon shape image annotation and get coordinate information.'
+summary: 'Learn how to create bounding polygon annotation tool with React Konva.'
 isToc: true
 image: ['/content/landscape_draw.svg']
-alt: 'polygon image annotation gif'
+alt: 'polygon bounding annotation gif'
 ---
 
-If you need to create client side configuration to determine the coordinates of objects, for example for your model training, then this post is for you. In this blog I will show you how you can create a user draw polygon shaped annotation on images using React and Konva.
+If you need to create client side configuration to determine the location of objects, for example for your model training, then this post is for you. In this blog I will show you how you can create a user draw polygon shaped bounding box annotation in images or videos using React and Konva.
 
 ## Introduction
 
 The idea is, in many computer vision projects we need to have information about the coordinates of
-the object. There are lots of labelling tools. One of the most popular open source one is
-[LabelMe](http://labelme.csail.mit.edu/guidelines.html). LabelMe is written in python and it is
-more like a desktop application.
+the object.
 
-In this blog I am going to use a minimal react app to draw polygon shapes to configure the
-coordinates of the object or the area.
+In this blog I am going to create a minimal react application to draw polygon bounding annotation area to configure the
+coordinates of the object in the image.
 
-To perform drawing on images we need canvas object, for this I used Konva.js. It is an open source
+First of all, to perform drawing on images we need canvas object, for this I used Konva.js. It is an open source
 library for HTML5 Canvas 2d context. If you don't know what canvas is... it is an HTML5 element
 and it is a place to draw graphics, animation, photo manipulation, video processing etc. Doing
 complex tasks on canvas requires lots of consideration, but thanks to Konva.js it is more easy.
@@ -43,7 +41,7 @@ resize and rotate functionality to nodes with `Transformer`.
     priority
   />
   <figcaption className="text-sm italic">
-    Canvas Polygon Shape Landscape Annotation With Its Coordinates
+    Bounding Polygon Annotation On An Imaginary Landscape
   </figcaption>
 </figure>
 You can find source code of the sample react application from [here](https://github.com/definite2/kanva-draggable-polygon).
@@ -167,13 +165,13 @@ I will explain in more detaiş by destructing the above code block as elements a
 
 ### Group: The Group of Shapes
 
-There are events for drag drop operations in Konva, we wrote callbacks for these events in the `Group` element. 
+There are events for drag drop operations in Konva, we wrote callbacks for these events in the `Group` element.
 In `handleGroupDragStart` we save the minimum and maximum x and y coordinate values with `setMinMaxX` and `setMinMaxY` helper functions respectively. When drag starts these values are setted in the locale state with react `useState`.
 Whereas `dragBoundFunc` is a property used to override drag drop positions while dragging event. In `groupDragBound` function, if the minimum of the drag starting point and the sum of the positions formed by drag is less than 0, we set it back to 0, in the same way, if the sum of the drag and max position is greater than the width of the stage, we set it to the width of the stage. Thus, we ensure that the dragged group remains on the canvas.
 
 ### Circles: Draggable Vertices
 
-```js 
+```js
 //src/components/PolygonAnnotation.js
 ...
 {
@@ -377,8 +375,8 @@ export default Canvas
 
 ### Setting Image In Canvas
 
-In the highlighted code above, we set an image inside the canvas. To this we used the Konva Image element. 
-In line 15, by using `useMemo` we prevented the image element from being created repeatedly in each render. Whatever Image's size is, we set it to Satge's width and height. We did this in the image onload event listener. We removed the event listener here with `useEffect` return.
+In the highlighted code above, we set an image inside the canvas. To this we used the Konva Image element.
+In line 15, by using `useMemo` we prevented the image element from being created repeatedly in each render. Whatever Image's size is, we set it to Stage's width and height. We did this in the image `onload` event listener. We removed the event listener here with `useEffect` return.
 
 ### Events on Stage
 
@@ -387,6 +385,6 @@ In our onMouseDown event, we set the clicked coordinates (points) when the mouse
 
 ## Conclusion
 
-In this blog, I have created a react application that may be necessary for computer vision projects, especially for image annotation or client side configuration for marking the area to be trained. For this, I used the Konva.js library, not the HTML5 Canvas Api directly.
+In this blog, I have created bounding polygon/box annotation tool with react and react konva. It can be used for computer vision projects, especially for detecting the location of the object or client side configuration for marking the area to be trained. For this, I used the Konva.js library, not the HTML5 Canvas Api directly. Because React Konva provides capabilities that make easy drawing and drag and drop operations on canvas.
 The documentation of Konva.js is very good and I saw that Anton Lavrenov especially tried to answer questions about the library, with examples. But I could not see an example project that allows to configure such a custom shape, which is restricted inside the canvas, from the end user. That's why I created this post.
 It may not be a super nice solution, so you are very welcome with your feedback. I hope I was able to help you with this article. Best.
