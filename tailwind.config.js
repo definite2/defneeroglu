@@ -90,7 +90,7 @@ module.exports = {
         pinkk: '#F21170',
         'primary-light': '#F7F7F7',
         'primary-grayish': '#fcfcf7',
-        gray: colors.gray,
+        gray: colors.neutral,
         'gray-150': '#ededed',
         violet: colors.violet,
         yellow: colors.yellow,
