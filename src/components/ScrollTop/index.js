@@ -14,7 +14,7 @@ export default function ScrollToTop() {
       aria-label="scroll-top"
       className={`${
         !isscrolled ? 'opacity-0 translate-y-24' : 'opacity-1 translate-y-0'
-      } overflow-hidden fixed bottom-6 cursor-pointer right-4 sm:righ-8 transform-transition hover:-translate-y-2`}
+      } overflow-hidden fixed bottom-6 cursor-pointer right-4 sm:righ-8 transform duration-500 hover:-translate-y-2`}
       onClick={onScrollToTop}
     >
       <svg
