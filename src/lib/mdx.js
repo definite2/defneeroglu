@@ -47,7 +47,8 @@ export async function getFilesBySlug(type, slug) {
       'esbuild'
     )
   }
-  const { frontmatter, code } = await bundleMDX(source, {
+  const { code, frontmatter } = await bundleMDX({
+    source,
     cwd: path.join(currentDir, 'components'),
     xdmOptions(options) {
       options.rehypePlugins = [
@@ -84,8 +85,12 @@ export async function getAllFilesFrontMatter(folder) {
       allFrontMatters.push({
         ...frontmatter,
         slug: formatSlug(filename),
-        lastmod: frontmatter.lastmod ? new Date(frontmatter.lastmod).toISOString() : new Date().toISOString(),
-        date: frontmatter.date ? new Date(frontmatter.date).toISOString() : new Date().toISOString(),
+        lastmod: frontmatter.lastmod
+          ? new Date(frontmatter.lastmod).toISOString()
+          : new Date().toISOString(),
+        date: frontmatter.date
+          ? new Date(frontmatter.date).toISOString()
+          : new Date().toISOString(),
       })
     }
   })
