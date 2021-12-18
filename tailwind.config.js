@@ -1,8 +1,7 @@
-const colors = require('tailwindcss/colors')
 const defaultTheme = require('tailwindcss/defaultTheme')
+const colors = require('tailwindcss/colors')
 module.exports = {
-  mode: 'jit',
-  purge: [
+  content: [
     './src/pages/**/*.js',
     './src/components/**/*.js',
     './src/layouts/**/*.js',
@@ -91,7 +90,7 @@ module.exports = {
         pinkk: '#F21170',
         'primary-light': '#F7F7F7',
         'primary-grayish': '#fcfcf7',
-        gray: colors.trueGray,
+        gray: colors.gray,
         'gray-150': '#ededed',
         violet: colors.violet,
         yellow: colors.yellow,
@@ -152,6 +151,9 @@ module.exports = {
             },
             'h4,h5,h6': {
               color: theme('colors.gray.900'),
+            },
+            pre: {
+              backgroundColor: theme('colors.gray.800'),
             },
             code: {
               color: theme('colors.pink.500'),
@@ -249,10 +251,6 @@ module.exports = {
         },
       }),
     },
-  },
-
-  variants: {
-    typography: ['dark'],
   },
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 }
