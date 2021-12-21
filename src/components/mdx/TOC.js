@@ -13,7 +13,7 @@ export function TOC() {
   }, [])
 
   const [activeNode] = useIntersectNode(
-    ['#introduction', ...headings.map((heading) => `#${heading.id}`)],
+    [...headings.map((heading) => `#${heading.id}`)],
     `0% 0% -55% 0%`,
     1
   )
