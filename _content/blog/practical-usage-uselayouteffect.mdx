@@ -1,0 +1,180 @@
+---
+title: 'useLayoutEffect With Practical Example'
+date: '2021-12-17'
+lastmod: '2021-12-17'
+tags: ['react', 'react-hooks']
+draft: false
+summary: 'Learn when to use useLayoutEffect with practical example'
+isToc: true
+image: ['/content/uselayouteffect_cover.svg']
+alt: 'uselayoutEffect with textarea component'
+---
+
+If you want to know when you need to use `useLayoutEffect` rather than `useEffect` this post is for you. I am going to show it with a practical example, that is placing the caret in a contenteditable div element with the help of useLayoutEffect hook.
+
+## Introduction
+
+<p> You may know the fact that we cannot highlight words within `<textarea>` element. I mean we are not able to style text within textarea. And if we need such a feature in a React application and if we don't use a 3rd party text editor library like [draft.js](https://draftjs.org/), then we can use `<div contenteditable="true">` that is a div element and it can be editable by user (it does not have to be div element it can be `pre` element or so).</p>
+<p> One example why you need **contenteditable** instead of textarea, it is supposed you are building a comment component for your blog site, that is your readers can add comments with this component. And suppose you have some kind of dictionary integration with this comment component, such that while your user types something he or she can see some of unrestricted words or say he/she can see the words written incorrect (without AI) depending on response of the dictionary that you are using.</p>
+<p> However in order to use a contenteditable element like a textarea element (thus we can retrieve text data and send it to backend or vice versa) we need to do some extra effort. Because unfortunately a contenteditable element cannot behave exactly as a textarea element.</p>
+
+## Problem
+
+If you have a contenteditable `div` in React application with `dangerouslySetInnerHTML` then you are going to see that your cursor is not at the end of the text but it is at the beginning of the text, and while you type some words, they are written in reverse. In order to fix this we need to place the cursor on every change at the back of the text. And suppose you add some placeCaret logic in your component's code. But this time you are going to face the jumping cursor problem.And to fix that we need to use the `useLayoutEffect` hook.
+In fact in this blog first I am going to show how you can create a custom textarea element, that is a simple text editor with an editable div element, and then I am going to show you the **cursor placement problem** I encountered it, and then I am going to show how we can fix it.
+
+In this part we are going to create simple text editor with div contenteditable with inputchange event.
+
+```js {5-9,13} showLineNumbers
+import React, { useRef } from 'react'
+const TextArea = ({ highlighted, ...rest }) =>
+  const editorRef = useRef();
+
+  //onInputChnage callback function
+  const handleInputChange = (_) => {
+    const editor = editorRef.current
+    console.log(editor.innerText)
+  }
+  return (
+    <div
+      className="textarea"
+      contentEditable
+      placeholder="Enter your text here"
+      ref={editorRef}
+      onInput={handleInputChange}
+      spellCheck={false}
+      {...rest}
+    />
+  )
+}
+
+export default TextArea
+```
+
+For detecting changes inside of an editable element we need to listen `oninput` change event instead of `onchange` event.
+
+### `dangerouslySetInnerHTML`
+
+To keep the component's state in sync, we need to use [`dangerouslySetInnerHTML`](https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml), or you can update value by setting `innerHTML` of `editorRef.current` but it is not a good practice.
+In the following code block, I added also the highlighting logic but you don't have to focus on that part, you can find the details of the `utils` functiopn from the source cod that its link in the final code sction:
+
+```js {5,12} showLineNumbers
+import React, { useRef, useState } from 'react'
+import { getTextSegments, highlightText } from '../utils'
+const TextArea = ({ highlighted, ...rest }) => {
+  const editorRef = useRef()
+  const [lastHtml, setLastHtml] = useState()
+  //onInputChnage callback function
+  const handleInputChange = (_) => {
+    const editor = editorRef.current
+    const textSegments = getTextSegments(editor)
+    const textContent = textSegments.map(({ text }) => text).join('')
+    let html = highlightText(textContent, highlighted) // returns the text with highlighted words
+    setLastHtml(html) // sets the html of dangerouslySetInnerHTML
+  }
+  return (
+    <div
+      className="textarea"
+      contentEditable
+      placeholder="Enter your text here"
+      ref={editorRef}
+      onInput={handleInputChange}
+      spellCheck={false}
+      dangerouslySetInnerHTML={{ __html: lastHtml }}
+      {...rest}
+    />
+  )
+}
+
+export default TextArea
+```
+
+If we run our application with the code above we can see that our caret is not behave normal it places at the beginnig of the text and it seems you are writing the words in reverse. See the below gif:
+
+<Accordion title="See Reverse Caret Placement Problem with dangerouslySetInnerHTML">
+  <figure className="flex justify-center flex-col items-center">
+    <Image
+      alt="dangerouslySetInnerHTML weird caret position"
+      src="/content/caret_position_wrong.gif"
+      width="486"
+      height="584"
+    />
+    <figcaption className="text-sm italic">
+      Weird behaviour of caret after dangerouslySetInnerHTML
+    </figcaption>
+  </figure>
+</Accordion>
+
+### Jumping Caret
+
+In this part I am going to add a place caret helper function, that replaces the caret at the end of the text on every time when contenteditable's html changes... Sounds like we need to use
+`useEffect`, right? Let's see:
+
+```js {13,16} showLineNumbers
+import React, { useRef, useState, useEffect } from 'react'
+import { getTextSegments, highlightText, editCaretPosition } from '../utils'
+const TextArea = ({ highlighted, ...rest }) => {
+  const editorRef = useRef()
+  const [lastHtml, setLastHtml] = useState()
+  //onInputChnage callback function
+  const handleInputChange = (_) => {
+    const editor = editorRef.current
+    const textSegments = getTextSegments(editor)
+    const textContent = textSegments.map(({ text }) => text).join('')
+    let html = highlightText(textContent, highlighted) // returns the text with highlighted words
+    setLastHtml(html) // sets the html of dangerouslySetInnerHTML
+  }
+  useEffect(() => {
+    const editor = editorRef.current
+    editCaretPosition(editor) //replaces the caret at the end of text
+  }, [lastHtml])
+  return (
+    <div
+      className="textarea"
+      contentEditable
+      placeholder="Enter your text here"
+      ref={editorRef}
+      onInput={handleInputChange}
+      spellCheck={false}
+      dangerouslySetInnerHTML={{ __html: lastHtml }}
+      {...rest}
+    />
+  )
+}
+
+export default TextArea
+```
+
+If we run our application with the code above we can see that caret jumping behaviour:
+
+<Accordion title="See Jumping Caret Problem with useEffect">
+  <figure className="flex justify-center flex-col items-center">
+    <Image
+      alt="jumping caret with useEffect"
+      src="/content/jumpig_cursor.gif"
+      width="486"
+      height="584"
+    />
+    <figcaption className="text-sm italic">Jumping Caret Problem</figcaption>
+  </figure>
+</Accordion>
+
+### Fix Jumping Caret
+
+In order to fix the jumping caret problem, instead of using `useEffect` hook we are going to use `useLayoutEffect` and voilà there is no juming cursor problem.
+Why? because `dangerouslySetInnerHTML` is a DOM mutation and we need to update the caret palce immediately after React performs this DOM mutation in pther words we need to run our `editCaretPlacement` helper function synchronously not asynchronously, and `useEfect` is asynchronous whereas `useLayoutEffect` is synchronous.
+
+```js
+// change useEffect to useLayoutEffect
+...
+  useLayoutEffect(() => {
+    const editor = editorRef.current;
+    editCaretPosition(editor);
+  }, [lastHtml]);
+  ...
+```
+
+## Conclusion
+
+In this blog I've created a simple text editor component with `<div contenteditable`. And I've shown how to handle the jumping cursor problem. I hope this blog could help you to understand the difference between `useLayoutEffect` and `useEffect`.
+You can find the complete code for the custom textarea element that highlights the restricted words, made of `<div contenteditable>` and with `useLayoutEffect` can be found from 👉 [here](https://github.com/definite2/editable-div-with-uselayouteffect)
