@@ -5,7 +5,7 @@ import { siteMetadata } from '../constants/siteMetadata'
 import { getAllFilesFrontMatter } from '../lib/mdx'
 import BlogSummaryCard from '@/components/BlogSummaryCard'
 
-const max_post_number = 6
+const max_post_number = 4
 
 export async function getStaticProps() {
   const posts = await getAllFilesFrontMatter('blog')
@@ -52,7 +52,7 @@ export default function Home({ posts }) {
         <div className="flex justify-end text-base font-medium leading-6 my-5">
           <CustomLink
             href="/blog"
-            className="text-green-500 hover:text-green-600 dark:hover:text-green-400"
+            className="text-primary-500 hover:text-primary-600"
             aria-label="all posts"
           >
             More Posts &rarr;

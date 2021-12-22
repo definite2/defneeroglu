@@ -13,39 +13,9 @@ const ListLayout = ({ posts, title, initialDisplayPosts = [], pagination }) => {
     const searchContent = frontMatter.title + frontMatter.summary + frontMatter.tags.join('')
     return searchContent.toLowerCase().includes(searchValue.toLowerCase())
   })
-  // const { open, close, alertDialogOpen } = useAlert()
-  // const query = useDebouncedValue(searchValue, 600)//not the typed value but-
-  //                                                 //... the debounced value to send search term to es api
-  // useEffect(() => {
-  //   if (query) {
-  //     setLoading(true) 
-  //     fetch('/api/elasticsearch', {
-  //       method: 'POST',
-  //       headers: {
-  //         Accept: 'application/json, text/plain, */*',
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(query),
-  //     }).then((res) =>
-  //       res
-  //         .json()
-  //         .then((data) => {
-  //           setSuccess(true)
-  //           setFilteredPosts(data)
-  //           setLoading(false)
-  //         })
-  //         .catch((err) => {
-  //           open()
-  //           setAlertMessage(err.message)
-  //           setSuccess(false)
-  //           setLoading(false)
-  //           setFilteredPosts(posts)
-  //         })
-  //     )
-  //   } else {
-  //     setFilteredPosts(posts)
-  //   }
-  // }, [query])
+  //if no search then return initial
+  const displayPosts =
+  initialDisplayPosts.length > 0 && !searchValue ? initialDisplayPosts : filteredPosts
   return (
     <>
       <div className="divide-y">
@@ -83,7 +53,7 @@ const ListLayout = ({ posts, title, initialDisplayPosts = [], pagination }) => {
           {' '}
           {!filteredPosts.length
             ? 'No posts found.'
-            : filteredPosts.map((frontMatter, index) => {
+            : displayPosts.map((frontMatter, index) => {
                 const { slug, date, title, summary, tags } = frontMatter
                 return (
                   <li key={index} className="py-4">
