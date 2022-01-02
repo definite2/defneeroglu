@@ -223,6 +223,12 @@ module.exports = {
             code: {
               backgroundColor: theme('colors.gray.800'),
             },
+            'code::before': {
+              content: 'none',
+            },
+            'code::after': {
+              content: 'none',
+            },
             details: {
               backgroundColor: theme('colors.gray.800'),
             },
