@@ -37,7 +37,7 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
                 <div className="mb-6">
                   <PageTitle>{title}</PageTitle>
                 </div>
-                <dl className="flex text-base justify-center font-medium leading-6 text-gray-500 dark:text-gray-400">
+                <dl className="flex flex-col sm:flex-row text-base justify-center font-medium leading-6 text-gray-500 dark:text-gray-400">
                   <dt className="sr-only">Published on</dt>
                   <dd>
                     Updated on <time dateTime={lastmod}>{formatDate(lastmod)}</time>
