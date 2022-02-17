@@ -72,7 +72,6 @@ const ContactForm = () => {
           setAlertMessage(err.message)
           setSuccess(false)
         })
-    
     }
   }
   return (
@@ -90,7 +89,7 @@ const ContactForm = () => {
       </AlertContainer>
       <form className="w-full">
         <div className="flex flex-wrap mb-6">
-          <div className="w-full ">
+          <div className="w-full">
             <Input
               id="name"
               type="text"
@@ -100,7 +99,9 @@ const ContactForm = () => {
               error={errors.name}
             />
           </div>
-          <div className="w-full  ">
+        </div>
+        <div className="flex flex-wrap mb-6">
+          <div className="w-full">
             <Input
               id="email"
               type="email"
@@ -127,15 +128,15 @@ const ContactForm = () => {
           </div>
         </div>
         <div className="flex flex-wrap  mb-6">
-        <div className="w-full flex  justify-end">
-          <m.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="bg-gray-700 flex items-center justify-center font-medium border-2  border-gray-500  p-2 rounded-md shadow-sm"
-            onClick={handleSubmit}
-          >
-            <span className="px-6  text-gray-50">Send</span>
-          </m.button>
+          <div className="w-full flex  justify-end">
+            <m.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="bg-gray-700 flex items-center justify-center font-medium border-2  border-gray-500  p-2 rounded-md shadow-sm"
+              onClick={handleSubmit}
+            >
+              <span className="px-6  text-gray-50">Send</span>
+            </m.button>
           </div>
         </div>
       </form>
