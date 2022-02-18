@@ -26,11 +26,11 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
         })}
       >
         {isToc && (
-          <aside className="sticky hidden h-screen  max-w-xs mt-4/5 top-32 xl:block ml-8">
+          <aside className="sticky hidden h-screen max-w-xs mt-4/5 top-32 bottom-4 xl:block ml-4 mr-4">
             <TOC />
           </aside>
         )}
-        <article className="text-base max-w-prose lg:text-lg xl:max-w-xl 2xl:max-w-2.5xl 3xl:max-w-3xl 4xl:max-w-4xl min-w-0">
+        <article className="text-base max-w-prose lg:text-lg xl:max-w-2xl 2xl:max-w-2.5xl 3xl:max-w-3xl 4xl:max-w-4xl min-w-0">
           <div>
             <header className="xl:pb-6">
               <div className="pb-10 space-y-1 text-center border-b border-gray-200 dark:border-gray-700">
@@ -67,9 +67,9 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
         </article>
       </div>
       <div className="mb-8">
-        <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
+        <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base max-w-prose xl:max-w-2.5xl 2xl:max-w-2.5xl 3xl:max-w-3xl 4xl:max-w-4xl min-w-0">
           {prev && (
-            <div className="pt-4 xl:pt-8">
+            <div className="pt-4 xl:pt-8 xl:pr-4">
               <CustomLink
                 href={`/blog/${prev.slug}`}
                 className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
