@@ -5,7 +5,11 @@ import { siteMetadata } from '@/constants/siteMetadata'
 import { formatDate } from 'lib/date'
 import { TOC } from '@/components/mdx/TOC'
 import clsx from 'clsx'
+import styled from 'styled-components'
 import Image from 'next/image'
+const NegativeMargin = styled.aside`
+  margin-right: -210px !important;
+`
 export default function PostLayout({ frontMatter, next, prev, children }) {
   const { slug, fileName, title, tags, lastmod, isToc, image, alt, summary } = frontMatter
 
@@ -26,9 +30,9 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
         })}
       >
         {isToc && (
-          <aside className="sticky hidden h-screen max-w-xs mt-4/5 top-32 bottom-4 xl:block ml-4 mr-4">
+          <NegativeMargin className="sticky hidden h-screen max-w-xs mt-4/5 top-32 bottom-4 xl:block">
             <TOC />
-          </aside>
+          </NegativeMargin>
         )}
         <article className="text-base max-w-prose lg:text-lg xl:max-w-2xl 2xl:max-w-2.5xl 3xl:max-w-3xl 4xl:max-w-4xl min-w-0">
           <div>
