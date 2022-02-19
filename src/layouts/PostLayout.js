@@ -25,18 +25,13 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
         images={image}
       />
       <div
-        className={clsx('relative flex xl:justify-between justify-center', {
-          'flex-row-reverse': Boolean(isToc),
-        })}
+        className={`relative w-full flex xl:${
+          isToc ? 'justify-between' : 'justify-center'
+        } justify-center`}
       >
-        {isToc && (
-          <NegativeMargin className="sticky hidden h-screen max-w-xs mt-4/5 top-32 bottom-4 xl:block">
-            <TOC />
-          </NegativeMargin>
-        )}
-        <article className="text-base max-w-prose lg:text-lg xl:max-w-2xl 2xl:max-w-2.5xl 3xl:max-w-3xl 4xl:max-w-4xl min-w-0">
+        <article className="w-full xl:max-w-3xl">
           <div>
-            <header className="xl:pb-6">
+            <header className="xl:pb-6 xl:ml-40">
               <div className="pb-10 space-y-1 text-center border-b border-gray-200 dark:border-gray-700">
                 <div className="mb-6">
                   <PageTitle>{title}</PageTitle>
@@ -50,8 +45,9 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
                   <div>{frontMatter.readingTime.text}</div>
                 </dl>
               </div>
-
-              <Image className="w-full" src={image[0]} width="900px" height="600px" alt={alt} />
+              <div className="flex justify-center items-center">
+                <Image className="w-full" src={image[0]} width="900px" height="600px" alt={alt} />
+              </div>
             </header>
 
             <div
@@ -69,9 +65,14 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
             </div>
           </div>
         </article>
+        {isToc && (
+          <aside className="sticky hidden h-screen max-w-xs mt-4/5 top-32 bottom-4 pt-2 pl-4 xl:block">
+            <TOC />
+          </aside>
+        )}
       </div>
       <div className="mb-8">
-        <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base max-w-prose xl:max-w-2.5xl 2xl:max-w-2.5xl 3xl:max-w-3xl 4xl:max-w-4xl min-w-0">
+        <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
           {prev && (
             <div className="pt-4 xl:pt-8 xl:pr-4">
               <CustomLink
