@@ -29,7 +29,7 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
           isToc ? 'justify-between' : 'justify-center'
         } justify-center`}
       >
-        <article className="w-full xl:max-w-3xl">
+        <article className="w-full xl:max-w-3xl 2xl:max-w-5xl 3xl:max-w-7xl 3xl:ml-28 2xl:ml-12">
           <div>
             <header className="xl:pb-6 xl:ml-40">
               <div className="pb-10 space-y-1 text-center border-b border-gray-200 dark:border-gray-700">

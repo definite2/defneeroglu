@@ -29,7 +29,7 @@ export default function Home({ posts }) {
             Recents
           </h1>
         </div>
-        <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 mb-4 sm:gap-8">
+        <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 mb-4 sm:gap-8">
           {!posts.length && 'No posts found.'}
           {posts.slice(0, max_post_number).map((frontmatter) => {
             const { slug, date, title, summary, tags, image } = frontmatter
