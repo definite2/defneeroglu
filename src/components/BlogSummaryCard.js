@@ -31,15 +31,14 @@ export default function BlogSummaryCard(props) {
               <dt className="sr-only"> Published on</dt>
               <dd className="text-base  leading-6 text-gray-400 dark:text-gray-400">
                 <time dateTime={date}>
-                  {' '}
                   {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}{' '}
                 </time>
               </dd>
             </dl>
           </div>
-          <section className="flex flex-col h-full px-5 py-5 sm:px-8 ">
-            <h2 className="pb-5 text-xl font-semibold leading-tight sm:text-2xl">{title}</h2>
-            <div className="flex flex-wrap">
+          <section className="flex flex-col h-full px-5 py-5">
+            <h2 className="pb-2 text-xl font-semibold leading-tight">{title}</h2>
+            <div className="flex flex-wrap mb-2">
               {tags &&
                 tags.map((tag) => (
                   <object key={tag} alt={`${tag} tag`}>
@@ -48,7 +47,7 @@ export default function BlogSummaryCard(props) {
                 ))}
             </div>
             <div className="prose transition-opacity duration-200 ease-in-out opacity-75 hover:opacity-100 text-gray-500 max-w-none dark:text-gray-400">
-              <p>{summary}</p>
+              <p className="text-sm">{summary}</p>
             </div>
           </section>
         </m.div>
