@@ -51,8 +51,8 @@ const about = () => {
             </p>
             <p>
               I am very passionate to learn how Javascript works from frameworks to browser
-              engines... I decided to make this blog site, both to reinforce what I know and to be
-              instructive for other beginners.
+              engines... I decided to make this blog site, both to reinforce what I know and to help
+              other developers.
             </p>
             <h4>
               Publications{' '}
