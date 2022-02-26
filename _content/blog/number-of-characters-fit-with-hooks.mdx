@@ -1,0 +1,100 @@
+---
+title: 'Calculate Number of Characters Fit in HTML Element With Custom React Hook'
+date: '2022-02-19'
+lastmod: '2022-02-19'
+tags: ['algorithms', 'react', 'react-hooks']
+draft: true
+summary: 'Learn how you can dynamically calculate the number of characters that can fit into an html element'
+isToc: true
+image: ['/content/minstack_thumbnail.svg']
+alt: 'leetcode minstack javascript solution abstract thumbnail'
+---
+
+If you need to know the number of characters that can fit into an HTML element, where the width of the target HTML element and the text are not static, then this post is for you.
+To solve this problem, I am going to talk about custom react hooks, and a little bit about the Web API. And eventually, I am going to show you that a frontend developer needs some algorithm and problem solving skills to solve pure frontend problems.
+
+## Introduction
+
+At work, designers ask me to shorten the button texts with three dots from the middle. The challenge is that the width of the buttons are not fixed, and the text inside is not fixed as well. Actually this information comes from an endpoint. In short, I had to do the following: calculating the width of the button, then calculating the width of the text that will be written inside it, if the width of the text is larger, then cut the text in the middle with three dots. But how many characters should be shown? Let's solve this.
+
+## Final Code
+
+### Width of Button
+
+To calculate width of the button, I combined the solutions found from [stackoverflow](https://stackoverflow.com/questions/68547290/measure-width-of-component-without-re-loading-the-page) and [`useSize`](https://github.com/alibaba/hooks/blob/master/packages/hooks/src/useSize/index.ts) hook from alibaba hooks library.
+[`ResizeObserver`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver#examples) which is an Web API Interface and it is available in most browsers. If it is not available there are some polyfills libraries.
+
+### Width of Text
+
+Normally, we able to know the `length` of text, but there is no such direct information about the width of a text. To calculate the width of a text, we need to use Web API's [`TextMetrics`](https://developer.mozilla.org/en-US/docs/Web/API/TextMetrics/width) interface. It gives us a read-only width value of a text based on the `font` information of it. You may guess that a text with bold font and with large font size has larger width than the small font size.
+However this interface calculates the width of text, that is filled in `canvas` element only. But our element is `button`. For this, what we are going to here is copy the font style of our button text, with [`window.getComputedStyle()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) method and fill canvas with this text and then calculate its width. Now, with this approach we able to know that the width of text is larger than button's content width and if it is larger than it should be truncated. By the way, the case could be different it is not just about truncating it is about the calculating the number of characters that can fit the given button element, truncating from middle is just a case from my work and used as an example.
+That's why we are going to write a custom hooks which gives the number of characters fit into a element based on width calculation.
+
+### Calculating the Number of Characters
+
+Now we are able to calculate the width of button, able to calculate the width of text. Here our approach is: within a `for` loop within the length of button's text, get a character from button's text and fill it in a canvas with computed style then calculate its width. If it is larger than button's content width, than break the loop and return the number of characters.
+
+```js
+import { useMemo } from 'react'
+/**
+ * Calculates the maximum number of characters that can be fit into give maxwidth.
+ * Calculates the width of text with given font family via ref object, in terms of px
+ *
+ * @param {Ref} ref
+ * @param {number} maxWidth
+ * @param {string} middleChars i.e. '...' ellipsis
+ * @return number of chars of ref's text, including number of chars of given/default
+ * returned value is an odd number, first part has +1 characters
+ */
+const getContext = () => {
+  const fragment = document.createDocumentFragment()
+  const canvas = document.createElement('canvas')
+  fragment.appendChild(canvas)
+  return canvas.getContext('2d')
+}
+const useCharNumberWithTextWith = (options) => {
+  const { ref, maxWidth, middleChars } = options
+  return useMemo(() => {
+    if (ref.current?.textContent && maxWidth) {
+      const context = getContext()
+      const computedStyles = window.getComputedStyle(ref.current)
+      context.font = computedStyles.font
+        ? computedStyles.font
+        : `${computedStyles.fontSize}" "${computedStyles.fontFamily}`
+      const textWidth = context.measureText(ref.current.textContent).width
+      let fitLength = ref.current.textContent.length
+      let prefix = ''
+      let suffix = ''
+      let i = 0
+      let j = fitLength - 1
+      let current = middleChars || ''
+      let prev = current
+      while (i < j) {
+        // eslint-disable-next-line operator-assignment
+        prefix = prefix + ref.current.textContent.charAt(i)
+        current = prefix + middleChars + suffix
+        if (context.measureText(current).width > maxWidth) {
+          fitLength = prev.length
+          break
+        }
+        prev = current
+        suffix = ref.current.textContent.charAt(j) + suffix
+        current = prefix + middleChars + suffix
+        if (context.measureText(current).width > maxWidth) {
+          fitLength = prev.length
+          break
+        }
+        prev = current
+        i++
+        j--
+      }
+      return { textWidth, charNumber: fitLength }
+    }
+    return NaN
+  }, [ref, maxWidth, middleChars])
+}
+
+export default useCharNumberWithTextWith
+```
+
+## Conclusion
