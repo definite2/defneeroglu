@@ -29,7 +29,7 @@ export default function BlogSummaryCard(props) {
           <div className="flex w-full justify-center mt-2">
             <dl>
               <dt className="sr-only"> Published on</dt>
-              <dd className="text-base  leading-6 text-gray-400 dark:text-gray-400">
+              <dd className="text-sm  leading-6 text-gray-400 dark:text-gray-400">
                 <time dateTime={date}>
                   {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}{' '}
                 </time>
@@ -37,17 +37,18 @@ export default function BlogSummaryCard(props) {
             </dl>
           </div>
           <section className="flex flex-col h-full px-5 py-5">
-            <h2 className="pb-2 text-xl font-semibold leading-tight">{title}</h2>
-            <div className="flex flex-wrap mb-2">
+            <h2 className="pb-2 text-lg font-semibold leading-tight">{title}</h2>
+            <div className="prose mb-2 transition-opacity duration-200 ease-in-out opacity-75 hover:opacity-100 text-gray-500 max-w-none dark:text-gray-400">
+              <p className="text-sm">{summary}</p>
+            </div>
+            <div className="flex flex-wrap mt-auto">
               {tags &&
-                tags.map((tag) => (
-                  <object key={tag} alt={`${tag} tag`}>
+                tags.map((tag, index) => (
+                  <object className="flex items-center" key={tag} alt={`${tag} tag`}>
                     <Tag key={tag} text={tag} />
+                    {index !== tags.length - 1 && <div className="dot -ml-3 text-gray-400"></div>}
                   </object>
                 ))}
-            </div>
-            <div className="prose transition-opacity duration-200 ease-in-out opacity-75 hover:opacity-100 text-gray-500 max-w-none dark:text-gray-400">
-              <p className="text-sm">{summary}</p>
             </div>
           </section>
         </m.div>
