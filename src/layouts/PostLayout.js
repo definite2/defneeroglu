@@ -66,7 +66,10 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
           </div>
         </article>
         {isToc && (
-          <aside className="sticky hidden h-screen max-w-xs mt-4/5 top-32 bottom-4 pt-2 pl-4 xl:block">
+          <aside
+            style={{ paddingTop: frontMatter.tocPaddingTop ? frontMatter.tocPaddingTop : '2rem' }}
+            className="sticky hidden h-screen max-w-xs mt-4/5 top-32 bottom-4 pl-4 xl:block"
+          >
             <TOC />
           </aside>
         )}
