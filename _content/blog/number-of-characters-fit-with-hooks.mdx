@@ -50,7 +50,7 @@ By the way, the case could be different, I mean it is not just about truncating 
 ### Calculating the Number of Characters
 
 Now we are able to calculate the width of button, and calculate the width of text.
-Here we are going to create a _for loop_, which is within the length of button's text, we are going to get a character in each iteration from button's text and fill it in a canvas, with its font style as using `window.computedStyle()`, and then calculate the text width. If it is larger than button's content width, then break the loop and return the number of characters that fit.
+Here we are going to create a _for loop_, which is within the length of button's text, we are going to get a character in each iteration from button's text, and fill it in a canvas, with its font style as using `window.computedStyle()`, and then calculate the text width. If it is larger than button's content width, then break the loop and return the number of characters that fit, that is the value of previous iteration's index.
 
 ```js {39-40,46-47} showLineNumbers
 import { useMemo } from 'react'
@@ -126,4 +126,5 @@ For example suppose our long text is: _'longer button text'_, and button width i
 
 ## Conclusion
 
-In this blog, I would like to share how you can solve truncating text from middle design problem as calculating the maximum number of characters that can fit into a given container element's content width. We created custom react hook to make our solution reusable across the application. I hope this hook could help you in your work and be inpiration for you to develop your custom hook developing skill, as well as for your problem solving skill... Thank you for reading.
+In this blog, I would like to share how you can solve truncating text from middle design problem as calculating the maximum number of characters that can fit into a given container element's content width.
+We created custom react hook to make our solution reusable across the application. I hope this hook could help you in your work and inspire you to develop your custom hook development skill, as well as your problem solving skill😃... Thank you for reading.
