@@ -4,12 +4,8 @@ import { BlogSeo } from '@/components/Seo'
 import { siteMetadata } from '@/constants/siteMetadata'
 import { formatDate } from 'lib/date'
 import { TOC } from '@/components/mdx/TOC'
-import clsx from 'clsx'
-import styled from 'styled-components'
 import Image from 'next/image'
-const NegativeMargin = styled.aside`
-  margin-right: -210px !important;
-`
+
 export default function PostLayout({ frontMatter, next, prev, children }) {
   const { slug, fileName, title, tags, lastmod, isToc, image, alt, summary } = frontMatter
 
