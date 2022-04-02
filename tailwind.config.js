@@ -86,7 +86,6 @@ module.exports = {
       },
       colors: {
         primary: colors.lime,
-        'primary-bluish': '#6DECB9',
         pinkk: '#F21170',
         'primary-light': '#F7F7F7',
         'primary-grayish': '#fcfcf7',
@@ -241,14 +240,6 @@ module.exports = {
               backgroundColor: theme('colors.gray.400'),
             },
             strong: { color: theme('colors.gray.100') },
-            thead: {
-              color: theme('colors.gray.100'),
-            },
-            tbody: {
-              tr: {
-                borderBottomColor: theme('colors.gray.700'),
-              },
-            },
             blockquote: {
               color: theme('colors.gray.100'),
               borderLeftColor: theme('colors.gray.700'),
