@@ -4,17 +4,14 @@ import Head from 'next/head'
 import { SEO } from '@/components/Seo'
 import '../styles/global.scss'
 import Wrapper from '@/components/Layout'
-import { GlobalStyle } from 'styles/GlobalStyle'
 import Analytics from '@/components/Analytics'
-import { LazyMotion, m } from "framer-motion"
+import { LazyMotion, m } from 'framer-motion'
 
 const App = ({ Component, pageProps, router }) => {
   let easing = [0.175, 0.85, 0.12, 0.96]
-  const loadFeatures = () =>
-  import("../framerFeatures").then(res => res.default)
+  const loadFeatures = () => import('../framerFeatures').then((res) => res.default)
   return (
-     <LazyMotion features={loadFeatures} strict>
-      <GlobalStyle />
+    <LazyMotion features={loadFeatures} strict>
       <ThemeProvider attribute="class">
         <Head>
           <meta content="width=device-width, initial-scale=1" name="viewport" />
