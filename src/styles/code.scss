@@ -1,5 +1,3 @@
-import { createGlobalStyle } from 'styled-components'
-export const GlobalStyle = createGlobalStyle`
 .token.selector-tag,
 .token.selector-class {
   color: orange;
@@ -263,4 +261,3 @@ export const GlobalStyle = createGlobalStyle`
   color: rgb(156, 163, 175); /* Line number color */
   content: attr(line);
 }
-`
