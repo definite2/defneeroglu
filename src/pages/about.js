@@ -37,7 +37,7 @@ const about = () => {
             <h2 className="pt-4 pb-2 text-2xl font-bold leading-8 tracking-tight">{author}</h2>
             <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
           </div>
-          <div className="pt-8 pb-8 prose lg:prose-lg dark:prose-dark max-w-none xl:col-span-2 xl:col-start-2">
+          <div className="pt-8 pb-8 prose dark:prose-dark max-w-none xl:col-span-2 xl:col-start-2">
             <p>
               Currently I'm working as a frontend engineer. My BS is in physics, I still have some
               passion for it, but I've prefered to develop my career in software development.
