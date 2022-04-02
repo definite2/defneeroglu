@@ -85,7 +85,7 @@ module.exports = {
         nav: 'rgba(0, 0, 0, 0.15) 0px 1px 4px 0px',
       },
       colors: {
-        primary: colors.lime,
+        primary: colors.teal,
         pinkk: '#F21170',
         'primary-light': '#F7F7F7',
         'primary-grayish': '#fcfcf7',
