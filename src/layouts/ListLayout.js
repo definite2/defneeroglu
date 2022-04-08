@@ -41,11 +41,11 @@ const ListLayout = ({ posts, title, initialDisplayPosts = [], pagination }) => {
           <div className="relative flex items-center max-w-lg">
             <Search className="absolute top-4 left-2 text-gray-400 " />
             <Input
-              aria-label="Search articles"
+              aria-label="Search blogs"
               className="pl-12"
               type="text"
               onChange={(e) => setSearchValue(e.target.value)}
-              placeholder="Search articles"
+              placeholder="Search Post"
             />
           </div>
         </div>
