@@ -7,14 +7,14 @@ import { off, on } from 'lib/ui'
 const useScrollingUp = () => {
   let prevScroll
   //if it is SSR then check you are now on the client and window object is available
-  if (process.browser) {
+  if (typeof window === undefined) {
     prevScroll = window.pageYOffset
   }
   const [scrollingUp, setScrollingUp] = useState(false)
   const handleScroll = () => {
     const currScroll = window.pageYOffset
     const isScrolled = prevScroll > currScroll
-    setScrollingUp(currScroll===0?false:isScrolled)
+    setScrollingUp(currScroll === 0 ? false : isScrolled)
     prevScroll = currScroll
   }
   useEffect(() => {
