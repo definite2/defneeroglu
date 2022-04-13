@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
 import useIntersectNode from '@/hooks/useIntersection'
 import clsx from 'clsx'
-import CustomLink from '../CustomLink'
+import { m } from 'framer-motion'
 
-export function TOC() {
+export function TOC(framerProps) {
   const [headings, setHeadings] = useState([])
-
   useEffect(() => {
     const afterElm = document.getElementById('post-body')
     const headingElements = Array.from(afterElm.querySelectorAll('h1,h2,h3,h4,h5,h6'))
@@ -24,14 +23,10 @@ export function TOC() {
   }
 
   return (
-    <nav className="text-gray-800 dark:text-gray-200">
-      <h2 className="font-semibold text-gray-800 dark:text-gray-200 tracking-widestest">
-        Table Of Contents
-      </h2>
-
+    <>
       {headings.map((heading) => {
         return (
-          <CustomLink
+          <m.a
             key={heading.id}
             href={`#${heading.id}`}
             className={clsx(
@@ -42,11 +37,12 @@ export function TOC() {
                 'ml-4': getLevel(heading.nodeName) === 4,
               }
             )}
+            {...framerProps}
           >
             {heading.innerText}
-          </CustomLink>
+          </m.a>
         )
       })}
-    </nav>
+    </>
   )
 }
