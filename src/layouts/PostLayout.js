@@ -3,8 +3,7 @@ import PageTitle from '@/components/PageTitle'
 import { BlogSeo } from '@/components/Seo'
 import { siteMetadata } from '@/constants/siteMetadata'
 import { formatDate } from 'lib/date'
-import { TOC } from '@/components/mdx/TOC'
-import Image from 'next/image'
+import Sidebar from '@/components/Sidebar'
 
 export default function PostLayout({ frontMatter, next, prev, children }) {
   const { slug, fileName, title, tags, lastmod, isToc, image, alt, summary } = frontMatter
@@ -20,14 +19,10 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
         {...frontMatter}
         images={image}
       />
-      <div
-        className={`relative w-full flex xl:${
-          isToc ? 'justify-between' : 'justify-center'
-        } justify-center`}
-      >
-        <article className="w-full xl:max-w-3xl 2xl:max-w-5xl 3xl:max-w-7xl 3xl:ml-28 2xl:ml-12">
+      <div>
+        <article className="w-full">
           <div>
-            <header className="xl:pb-6 xl:ml-40">
+            <header className="xl:pb-6">
               <div className="pb-10 space-y-1 text-center border-b border-gray-200 dark:border-gray-700">
                 <div className="mb-6">
                   <PageTitle>{title}</PageTitle>
@@ -41,31 +36,15 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
                   <div>{frontMatter.readingTime.text}</div>
                 </dl>
               </div>
-              <div className="flex justify-center items-center">
-                <Image className="w-full" src={image[0]} width="900px" height="600px" alt={alt} />
-              </div>
+              <img className="w-full" src={image[0]} height={600} alt={alt} />
             </header>
 
-            <div
-              className="pb-8 divide-y divide-gray-200 xl:divide-y-0 dark:divide-gray-700 "
-              style={{ gridTemplateRows: 'auto 1fr' }}
-            >
-              <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:pb-0 xl:col-span-3 xl:row-span-2">
-                <div id="post-body" className="pt-8 lg:pt-6 pb-8 prose dark:prose-dark max-w-none">
-                  {children}
-                </div>
-              </div>
+            <div id="post-body" className="pt-8 lg:pt-6 pb-8 prose dark:prose-dark max-w-none">
+              {children}
             </div>
           </div>
         </article>
-        {isToc && (
-          <aside
-            style={{ paddingTop: frontMatter.tocPaddingTop ? frontMatter.tocPaddingTop : '2rem' }}
-            className="sticky hidden h-screen max-w-xs mt-4/5 top-32 bottom-4 pl-4 xl:block"
-          >
-            <TOC />
-          </aside>
-        )}
+        {isToc && <Sidebar />}
       </div>
       <div className="mb-8">
         <div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
