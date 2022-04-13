@@ -132,7 +132,7 @@ const ContactForm = () => {
             <m.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="bg-gray-700 flex items-center justify-center font-medium border-2  border-gray-500  p-2 rounded-md shadow-sm"
+              className="bg-gray-700 flex items-center justify-center font-medium border  border-gray-500  p-2 rounded-md shadow-sm"
               onClick={handleSubmit}
             >
               <span className="px-6  text-gray-50">Send</span>
