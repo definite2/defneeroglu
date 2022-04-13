@@ -23,7 +23,7 @@ export default function ScrollToTop() {
         height="44"
         viewBox="0 0 24 24"
         fill="currentColor"
-        className="text-primary-400"
+        className="text-primary-500"
       >
         <rect
           opacity="0.5"
