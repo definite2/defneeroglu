@@ -16,6 +16,17 @@ module.exports = {
         '-10': '-10',
         '-50': '-50',
       },
+      height: {
+        unset: 'unset',
+      },
+      dropShadow: {
+        nav: '0rem 0rem 4px rgba(71, 71, 71,1)',
+      },
+      width: {
+        '3xl': '48rem',
+        '5xl': '60rem',
+        '7xl': '80rem',
+      },
       transitionProperty: {
         height: 'height',
         padding: 'padding',
@@ -89,7 +100,7 @@ module.exports = {
         pinkk: '#F21170',
         'primary-light': '#F7F7F7',
         'primary-grayish': '#fcfcf7',
-        gray: colors.neutral,
+        gray: colors.slate,
         'gray-150': '#ededed',
         violet: colors.violet,
         yellow: colors.yellow,
