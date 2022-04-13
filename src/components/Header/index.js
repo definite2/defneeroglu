@@ -7,13 +7,13 @@ import Logo from './Logo'
 import useScrollingUp from '@/hooks/useScrollingUp'
 
 const Header = () => {
-  const scrolled = useScrollingUp()
+  const scrolledToTop = useScrollingUp()
   return (
     <>
       <nav
         className={`${
-          scrolled
-            ? 'fixed top-0 left-0 w-full z-10 shadow-nav dark:shadow-md'
+          scrolledToTop
+            ? 'fixed top-0 left-0 w-full z-10 shadow-nav dark:shadow-2xl'
             : 'col-span-12 shadow-none'
         } max-h-24 transition-shadow duration-300 ease-out flex  items-center justify-between border-0 xl:grid xl:grid-cols-12 gap-1 bg-primary-light dark:bg-gray-900 py-6`}
       >
@@ -32,7 +32,10 @@ const Header = () => {
         </div>
         <MobileNavbar />
       </nav>
-      <div style={{ height: 100 }} className={`${scrolled ? 'block' : 'hidden'} col-span-12`}></div>
+      <div
+        style={{ height: 100 }}
+        className={`${scrolledToTop ? 'block' : 'hidden'} col-span-12`}
+      ></div>
     </>
   )
 }
