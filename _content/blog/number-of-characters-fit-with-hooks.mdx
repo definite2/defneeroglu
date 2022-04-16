@@ -1,7 +1,7 @@
 ---
 title: 'Calculate Number of Characters Fit into an HTML Element'
 date: '2022-03-05'
-lastmod: '2022-03-05'
+lastmod: '2022-04-16'
 tags: ['react', 'problem-solving']
 draft: false
 summary: 'Learn how you can dynamically calculate the number of characters that can fit into an html element with custom react hook.'
@@ -25,7 +25,12 @@ At work, designers ask me to shorten the button texts with three dots from the m
   </figcaption>
 </figure>
 
-The challenge is that the width of the buttons were not fixed, and the text inside of them were not fixed as well. Actually this information comes from an endpoint. In short, I had to do the following: calculating the width of the button, then calculating the width of the button text width; if the width of the text is larger, then cut the text in the middle with three dots. But I needed to find how many characters should be shown? Let's solve this together.
+The challenge is that the width of the buttons were not fixed, and the text inside of them were not fixed as well. In short, I had to do the following:
+
+- calculating the width of the button,
+- then calculating the width of the button's text,
+- then compare that if the width of the text is larger than the width of the button, then cut the text in the middle with three dots...
+  But also I needed to find how to cut, I mean how many characters should be shown? Let's solve this together.
 
 ## Final Code and Demo
 
@@ -33,12 +38,40 @@ You can find the full code and a demo for the subject of this blog, dynamically 
 
 ### Width of Button
 
-To calculate width of the button, I combined the solutions found from [stackoverflow](https://stackoverflow.com/questions/68547290/measure-width-of-component-without-re-loading-the-page) and [`useSize`](https://github.com/alibaba/hooks/blob/master/packages/hooks/src/useSize/index.ts) hook from alibaba hooks library.
+Since the width of the button is dynamic, and itself loads asynchronously; we cannot calculate width by using the `componentDidMount` or `useEffect` hook. Instead we need to use the `useLayoutEffect` hook due to the asynchronous UI effect.<br/>
+And to follow the size changes of an element, I used [`ResizeObserver`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver#examples) which is a Web API Interface that is available in most browsers.<br/>
+There is another way to watch size changes of an element that is `addEventListener('resize',()=>{})` approach. However, I suggest using ResizeObserver instead, because it is more reliable since it is easier to disconnect the observer and to stop the listening callbacks. Actually, I suggest you do your own research about when to use ResizeObserver over Resize Event Listener, you can start from reading comments in this [issue](https://github.com/w3ctag/design-principles/issues/78).
 
-In my solution, I used [`ResizeObserver`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver#examples) which is a Web API Interface to calculate element's width, and it is available in most browsers. If it is not available, there are some polyfills libraries.
+```js
+import { useLayoutEffect, useState } from 'react'
+/**
+ * Returns current width of specified element.
+ *
+ * @param {Ref} ref element to use in width calculation
+ */
+const useElementWidth = (ref) => {
+  const [width, setWidth] = useState(0)
 
-You can can calculate an element's size with resize event as well, however, I suggest to use ResizeObserver instead, because it is more reliable since it is more easy to disconnect the observer and stop the listening callbacks, in react world, it means it is more easy to clean the effect. Actually I suggest you to read [why ResizeObserver is needed?](https://github.com/WICG/resize-observer/blob/master/explainer.md) article.
-I am not going to go in detail for this part, but you can find the full code from my example repository in [useElementWidth.js](https://github.com/definite2/truncate-middle/blob/main/src/hooks/useElementWidth.js) file.
+  const elObserver = new ResizeObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.contentBoxSize) {
+        setWidth(entry.contentRect.width)
+      }
+    }
+  })
+
+  useLayoutEffect(() => {
+    if (!ref?.current) return
+    elObserver.observe(ref.current)
+    return () => {
+      elObserver.disconnect()
+    }
+  }, [])
+  return width
+}
+
+export default useElementWidth
+```
 
 ### Width of Text
 
