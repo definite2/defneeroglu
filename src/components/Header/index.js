@@ -11,11 +11,12 @@ const Header = () => {
   return (
     <>
       <nav
+        style={{ height: '100px' }}
         className={`${
           scrolledToTop
             ? 'fixed top-0 left-0 w-full z-10 shadow-nav dark:shadow-2xl'
             : 'col-span-12 shadow-none'
-        } max-h-24 transition-shadow duration-300 ease-out flex  items-center justify-between border-0 xl:grid xl:grid-cols-12 gap-1 bg-primary-light dark:bg-gray-900 py-6`}
+        } transition-shadow duration-300 ease-out flex  items-center justify-between border-0 xl:grid xl:grid-cols-12 gap-1 bg-primary-light dark:bg-gray-900 py-6`}
       >
         <div className="w-full xl:col-span-10 xl:col-start-2 flex justify-between px-5 sm:px-0 ">
           <Logo />
