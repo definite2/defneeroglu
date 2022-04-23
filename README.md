@@ -10,7 +10,6 @@ Personal website.
 - [Gray-matter](https://github.com/jonschlinkert/gray-matter)
 - [Rehype](https://github.com/rehypejs/rehype)
 - [Sass](https://sass-lang.com/)
-- [Styled Components](https://styled-components.com/docs/api#createglobalstyle): To handle global style, it was needed for code block component to style rehype plugin
 
 ## Contributing
 
