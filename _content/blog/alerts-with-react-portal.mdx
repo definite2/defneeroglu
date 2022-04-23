@@ -1,7 +1,7 @@
 ---
 title: 'How to Create Error Dialog with React Portal and Axios Interceptor'
 date: '2021-10-03'
-lastmod: '2021-10-03'
+lastmod: '2022-04-23'
 tags: ['react', 'axios']
 draft: false
 summary: 'Learn a global solution for error message dialogs with react portal.'
@@ -276,7 +276,8 @@ const Login = () => {
           // console.log(data)
         })
         .catch(() => {
-          // console.log("error");
+          // handle error, that is not API call error
+          //...because network level error message will be shown via portal
         })
     }, 1000)
   }
@@ -321,7 +322,7 @@ export default Login
 
 ### `App.js` and `index.js`
 
-Our app componnet will be consist of Login component and ErrorPortal component, as mentioned before the place of ErrorPortal is not important we we would have more than one component such as routes here still we put our ErrorPortal just next to the most parent component inside of the App component.
+Our app componnet will be consist of Login component and ErrorPortal component, as mentioned before the place of ErrorPortal is not important. For example we would have more than one component, such as routes, and still we put our ErrorPortal just next to the most parent component inside of the App component.
 
 ```js
 //src/App.js
@@ -374,5 +375,5 @@ Here we initialize our axios and redux connection as well as mock axios.
 
 ## Conclusion
 
-In this post I tried to show how you can use axios interceptors to get network level data to write the data to your application's redux store and create react portal component.
-I could have covered these two topics under different blogs, but I wanted to cover them in a single article, since these two are combined in this way in real React projects. I hope this could help you.
+In this post, I tried to show how you can bring network level data to your application's global store using axios interceptors, and show the error message in the UI, that comes from API call, via react portal component.
+I could have covered these two topics -axios interceptors and react portal- under different blogs, but I wanted to cover them in a single article, since these two are combined in this way in real React projects. I hope this blog could help you, thank you for reading.
