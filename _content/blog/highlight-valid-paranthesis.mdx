@@ -1,119 +1,114 @@
 ---
-title: 'Calculate Number of Characters Fit into an HTML Element'
+title: 'Highlighting Paired Parentheses In React'
 date: '2022-07-25'
-lastmod: '2022-07-25'
+lastmod: '2022-08-14'
 tags: ['problem-solving', 'react']
-draft: true
-summary: 'Learn how you can highilight valid parentheses in a sentence.'
+draft: false
+summary: 'Learn how you can highlight valid parentheses in a text as using your problem solving skills in a react component.'
 isToc: true
-image: ['/content/dynamicaly_fit.svg']
-alt: 'dynamically truncate text cover'
+image: ['/content/highlight_parantheses.svg']
+alt: 'highlight valid parantheses'
 tocPaddingTop: '2.5rem'
 ---
 
-In this blog, I am going to share Leetcode(ish) solution for highilighting valid parantheses in a text which contains not only parentheses, but also other characters. Solution is going to be used in a React component so you can easily use this in your projects.
+In this blog, I am going to share the Leetcode(ish) solution for highlighting valid parentheses in a text. The solution is going to be used in a React component, so you can easily use this feature in your React projects.
 
 ## Introduction
 
-As leetcode is very useful in the process of preparing for interviews, practicing here will also help those who are already has a job, to improve their problem-solving skills or their ability to look at problems from a different perspective.
-One of the popular questions from Leetcode is [Valid Parantheses](https://leetcode.com/problems/valid-parentheses/) problem. It asks you to find whether a given string is valid in terms of it has all opening and closing pairs of parenthesis. In the question the given string includes only parantheses not any other letter and there are three different type of parenthesis: `()`, `{}` and `[]`.
-Example which is valid or not:
+As leetcode is very useful in the process of preparing for interviews, even if you are not looking for a job, practicing here will also help to improve your problem-solving skills or your ability to look at problems from a different perspective.
 
-```
-(((((()))))) -- VALID
+One of the popular questions from Leetcode is [Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) problem. It asks you to find whether a given string is valid or not depending on whether it has all opening and closing pairs of parentheses.
 
-()()()()     -- VALID
+With this blog, we are going to solve the same problem, but with some differences:
 
-(((((((()    -- INVALID
+- There is only one type of parenthesis.
+- The given string does not consist of only parentheses, but also other characters.
+- We are not going to return a `boolean` value, instead we are going to **highlight the matched parentheses**.
+- And we are going to use the solution in a React component.
 
-((()(())))   -- VALID
-```
-
-I suggest you to before reading this blog, go to the question link above, and try to solve it. The problem we are going to deal with is very similar problem however we are going to use the solution in a React component and we are going to add a little bit of CSS.
-
-### The Problem: Highlight Valid Parantheses
-
-###
-
-<figure className="flex justify-center flex-col items-center bg-transparent">
-  <Image alt="truncate from middle" src="/content/text_long.png" width="425" height="48" priority />
-  <figcaption className="text-sm italic">
-    Truncating 'text text text' in different container widths
-  </figcaption>
-</figure>
-
-The challenge is that the width of the buttons were not fixed, and the text inside of them were not fixed as well. In short, I had to do the following:
-
-- calculating the width of the button,
-- then calculating the width of the button's text,
-- then compare that if the width of the text is larger than the width of the button, then cut the text in the middle with three dots...
-  But also I needed to find how to cut, I mean how many characters should be shown? Let's solve this together.
+By the way, I suggest that, before reading this blog, go to the Leetcode question link above, and try to solve it.
 
 ## Final Code and Demo
 
-You can find the full code and a demo for the subject of this blog, dynamically calculating fit character length, from this [repository](https://github.com/definite2/truncate-middle)
+You can find the full code and a demo for the subject of this blog, from [here](https://github.com/definite2/highlight-parantheses-react).
 
-### Width of Button
+## The Problem: Highlight Valid Parentheses
 
-Since the width of the button is dynamic, and itself loads asynchronously; we cannot calculate width by using the `componentDidMount` or `useEffect` hook. Instead we need to use the `useLayoutEffect` hook due to the asynchronous UI effect.<br/>
-And to follow the size changes of an element, I used [`ResizeObserver`](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver#examples) which is a Web API Interface that is available in most browsers.<br/>
-There is another way to watch size changes of an element that is `addEventListener('resize',()=>{})` approach. However, I suggest using ResizeObserver instead, because it is more reliable since it is easier to disconnect the observer and to stop the listening callbacks. Actually, I suggest you do your own research about when to use ResizeObserver over Resize Event Listener, you can start from reading comments in this [issue](https://github.com/w3ctag/design-principles/issues/78).
+What does **valid** mean? It means the given string includes paired parentheses, and there is no any unmatched opening or closing parenthesis. Here are examples for invalid and valid inputs:
 
-```js
-/* eslint-disable no-plusplus */
+```
+(my (best ((((((1904)    -- INVALID
+
+((your best) ((1807)))   -- VALID
+```
+
+So how do we find all paired parentheses in a text?
+Well, what we do actually: while reading the text, from left to right, we pair the first encountered closing parenthesis, `)`, with the last opening parenthesis.
+Therefore in our solution, we can use a `stack`. We can `push` opening parentheses. And if we encounter a closing parenthesis, we can easily obtain the recent opening parenthesis from the stack, and match with the current closing one. And `pop` the last proccessed opening paranthesis from stack and thus update the recent element and continue to our operation.
+Most of the popular languages provide a built-in stack, but Javascript doesn't. If you don't know what `stack`, it is a data structure, the newest element added to the stack will be processed first. So the last `push`ed element will be `pop`ed first. It is like a Javascript array with the `push` and `pop` operations.
+Since we are going to highlight the paired parentheses, we need to know the **index values of matched parentheses**. So for our problem, we need to use an array, highlight corresponding indices. Let's see the solution:
+
+```js {9, 11, 17-18,24} showLineNumbers
 /**
- * highlights valid parathesis
+ * highlights valid parenthesis
  */
 import React from 'react'
 import './style.scss'
 
-const HighlightBrackets = ({ text }) => {
-  const pairs = { '{': '}' }
-  const stack = []
-  const pairKeyIndexStack = []
-  // eslint-disable-next-line no-unused-vars
-  const highlightsIndexes = Array.from({ length: text.length }).map((i) => false)
+const HighlightParentheses = ({ text }) => {
+  // initialize a stack for parentheses:
+  const parenthesesIndexStack = []
+  // initialize an array with length text.length, with inital values are false:
+  const higlightedIndices = Array(text.length).fill(false)
   for (let i = 0; i < text.length; i++) {
-    if (pairs[text[i]]) {
-      stack.push(pairs[stack[i]])
-      pairKeyIndexStack.push(i)
-    } else if (text[i] === '}' && stack.length !== 0) {
-      stack.pop()
-      highlightsIndexes[pairKeyIndexStack.pop()] = true
-      highlightsIndexes[i] = true
+    if (text[i] === '(') {
+      parenthesesIndexStack.push(i)
+    } else if (text[i] === ')' && parenthesesIndexStack.length !== 0) {
+      // since paired parentheses are found, set corresponding indices' as true:
+      higlightedIndices[parenthesesIndexStack.pop()] = true // opening parenthesis
+      higlightedIndices[i] = true // closing parenthesis
     }
   }
-
   return (
     <>
-      {[...text].map((str, i) => (
-        <>{highlightsIndexes[i] ? <i className="bracket">{str}</i> : <>{str}</>}</>
+      {[...text].map((char, i) => (
+        <>{higlightedIndices[i] ? <i className="highlight">{char}</i> : <>{char}</>}</>
       ))}
     </>
   )
 }
-export default HighlightBrackets
+
+export default HighlightParentheses
 ```
 
-```scss
-i.bracket {
+1. In line 9, we initialize a stack for index values of opening parentheses. It is required to find matched parentheses.
+2. In line 11, we initialize an array with the length of the given text. Initially, all values in the array are `false`, meaning all characters are not highlighted at first. This array is required to store the indices of the matched parentheses. Its length must be same with the given text.
+3. While reading the given text, if we encounter an opening parenthesis we `push` it with line 14.
+4. If we encounter a closing parenthesis we `pop` **the recent opening parenthesis' index value** from `parenthesesIndexStack`. Since it is paired, we set its value as `true` in `higlightedIndices` array with line 17.
+5. And we set the current closing parenthesis' index value as `true` with line 18.
+6. In the render method, we add `highlight` className if the index value is true with line 24.
+
+An example usage of the `HighlightParentheses` component is very simple, it accepts `text` as prop:
+
+```
+  <HighlightParentheses text={text} />
+```
+
+css for the highlight:
+
+```css
+i.highlight {
   font-style: normal;
-  color: #00e0e4;
-}
-i.atSign {
-  font-style: normal;
-  color: #00e0e4;
+  color: #ff22e9;
 }
 ```
 
-As you see above at the lines 39 and 46, we get one character from start and calculate the text width, and get one character from back then again calculate the text width as comparing the current text width with contianer's content width.
+### Follow up
 
-Why we didn't just pick one character from the start, and continue with the loop? Because the purpose here is truncating the text from middle, and since some of characters occupies different width, we needed to pick character from end as well to get more accurate number of characters that fit into button element.
-
-So the solution can be even number and odd number, if it is odd number, we have one extra character from the beginning.
-For example suppose our long text is: _'longer button text'_, and button width is _128px_, solution could be :_'long...text'_ or it could be _'longe...text'_.
+As a bonus, I encourage you to try to solve this problem with three types of parentheses, and assign different highlight colors for each type of paired parentheses.
 
 ## Conclusion
 
-In this blog, I would like to share how you can solve truncating text from middle design problem as calculating the maximum number of characters that can fit into a given container element's content width.
-We created custom react hook to make our solution reusable across the application. I hope this hook could help you in your work and inspire you to develop your custom hook development skill, as well as your problem solving skill😃... Thank you for reading.
+In this blog, I share how you can highlight valid(matched) parentheses in a text with React component. For this we use stack data structure and additionally an array to mark the valid parentheses indices.
+This blog is kind of interview preparation for frontend developers, because the problem we deal with requires problem solving and react development skills.
+I hope this blog could help you in your work and encourage you to develop your problem solving skills... Thank you for reading.
