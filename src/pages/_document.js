@@ -10,8 +10,8 @@ class MyDocument extends Document {
           <link rel="icon" type="image/png" sizes="16x16" href="/favicons//favicon-16x16.png" />
           <link rel="manifest" href="/favicons/site.webmanifest" />
           <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
-          <meta name="msapplication-TileColor" content="#A3E635" />
-          <meta name="theme-color" content="#A3E635" />
+          <meta name="msapplication-TileColor" content="#14b8a6" />
+          <meta name="theme-color" content="#14b8a6" />
           <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
           <link
