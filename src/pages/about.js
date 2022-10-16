@@ -54,31 +54,7 @@ const about = () => {
               engines... I decided to make this blog site, both to reinforce what I know and to help
               other developers.
             </p>
-            <h4>
-              Publications{' '}
-              <m.div
-                initial={{
-                  rotate: 0,
-                }}
-                animate={{
-                  rotate: 5,
-                }}
-                transition={{
-                  duration: 7,
-                  ease: 'easeInOut',
-                  repeat: Infinity,
-                  repeatType: 'reverse',
-                }}
-              >
-                <Image
-                  className="self-start absolute -top-2 right-10 z-1"
-                  alt="triangle"
-                  src="/media/triangle.svg"
-                  width="40px"
-                  height="40px"
-                />
-              </m.div>
-            </h4>
+            <h4>Publications </h4>
             <CustomLink
               className="italic"
               href="https://dergipark.org.tr/tr/pub/ejosat/issue/53473/711076"

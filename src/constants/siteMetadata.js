@@ -1,7 +1,7 @@
 export const siteMetadata = {
   title: 'DevMuscle',
   author: 'Defne Eroğlu',
-  avatar: '/media/avatar1.jpg',
+  avatar: '/media/avatar1.png',
   occupation: 'Software Engineer',
   headerTitle: 'DevMuscle',
   description:
@@ -9,7 +9,7 @@ export const siteMetadata = {
   language: 'en-us',
   siteUrl: 'https://devmuscle.com',
   siteLogo: '/favicon.ico',
-  socialBanner: '/media/avatar1.jpg',
+  socialBanner: '/media/avatar1.png',
   github: 'https://github.com/definite2',
   twitter: 'https://twitter.com/defne_erogluu',
   linkedin: 'https://www.linkedin.com/in/defne-eroglu/',

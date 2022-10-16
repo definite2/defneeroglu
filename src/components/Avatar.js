@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import avatar from '../../public/media/avatar1.jpg'
+import avatar from '../../public/media/avatar1.png'
 const Avatar = () => {
   return (
     <div className="relative -z-10">
@@ -12,11 +12,11 @@ const Avatar = () => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <defs>
-              <linearGradient id="myGradient" gradientTransform="rotate(90)">
-                <stop offset="5%" stopColor="var(--color-avatar-blue-200)" />
-                <stop offset="25%" stopColor="var(--color-avatar-blue-300)" />
-                <stop offset="95%" stopColor="var(--color-avatar-purple-300)" />
-              </linearGradient>
+              <radialGradient id="myGradient" gradientTransform="rotate(-0)">
+                <stop offset="15%" stopColor="#78350f" />
+                <stop offset="55%" stopColor="#ecfccb" />
+                <stop offset="95%" stopColor="#475569" />
+              </radialGradient>
             </defs>
             <path
               fill="url('#myGradient')"

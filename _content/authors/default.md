@@ -1,6 +1,6 @@
 ---
 name: Defne eroglu
-avatar: /media/avatar1.jpg
+avatar: /media/avatar1.png
 occupation: Frontend development engineer
 company: Huawei
 email: defne@devmuscle.com

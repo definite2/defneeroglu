@@ -53,7 +53,7 @@ module.exports = {
         14: '3.5rem',
       },
       animation: {
-        'blob-spin': 'blobbing 25s linear infinite',
+        'blob-spin': 'blobbing 24s linear infinite',
       },
       screens: {
         '2md': '900px',
@@ -63,11 +63,14 @@ module.exports = {
       },
       keyframes: {
         blobbing: {
-          from: {
-            transform: 'rotate(0deg)',
+          '0%': {
+            transform: 'rotate(0deg) scaleY(1) scaleX(1)',
           },
-          to: {
-            transform: 'rotate(360deg)',
+          '50%': {
+            transform: 'rotate(180deg) scaleY(0.95) scaleX(1.01)',
+          },
+          '100%': {
+            transform: 'rotate(360deg) scaleY(1) scaleX(1)',
           },
         },
       },
@@ -119,15 +122,6 @@ module.exports = {
           red: '#ff8383',
           blue: '#569CD6',
           white: '#fff',
-        },
-        avatarback: {
-          blue: {
-            200: colors.blue[100],
-            300: colors.blue[200],
-          },
-          purple: {
-            300: colors.purple[300],
-          },
         },
       },
       letterSpacing: {
