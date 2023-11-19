@@ -1,4 +1,4 @@
-import CustomLink from '../CustomLink'
+import CustomLink from '@/components/CustomLink'
 
 export default function Pagination({ totalPages, currentPage }) {
   const prevPage = parseInt(currentPage) - 1 > 0

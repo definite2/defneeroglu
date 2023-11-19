@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import CustomLink from '@/components/CustomLink'
 
 export default function FourZeroFour() {
   return (
@@ -13,13 +13,11 @@ export default function FourZeroFour() {
           Sorry we couldn't find this page.
         </p>
         <p className="mb-8">But dont worry, you can find plenty of other things on our homepage.</p>
-        <Link href="/">
-          <a aria-label="something went wrong">
+        <CustomLink href="/">
           <button className="inline px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-200 border border-transparent rounded-lg shadow focus:outline-none focus:shadow-outline-blue hover:bg-blue-100 dark:hover:bg-blue-200">
             Back to homepage
           </button>
-          </a>
-        </Link>
+        </CustomLink>
       </div>
     </div>
   )

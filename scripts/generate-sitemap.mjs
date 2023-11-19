@@ -5,16 +5,16 @@ import prettier from 'prettier'
 async function generate() {
   const prettierConfig = await prettier.resolveConfig('./.prettierrc.js')
   const pages = await globby([
-    'src/pages/**/*.js',
+    'pages/**/*.js',
     '_content/blog/**/*.mdx',
     '_content/blog/**/*.md',
     'public/tags/**/*.xml',
-    '!src/pages/_*.js',
-    '!src/pages/blog/[...slug].js',
-    '!src/pages/blog/page/[page].js',
-    '!src/pages/tags/[tag].js',
-    '!src/pages/404.js',
-    '!src/pages/api',
+    '!pages/_*.js',
+    '!pages/blog/[...slug].js',
+    '!pages/blog/page/[page].js',
+    '!pages/tags/[tag].js',
+    '!pages/404.js',
+    '!pages/api',
   ])
   const sitemap = `
         <?xml version="1.0" encoding="UTF-8"?>
@@ -22,14 +22,14 @@ async function generate() {
             ${pages
               .map((page) => {
                 const path = page
-                  .replace('src/pages/', '/')
+                  .replace('pages/', '/')
                   .replace('_content/blog', '/blog')
                   .replace('public/', '/')
                   .replace('.js', '')
                   .replace('.mdx', '')
                   .replace('/feed.xml', '')
                 const route = path === '/index' ? '' : path
-                if (page === `src/pages/blog/[...slug].js`) {
+                if (page === `pages/blog/[...slug].js`) {
                   return
                 }
                 return `

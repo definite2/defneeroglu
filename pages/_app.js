@@ -2,10 +2,10 @@ import { ThemeProvider } from 'next-themes'
 import { DefaultSeo } from 'next-seo'
 import Head from 'next/head'
 import { SEO } from '@/components/Seo'
-import '../styles/global.scss'
 import Wrapper from '@/components/Layout'
 import Analytics from '@/components/Analytics'
 import { LazyMotion, m } from 'framer-motion'
+import '../styles/global.scss'
 
 const App = ({ Component, pageProps, router }) => {
   let easing = [0.175, 0.85, 0.12, 0.96]

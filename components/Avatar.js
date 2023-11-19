@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import avatar from '../../public/media/avatar1.png'
+import avatar from '../public/media/avatar1.png'
 const Avatar = () => {
   return (
     <div className="relative -z-10">

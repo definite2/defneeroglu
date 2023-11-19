@@ -1,12 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 const colors = require('tailwindcss/colors')
 module.exports = {
-  content: [
-    './src/pages/**/*.js',
-    './src/components/**/*.js',
-    './src/layouts/**/*.js',
-    './src/utils/**/*.js',
-  ],
+  content: ['./pages/**/*.js', './components/**/*.js', './layouts/**/*.js', './utils/**/*.js'],
   darkMode: 'class', // or 'media' or 'class',
   important: true,
   theme: {
