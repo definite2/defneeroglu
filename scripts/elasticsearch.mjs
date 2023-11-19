@@ -28,21 +28,21 @@ const getDirectories = (folder) =>
 async function connectToElasticsearch() {
   //process.env is not available from this folder, since this is outside of the project
   //for this reason dotenv is used to resolve .env file
-  const result = dotenv.config()
+  dotenv.config()
   if (
-    !result.parsed.ESS_CLOUD_ID ||
-    !result.parsed.ESS_CLOUD_USERNAME ||
-    !result.parsed.ESS_CLOUD_PASSWORD
+    !process.env.ESS_CLOUD_ID ||
+    !process.env.ESS_CLOUD_USERNAME ||
+    !process.env.ESS_CLOUD_PASSWORD
   ) {
     return 'ERR_ENV_NOT_DEFINED'
   }
   return new Client({
     cloud: {
-      id: result.parsed.ESS_CLOUD_ID,
+      id: process.env.ESS_CLOUD_ID,
     },
     auth: {
-      username: result.parsed.ESS_CLOUD_USERNAME,
-      password: result.parsed.ESS_CLOUD_PASSWORD,
+      username: process.env.ESS_CLOUD_USERNAME,
+      password: process.env.ESS_CLOUD_PASSWORD,
     },
   })
 }
