@@ -1,7 +1,7 @@
 ---
 title: 'How to Create Bounding Polygon Annotation Tool'
 date: '2021-11-21'
-lastmod: '2021-11-21'
+lastmod: '2024-05-20'
 tags: ['react', 'canvas-api']
 draft: false
 summary: 'Learn how to create bounding polygon annotation tool with React Konva.'
@@ -388,3 +388,7 @@ In our onMouseDown event, we set the clicked coordinates (points) when the mouse
 In this blog, I have created bounding polygon/box annotation tool with react and react konva. It can be used for computer vision projects, especially for detecting the location of the object or client side configuration for marking the area to be trained. For this, I used the Konva.js library, not the HTML5 Canvas Api directly. Because React Konva provides capabilities that make easy drawing and drag and drop operations on canvas.
 The documentation of Konva.js is very good and I saw that Anton Lavrenov especially tried to answer questions about the library, with examples. But I could not see an example project that allows to configure such a custom shape, which is restricted inside the canvas, from the end user. That's why I created this post.
 It may not be a super nice solution, so you are very welcome with your feedback. I hope I was able to help you with this article. Best.
+
+## Update
+
+I am very happy that this post has been helpful to some of you. I've received several emails asking how to implement multiple polygon drawing. In response, I have published an npm package that is more customizable and allows for multiple polygon drawing. You can find the repository [here](https://github.com/definite2/polygon-annotation).
