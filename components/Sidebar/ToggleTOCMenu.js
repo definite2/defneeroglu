@@ -16,7 +16,7 @@ const toggleIconOpen = {
   },
 }
 
-export default ({ isToggled, onClick }) => (
+const ToggleTOCMenu = ({ isToggled, onClick }) => (
   <AnimatePresence initial={false}>
     <m.button
       key="aniamte-toggle"
@@ -36,3 +36,5 @@ export default ({ isToggled, onClick }) => (
     </m.button>
   </AnimatePresence>
 )
+
+export default ToggleTOCMenu

@@ -11,6 +11,7 @@ const Input = (props) => {
       )}
       <input
         id={id}
+        name={id}
         type={type}
         onChange={onChange}
         value={value}

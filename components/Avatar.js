@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from 'next/image'
+import Image from "next/legacy/image"
 import avatar from '../public/media/avatar1.png'
 const Avatar = () => {
   return (

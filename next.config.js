@@ -5,16 +5,11 @@ module.exports = withBundleAnalyzer({
   pageExtensions: ['js', 'jsx', 'md', 'mdx'],
   experimental: { esmExternals: true },
   reactStrictMode: true,
-  webpack: (config, { dev, isServer }) => {
-    if (!dev && !isServer) {
-      //webpack aliase for Preact for production mode only
-      Object.assign(config.resolve.alias, {
-        'react/jsx-runtime.js': 'preact/compat/jsx-runtime',
-        react: 'preact/compat',
-        'react-dom/test-utils': 'preact/test-utils',
-        'react-dom': 'preact/compat',
-      })
-    }
+  webpack: (config, options) => {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    })
 
     return config
   },

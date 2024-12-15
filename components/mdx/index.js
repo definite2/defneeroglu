@@ -1,26 +1,26 @@
-/* eslint-disable react/display-name */
 import { useMemo } from "react";
 import { getMDXComponent } from "mdx-bundler/client";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import CustomLink from "../CustomLink";
 import Pre from "./Pre";
-import { WarningBodyMessage,HighlightInline } from "../Atoms";
+import { WarningBodyMessage, HighlightInline } from "../Atoms";
 import { Accordion } from "../Accordion";
-export const MdxComponents = {
+import PostLayout from "../../layouts/PostLayout";
+
+const MdxComponents = {
   Image,
   WarningBodyMessage,
   HighlightInline,
   a: CustomLink,
   pre: Pre,
-  wrapper: ({ components, layout, ...rest }) => {
-    const Layout = require(`../../layouts/${layout}`).default;
-    return <Layout {...rest} />;
+  wrapper: ({ components, ...rest }) => {
+    return <PostLayout {...rest} />;
   },
   Accordion
 };
 
-export const MdxLayoutRenderer = ({ layout, mdxSource, ...rest }) => {
+export const MdxLayoutRenderer = ({ mdxSource, ...rest }) => {
   const MDXLayout = useMemo(() => getMDXComponent(mdxSource), [mdxSource]);
 
-  return <MDXLayout layout={layout} components={MdxComponents} {...rest} />;
+  return <MDXLayout components={MdxComponents} {...rest} />;
 };

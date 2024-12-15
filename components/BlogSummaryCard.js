@@ -1,5 +1,5 @@
 import CustomLink from './CustomLink'
-import Image from 'next/image'
+import Image from "next/legacy/image"
 import Tag from './Tag'
 import { siteMetadata } from '@/constants/siteMetadata'
 
@@ -27,7 +27,7 @@ export default function BlogSummaryCard(props) {
             <dl>
               <dt className="sr-only"> Published on</dt>
               <dd className="text-xs  leading-6 text-gray-400 dark:text-gray-400">
-                <time dateTime={date}>
+                <time dateTime={date} suppressHydrationWarning>
                   {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}{' '}
                 </time>
               </dd>

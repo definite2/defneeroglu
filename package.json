@@ -4,25 +4,25 @@
   "private": true,
   "scripts": {
     "analyze": "cross-env ANALYZE=true next build",
-    "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
+    "dev": "cross-env NODE_OPTIONS='--inspect' next dev --turbopack",
     "build": "next build",
     "postbuild": "node ./scripts/generate-sitemap.mjs && node ./scripts/generate-robots-txt.js && node ./scripts/elasticsearch.mjs",
     "start": "next start"
   },
   "dependencies": {
+    "@mdx-js/react": "^3.1.0",
     "@sendgrid/mail": "^7.4.6",
-    "@tailwindcss/forms": "^0.4.0",
-    "@tailwindcss/typography": "^0.5.0",
+    "@tailwindcss/forms": "^0.5.9",
+    "@tailwindcss/typography": "^0.5.15",
     "clsx": "^1.1.1",
     "esbuild": "^0.14.5",
-    "framer-motion": "^4.1.17",
+    "framer-motion": "^11.13.5",
     "mdx-bundler": "^8.0.1",
-    "next": "13.5.6",
+    "next": "15.1.0",
     "next-seo": "^4.26.0",
-    "next-themes": "0.0.15",
-    "preact": "^10.6.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "next-themes": "^0.4.4",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "react-feather": "^2.0.9",
     "remark-footnotes": "^3.0.0",
     "sass": "^1.35.2",
@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@elastic/elasticsearch": "^7.15.0",
-    "@next/bundle-analyzer": "^12.0.7",
+    "@next/bundle-analyzer": "15.1.0",
     "@svgr/webpack": "^5.5.0",
     "autoprefixer": "^10.4.0",
     "cross-env": "^7.0.3",
@@ -49,6 +49,6 @@
     "rehype-slug": "^5.0.0",
     "remark-autolink-headings": "^7.0.1",
     "remark-stringify": "^9.0.1",
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.4.14"
   }
 }

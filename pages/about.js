@@ -2,8 +2,8 @@ import { PageSeo } from '@/components/Seo'
 import { siteMetadata } from '@/constants/siteMetadata'
 import Avatar from '@/components/Avatar'
 import CustomLink from '@/components/CustomLink'
-import Image from 'next/image'
 import { m } from 'framer-motion'
+import { PageTitle } from '@/components/PageTitle'
 const about = () => {
   const { author, occupation, title } = siteMetadata
   return (
@@ -11,24 +11,8 @@ const about = () => {
       <PageSeo title={`About ${author} of ${title}`} description={`About me - ${author}`} />
       <div className="divide-y">
         <div className="pt-6 pb-8 space-y-2 md:space-y-5">
-          <m.div
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: {
-                scale: 0.2,
-                opacity: 0,
-              },
-              visible: {
-                scale: 1,
-                opacity: 1,
-              },
-            }}
-          >
-            <h1 className="text-2xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl sm:leading-10 md:text-4xl md:leading-14">
-              Hey, I'm Defne <span className="font-light">👋</span>
-            </h1>
-          </m.div>
+          <PageTitle text=" Hey, I'm Defne" textSuffix="👋" />
+
         </div>
         <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-12 xl:space-y-0 lg:pt-8 mb-12 ">
           <div className="flex flex-col items-center pt-8 space-x-2 lg:-ml-16 xl:col-start-1 xl:col-span-1">

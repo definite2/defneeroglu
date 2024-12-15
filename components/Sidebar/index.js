@@ -34,7 +34,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode="wait">
         {open && (
           <m.aside
             key="aside"

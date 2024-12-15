@@ -18,10 +18,10 @@ const ThemeToggle = () => {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="currentColor"
-        className={`${clsx(
+        className={clsx(
           'text-gray-900 dark:text-gray-100 overflow-hidden transition-transform',
           { 'rotate-90': theme === 'dark', 'rotate-0': theme === 'light' }
-        )}`}
+        )}
       >
         {mounted && (theme === 'dark' || resolvedTheme === 'dark') ? (
           <path

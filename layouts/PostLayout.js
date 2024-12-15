@@ -1,5 +1,5 @@
 import CustomLink from '@/components/CustomLink'
-import PageTitle from '@/components/PageTitle'
+import PostTitle from '@/components/PostTitle'
 import { BlogSeo } from '@/components/Seo'
 import { siteMetadata } from '@/constants/siteMetadata'
 import { formatDate } from 'lib/date'
@@ -25,7 +25,7 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
             <header className="xl:pb-6">
               <div className="pb-10 space-y-1 text-center border-b border-gray-200 dark:border-gray-700">
                 <div className="mb-6">
-                  <PageTitle>{title}</PageTitle>
+                  <PostTitle>{title}</PostTitle>
                 </div>
                 <dl className="flex flex-col sm:flex-row text-base justify-center font-medium leading-6 text-gray-500 dark:text-gray-400">
                   <dt className="sr-only">Published on</dt>

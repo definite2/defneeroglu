@@ -1,14 +1,16 @@
 import fs from "fs";
-import PageTitle from "@/components/PageTitle";
+import PostTitle from "@/components/PostTitle";
 import {
   getAllFilesFrontMatter,
   formatSlug,
   getFilesBySlug,
   getFiles,
-} from "lib/mdx";
-import {MdxLayoutRenderer} from "@/components/mdx";
-import generateRss from "lib/generateRss";
+} from "@/lib/mdx";
+import { MdxLayoutRenderer } from "@/components/mdx/index";
+import { generateRss } from "@/lib/generateRss";
+
 const DEFAULT_LAYOUT = "PostLayout";
+
 export const getStaticPaths = async () => {
   const posts = getFiles("blog");
   return {
@@ -18,6 +20,7 @@ export const getStaticPaths = async () => {
     fallback: false,
   };
 };
+
 export const getStaticProps = async ({ params }) => {
   const allPosts = await getAllFilesFrontMatter("blog");
   const postIndex = allPosts.findIndex(
@@ -39,13 +42,12 @@ export const getStaticProps = async ({ params }) => {
 };
 
 const Blog = ({ post, authorDetails, prev, next }) => {
-
   const { mdxSource, frontMatter } = post;
+
   return (
     <>
       {!frontMatter.draft ? (
         <MdxLayoutRenderer
-          layout={frontMatter.layout || DEFAULT_LAYOUT}
           mdxSource={mdxSource}
           frontMatter={frontMatter}
           authorDetails={authorDetails}
@@ -54,12 +56,12 @@ const Blog = ({ post, authorDetails, prev, next }) => {
         />
       ) : (
         <div className="mt-24 text-center">
-          <PageTitle>
+          <PostTitle>
             Under Construction{" "}
             <span role="img" aria-label="roadwork sign">
               🚧
             </span>
-          </PageTitle>
+          </PostTitle>
         </div>
       )}
     </>

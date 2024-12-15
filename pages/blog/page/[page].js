@@ -1,7 +1,7 @@
 import ListLayout from '@/layouts/ListLayout'
 import { PageSeo } from '@/components/Seo'
 import { siteMetadata } from '@/constants/siteMetadata'
-import { getAllFilesFrontMatter } from 'lib/mdx'
+import { getAllFilesFrontMatter } from '@/lib/mdx'
 //paginated posts
 export const POSTS_PER_PAGE = 5
 export const getStaticPaths = async () => {

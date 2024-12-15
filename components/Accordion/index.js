@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react'
 import { ChevronUp } from 'react-feather'
+
 export const Accordion = (props) => {
   const [expanded, setExpanded] = useState(false)
   const [height, setHeight] = useState('0px')
   const [opacity, setOpacity] = useState(0)
   const [rotate, setRotate] = useState('transform duration-700 ease')
   const contentSpace = useRef(null)
+
   function toggleAccordion() {
     setExpanded(expanded === false ? true : false)
     // @ts-ignore
