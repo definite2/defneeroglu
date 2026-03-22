@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { getMDXComponent } from "mdx-bundler/client";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import CustomLink from "../CustomLink";
 import Pre from "./Pre";
 import { WarningBodyMessage, HighlightInline } from "../Atoms";

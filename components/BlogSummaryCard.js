@@ -1,5 +1,5 @@
 import CustomLink from './CustomLink'
-import Image from "next/legacy/image"
+import Image from "next/image"
 import Tag from './Tag'
 import { siteMetadata } from '@/constants/siteMetadata'
 
@@ -14,11 +14,12 @@ export default function BlogSummaryCard(props) {
             <div className="relative w-full">
               <header className="relative pb-1/2">
                 <Image
-                  layout="fill"
-                  className="absolute top-0 left-0 object-cover w-full h-full"
+                  fill
+                  className="object-cover"
                   src={image}
                   alt={title}
                   priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </header>
             </div>

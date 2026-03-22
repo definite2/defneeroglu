@@ -5,6 +5,7 @@ module.exports = withBundleAnalyzer({
   pageExtensions: ['js', 'jsx', 'md', 'mdx'],
   experimental: { esmExternals: true },
   reactStrictMode: true,
+  turbopack: {},
   webpack: (config, options) => {
     config.module.rules.push({
       test: /\.svg$/,
