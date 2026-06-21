@@ -20,7 +20,7 @@ const ThemeToggle = () => {
         fill="currentColor"
         className={clsx(
           'text-gray-900 dark:text-gray-100 overflow-hidden transition-transform',
-          { 'rotate-90': theme === 'dark', 'rotate-0': theme === 'light' }
+          mounted && { 'rotate-90': theme === 'dark', 'rotate-0': theme === 'light' }
         )}
       >
         {mounted && (theme === 'dark' || resolvedTheme === 'dark') ? (
